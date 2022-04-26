@@ -1,0 +1,652 @@
+<!doctype html>
+<html>
+<head>
+<title>invertappr.c</title>
+
+<style type="text/css">
+body { color:#000000; background-color:#ffffff }
+body { font-family:Helvetica, sans-serif; font-size:10pt }
+h1 { font-size:14pt }
+.FileName { margin-top: 5px; margin-bottom: 5px; display: inline; }
+.FileNav { margin-left: 5px; margin-right: 5px; display: inline; }
+.FileNav a { text-decoration:none; font-size: larger; }
+.divider { margin-top: 30px; margin-bottom: 30px; height: 15px; }
+.divider { background-color: gray; }
+.code { border-collapse:collapse; width:100%; }
+.code { font-family: "Monospace", monospace; font-size:10pt }
+.code { line-height: 1.2em }
+.comment { color: green; font-style: oblique }
+.keyword { color: blue }
+.string_literal { color: red }
+.directive { color: darkmagenta }
+
+/* Macros and variables could have pop-up notes hidden by default.
+  - Macro pop-up:    expansion of the macro
+  - Variable pop-up: value (table) of the variable */
+.macro_popup, .variable_popup { display: none; }
+
+/* Pop-up appears on mouse-hover event. */
+.macro:hover .macro_popup, .variable:hover .variable_popup {
+  display: block;
+  padding: 2px;
+  -webkit-border-radius:5px;
+  -webkit-box-shadow:1px 1px 7px #000;
+  border-radius:5px;
+  box-shadow:1px 1px 7px #000;
+  position: absolute;
+  top: -1em;
+  left:10em;
+  z-index: 1
+}
+
+.macro_popup {
+  border: 2px solid red;
+  background-color:#FFF0F0;
+  font-weight: normal;
+}
+
+.variable_popup {
+  border: 2px solid blue;
+  background-color:#F0F0FF;
+  font-weight: bold;
+  font-family: Helvetica, sans-serif;
+  font-size: 9pt;
+}
+
+/* Pop-up notes needs a relative position as a base where they pops up. */
+.macro, .variable {
+  background-color: PaleGoldenRod;
+  position: relative;
+}
+.macro { color: DarkMagenta; }
+
+#tooltiphint {
+  position: fixed;
+  width: 50em;
+  margin-left: -25em;
+  left: 50%;
+  padding: 10px;
+  border: 1px solid #b0b0b0;
+  border-radius: 2px;
+  box-shadow: 1px 1px 7px black;
+  background-color: #c0c0c0;
+  z-index: 2;
+}
+
+.num { width:2.5em; padding-right:2ex; background-color:#eeeeee }
+.num { text-align:right; font-size:8pt }
+.num { color:#444444 }
+.line { padding-left: 1ex; border-left: 3px solid #ccc }
+.line { white-space: pre }
+.msg { -webkit-box-shadow:1px 1px 7px #000 }
+.msg { box-shadow:1px 1px 7px #000 }
+.msg { -webkit-border-radius:5px }
+.msg { border-radius:5px }
+.msg { font-family:Helvetica, sans-serif; font-size:8pt }
+.msg { float:left }
+.msg { padding:0.25em 1ex 0.25em 1ex }
+.msg { margin-top:10px; margin-bottom:10px }
+.msg { font-weight:bold }
+.msg { max-width:60em; word-wrap: break-word; white-space: pre-wrap }
+.msgT { padding:0x; spacing:0x }
+.msgEvent { background-color:#fff8b4; color:#000000 }
+.msgControl { background-color:#bbbbbb; color:#000000 }
+.msgNote { background-color:#ddeeff; color:#000000 }
+.mrange { background-color:#dfddf3 }
+.mrange { border-bottom:1px solid #6F9DBE }
+.PathIndex { font-weight: bold; padding:0px 5px; margin-right:5px; }
+.PathIndex { -webkit-border-radius:8px }
+.PathIndex { border-radius:8px }
+.PathIndexEvent { background-color:#bfba87 }
+.PathIndexControl { background-color:#8c8c8c }
+.PathIndexPopUp { background-color: #879abc; }
+.PathNav a { text-decoration:none; font-size: larger }
+.CodeInsertionHint { font-weight: bold; background-color: #10dd10 }
+.CodeRemovalHint { background-color:#de1010 }
+.CodeRemovalHint { border-bottom:1px solid #6F9DBE }
+.selected{ background-color:orange !important; }
+
+table.simpletable {
+  padding: 5px;
+  font-size:12pt;
+  margin:20px;
+  border-collapse: collapse; border-spacing: 0px;
+}
+td.rowname {
+  text-align: right;
+  vertical-align: top;
+  font-weight: bold;
+  color:#444444;
+  padding-right:2ex;
+}
+
+/* Hidden text. */
+input.spoilerhider + label {
+  cursor: pointer;
+  text-decoration: underline;
+  display: block;
+}
+input.spoilerhider {
+ display: none;
+}
+input.spoilerhider ~ .spoiler {
+  overflow: hidden;
+  margin: 10px auto 0;
+  height: 0;
+  opacity: 0;
+}
+input.spoilerhider:checked + label + .spoiler{
+  height: auto;
+  opacity: 1;
+}
+</style>
+</head>
+<body>
+<!-- BUGDESC Value stored to 'chk' is never read -->
+
+<!-- BUGTYPE Dead assignment -->
+
+<!-- BUGCATEGORY Dead store -->
+
+<!-- BUGFILE /home/zach/vlc/contrib/native/gmp/mpn/invertappr.c -->
+
+<!-- FILENAME invertappr.c -->
+
+<!-- FUNCTIONNAME __gmpn_ni_invertappr -->
+
+<!-- ISSUEHASHCONTENTOFLINEINCONTEXT 1cadb33ca88aded0faaf0b76df886fd0 -->
+
+<!-- BUGLINE 236 -->
+
+<!-- BUGCOLUMN 4 -->
+
+<!-- BUGPATHLENGTH 1 -->
+
+<!-- BUGMETAEND -->
+<!-- REPORTHEADER -->
+<h3>Bug Summary</h3>
+<table class="simpletable">
+<tr><td class="rowname">File:</td><td>gmp/mpn/invertappr.c</td></tr>
+<tr><td class="rowname">Warning:</td><td><a href="#EndPath">line 236, column 4</a><br />Value stored to 'chk' is never read</td></tr>
+
+</table>
+<!-- REPORTSUMMARYEXTRA -->
+<h3>Annotated Source Code</h3>
+<p>Press <a href="#" onclick="toggleHelp(); return false;">'?'</a>
+   to see keyboard shortcuts</p>
+<input type="checkbox" class="spoilerhider" id="showinvocation" />
+<label for="showinvocation" >Show analyzer invocation</label>
+<div class="spoiler">clang -cc1 -triple x86_64-pc-linux-gnu -analyze -disable-free -disable-llvm-verifier -discard-value-names -main-file-name invertappr.c -analyzer-store=region -analyzer-opt-analyze-nested-blocks -analyzer-checker=core -analyzer-checker=apiModeling -analyzer-checker=unix -analyzer-checker=deadcode -analyzer-checker=security.insecureAPI.UncheckedReturn -analyzer-checker=security.insecureAPI.getpw -analyzer-checker=security.insecureAPI.gets -analyzer-checker=security.insecureAPI.mktemp -analyzer-checker=security.insecureAPI.mkstemp -analyzer-checker=security.insecureAPI.vfork -analyzer-checker=nullability.NullPassedToNonnull -analyzer-checker=nullability.NullReturnedFromNonnull -analyzer-output plist -w -setup-static-analyzer -mrelocation-model pic -pic-level 2 -mthread-model posix -mframe-pointer=none -fmath-errno -fno-rounding-math -masm-verbose -mconstructor-aliases -munwind-tables -target-cpu x86-64 -dwarf-column-info -fno-split-dwarf-inlining -debugger-tuning=gdb -resource-dir /usr/lib/llvm-10/lib/clang/10.0.0 -D HAVE_CONFIG_H -I . -I .. -D __GMP_WITHIN_GMP -I .. -D OPERATION_invertappr -I /home/zach/vlc/contrib/x86_64-linux-gnu/include -I /home/zach/vlc/contrib/x86_64-linux-gnu/include -D PIC -internal-isystem /usr/local/include -internal-isystem /usr/lib/llvm-10/lib/clang/10.0.0/include -internal-externc-isystem /usr/include/x86_64-linux-gnu -internal-externc-isystem /include -internal-externc-isystem /usr/include -O2 -fdebug-compilation-dir /home/zach/vlc/contrib/native/gmp/mpn -ferror-limit 19 -fmessage-length 0 -fgnuc-version=4.2.1 -fobjc-runtime=gcc -fdiagnostics-show-option -vectorize-loops -vectorize-slp -analyzer-output=html -faddrsig -o /tmp/scan-build-2022-04-26-124449-9742-1 -x c invertappr.c
+</div>
+<div id='tooltiphint' hidden="true">
+  <p>Keyboard shortcuts: </p>
+  <ul>
+    <li>Use 'j/k' keys for keyboard navigation</li>
+    <li>Use 'Shift+S' to show/hide relevant lines</li>
+    <li>Use '?' to toggle this window</li>
+  </ul>
+  <a href="#" onclick="toggleHelp(); return false;">Close</a>
+</div>
+<script type='text/javascript'>
+var relevant_lines = {"1": {"236": 1}};
+
+var filterCounterexample = function (hide) {
+  var tables = document.getElementsByClassName("code");
+  for (var t=0; t<tables.length; t++) {
+    var table = tables[t];
+    var file_id = table.getAttribute("data-fileid");
+    var lines_in_fid = relevant_lines[file_id];
+    if (!lines_in_fid) {
+      lines_in_fid = {};
+    }
+    var lines = table.getElementsByClassName("codeline");
+    for (var i=0; i<lines.length; i++) {
+        var el = lines[i];
+        var lineNo = el.getAttribute("data-linenumber");
+        if (!lines_in_fid[lineNo]) {
+          if (hide) {
+            el.setAttribute("hidden", "");
+          } else {
+            el.removeAttribute("hidden");
+          }
+        }
+    }
+  }
+}
+
+window.addEventListener("keydown", function (event) {
+  if (event.defaultPrevented) {
+    return;
+  }
+  if (event.key == "S") {
+    var checked = document.getElementsByName("showCounterexample")[0].checked;
+    filterCounterexample(!checked);
+    document.getElementsByName("showCounterexample")[0].checked = !checked;
+  } else {
+    return;
+  }
+  event.preventDefault();
+}, true);
+
+document.addEventListener("DOMContentLoaded", function() {
+    document.querySelector('input[name="showCounterexample"]').onchange=
+        function (event) {
+      filterCounterexample(this.checked);
+    };
+});
+</script>
+
+<form>
+    <input type="checkbox" name="showCounterexample" id="showCounterexample" />
+    <label for="showCounterexample">
+       Show only relevant lines
+    </label>
+</form>
+
+<script type='text/javascript'>
+var digitMatcher = new RegExp("[0-9]+");
+
+document.addEventListener("DOMContentLoaded", function() {
+    document.querySelectorAll(".PathNav > a").forEach(
+        function(currentValue, currentIndex) {
+            var hrefValue = currentValue.getAttribute("href");
+            currentValue.onclick = function() {
+                scrollTo(document.querySelector(hrefValue));
+                return false;
+            };
+        });
+});
+
+var findNum = function() {
+    var s = document.querySelector(".selected");
+    if (!s || s.id == "EndPath") {
+        return 0;
+    }
+    var out = parseInt(digitMatcher.exec(s.id)[0]);
+    return out;
+};
+
+var scrollTo = function(el) {
+    document.querySelectorAll(".selected").forEach(function(s) {
+        s.classList.remove("selected");
+    });
+    el.classList.add("selected");
+    window.scrollBy(0, el.getBoundingClientRect().top -
+        (window.innerHeight / 2));
+}
+
+var move = function(num, up, numItems) {
+  if (num == 1 && up || num == numItems - 1 && !up) {
+    return 0;
+  } else if (num == 0 && up) {
+    return numItems - 1;
+  } else if (num == 0 && !up) {
+    return 1 % numItems;
+  }
+  return up ? num - 1 : num + 1;
+}
+
+var numToId = function(num) {
+  if (num == 0) {
+    return document.getElementById("EndPath")
+  }
+  return document.getElementById("Path" + num);
+};
+
+var navigateTo = function(up) {
+  var numItems = document.querySelectorAll(
+      ".line > .msgEvent, .line > .msgControl").length;
+  var currentSelected = findNum();
+  var newSelected = move(currentSelected, up, numItems);
+  var newEl = numToId(newSelected, numItems);
+
+  // Scroll element into center.
+  scrollTo(newEl);
+};
+
+window.addEventListener("keydown", function (event) {
+  if (event.defaultPrevented) {
+    return;
+  }
+  if (event.key == "j") {
+    navigateTo(/*up=*/false);
+  } else if (event.key == "k") {
+    navigateTo(/*up=*/true);
+  } else {
+    return;
+  }
+  event.preventDefault();
+}, true);
+</script>
+  
+<script type='text/javascript'>
+
+var toggleHelp = function() {
+    var hint = document.querySelector("#tooltiphint");
+    var attributeName = "hidden";
+    if (hint.hasAttribute(attributeName)) {
+      hint.removeAttribute(attributeName);
+    } else {
+      hint.setAttribute("hidden", "true");
+    }
+};
+window.addEventListener("keydown", function (event) {
+  if (event.defaultPrevented) {
+    return;
+  }
+  if (event.key == "?") {
+    toggleHelp();
+  } else {
+    return;
+  }
+  event.preventDefault();
+});
+</script>
+<table class="code" data-fileid="1">
+<tr class="codeline" data-linenumber="1"><td class="num" id="LN1">1</td><td class="line"><span class='comment'>/* mpn_invertappr and helper functions.  Compute I such that</span></td></tr>
+<tr class="codeline" data-linenumber="2"><td class="num" id="LN2">2</td><td class="line">   <span class='comment'>floor((B^{2n}-1)/U - 1 &lt;= I + B^n &lt;= floor((B^{2n}-1)/U.</span></td></tr>
+<tr class="codeline" data-linenumber="3"><td class="num" id="LN3">3</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="4"><td class="num" id="LN4">4</td><td class="line">   <span class='comment'>Contributed to the GNU project by Marco Bodrato.</span></td></tr>
+<tr class="codeline" data-linenumber="5"><td class="num" id="LN5">5</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="6"><td class="num" id="LN6">6</td><td class="line">   <span class='comment'>The algorithm used here was inspired by ApproximateReciprocal from "Modern</span></td></tr>
+<tr class="codeline" data-linenumber="7"><td class="num" id="LN7">7</td><td class="line">   <span class='comment'>Computer Arithmetic", by Richard P. Brent and Paul Zimmermann.  Special</span></td></tr>
+<tr class="codeline" data-linenumber="8"><td class="num" id="LN8">8</td><td class="line">   <span class='comment'>thanks to Paul Zimmermann for his very valuable suggestions on all the</span></td></tr>
+<tr class="codeline" data-linenumber="9"><td class="num" id="LN9">9</td><td class="line">   <span class='comment'>theoretical aspects during the work on this code.</span></td></tr>
+<tr class="codeline" data-linenumber="10"><td class="num" id="LN10">10</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="11"><td class="num" id="LN11">11</td><td class="line">   <span class='comment'>THE FUNCTIONS IN THIS FILE ARE INTERNAL WITH MUTABLE INTERFACES.  IT IS ONLY</span></td></tr>
+<tr class="codeline" data-linenumber="12"><td class="num" id="LN12">12</td><td class="line">   <span class='comment'>SAFE TO REACH THEM THROUGH DOCUMENTED INTERFACES.  IN FACT, IT IS ALMOST</span></td></tr>
+<tr class="codeline" data-linenumber="13"><td class="num" id="LN13">13</td><td class="line">   <span class='comment'>GUARANTEED THAT THEY WILL CHANGE OR DISAPPEAR IN A FUTURE GMP RELEASE.</span></td></tr>
+<tr class="codeline" data-linenumber="14"><td class="num" id="LN14">14</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="15"><td class="num" id="LN15">15</td><td class="line"><span class='comment'>Copyright (C) 2007, 2009, 2010, 2012, 2015 Free Software Foundation, Inc.</span></td></tr>
+<tr class="codeline" data-linenumber="16"><td class="num" id="LN16">16</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="17"><td class="num" id="LN17">17</td><td class="line"><span class='comment'>This file is part of the GNU MP Library.</span></td></tr>
+<tr class="codeline" data-linenumber="18"><td class="num" id="LN18">18</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="19"><td class="num" id="LN19">19</td><td class="line"><span class='comment'>The GNU MP Library is free software; you can redistribute it and/or modify</span></td></tr>
+<tr class="codeline" data-linenumber="20"><td class="num" id="LN20">20</td><td class="line"><span class='comment'>it under the terms of either:</span></td></tr>
+<tr class="codeline" data-linenumber="21"><td class="num" id="LN21">21</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="22"><td class="num" id="LN22">22</td><td class="line">  <span class='comment'>* the GNU Lesser General Public License as published by the Free</span></td></tr>
+<tr class="codeline" data-linenumber="23"><td class="num" id="LN23">23</td><td class="line">    <span class='comment'>Software Foundation; either version 3 of the License, or (at your</span></td></tr>
+<tr class="codeline" data-linenumber="24"><td class="num" id="LN24">24</td><td class="line">    <span class='comment'>option) any later version.</span></td></tr>
+<tr class="codeline" data-linenumber="25"><td class="num" id="LN25">25</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="26"><td class="num" id="LN26">26</td><td class="line"><span class='comment'>or</span></td></tr>
+<tr class="codeline" data-linenumber="27"><td class="num" id="LN27">27</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="28"><td class="num" id="LN28">28</td><td class="line">  <span class='comment'>* the GNU General Public License as published by the Free Software</span></td></tr>
+<tr class="codeline" data-linenumber="29"><td class="num" id="LN29">29</td><td class="line">    <span class='comment'>Foundation; either version 2 of the License, or (at your option) any</span></td></tr>
+<tr class="codeline" data-linenumber="30"><td class="num" id="LN30">30</td><td class="line">    <span class='comment'>later version.</span></td></tr>
+<tr class="codeline" data-linenumber="31"><td class="num" id="LN31">31</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="32"><td class="num" id="LN32">32</td><td class="line"><span class='comment'>or both in parallel, as here.</span></td></tr>
+<tr class="codeline" data-linenumber="33"><td class="num" id="LN33">33</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="34"><td class="num" id="LN34">34</td><td class="line"><span class='comment'>The GNU MP Library is distributed in the hope that it will be useful, but</span></td></tr>
+<tr class="codeline" data-linenumber="35"><td class="num" id="LN35">35</td><td class="line"><span class='comment'>WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY</span></td></tr>
+<tr class="codeline" data-linenumber="36"><td class="num" id="LN36">36</td><td class="line"><span class='comment'>or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License</span></td></tr>
+<tr class="codeline" data-linenumber="37"><td class="num" id="LN37">37</td><td class="line"><span class='comment'>for more details.</span></td></tr>
+<tr class="codeline" data-linenumber="38"><td class="num" id="LN38">38</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="39"><td class="num" id="LN39">39</td><td class="line"><span class='comment'>You should have received copies of the GNU General Public License and the</span></td></tr>
+<tr class="codeline" data-linenumber="40"><td class="num" id="LN40">40</td><td class="line"><span class='comment'>GNU Lesser General Public License along with the GNU MP Library.  If not,</span></td></tr>
+<tr class="codeline" data-linenumber="41"><td class="num" id="LN41">41</td><td class="line"><span class='comment'>see https://www.gnu.org/licenses/.  */</span></td></tr>
+<tr class="codeline" data-linenumber="42"><td class="num" id="LN42">42</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="43"><td class="num" id="LN43">43</td><td class="line"><span class='directive'>#include "gmp.h"</span></td></tr>
+<tr class="codeline" data-linenumber="44"><td class="num" id="LN44">44</td><td class="line"><span class='directive'>#include "gmp-impl.h"</span></td></tr>
+<tr class="codeline" data-linenumber="45"><td class="num" id="LN45">45</td><td class="line"><span class='directive'>#include "longlong.h"</span></td></tr>
+<tr class="codeline" data-linenumber="46"><td class="num" id="LN46">46</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="47"><td class="num" id="LN47">47</td><td class="line"><span class='comment'>/* FIXME: The iterative version splits the operand in two slightly unbalanced</span></td></tr>
+<tr class="codeline" data-linenumber="48"><td class="num" id="LN48">48</td><td class="line">   <span class='comment'>parts, the use of log_2 (or counting the bits) underestimate the maximum</span></td></tr>
+<tr class="codeline" data-linenumber="49"><td class="num" id="LN49">49</td><td class="line">   <span class='comment'>number of iterations.  */</span></td></tr>
+<tr class="codeline" data-linenumber="50"><td class="num" id="LN50">50</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="51"><td class="num" id="LN51">51</td><td class="line"><span class='directive'>#if TUNE_PROGRAM_BUILD</span></td></tr>
+<tr class="codeline" data-linenumber="52"><td class="num" id="LN52">52</td><td class="line"><span class='directive'>#define <span class='macro'>NPOWS<span class='macro_popup'>((sizeof(mp_size_t) &gt; 6 ? 48 : 8*sizeof(mp_size_t)) - (((246<br>) &gt;= 0x1) + ((246) &gt;= 0x2) + ((246) &gt;= 0x4) + ((246)<br> &gt;= 0x8) + ((246) &gt;= 0x10) + ((246) &gt;= 0x20) + ((246<br>) &gt;= 0x40) + ((246) &gt;= 0x80) + ((246) &gt;= 0x100) + ((<br>246) &gt;= 0x200) + ((246) &gt;= 0x400) + ((246) &gt;= 0x800)<br> + ((246) &gt;= 0x1000) + ((246) &gt;= 0x2000) + ((246) &gt;=<br> 0x4000) + ((246) &gt;= 0x8000)))</span></span> \</span></td></tr>
+<tr class="codeline" data-linenumber="53"><td class="num" id="LN53">53</td><td class="line"> <span class='directive'>((sizeof(mp_size_t) &gt; 6 ? 48 : 8*sizeof(mp_size_t)))</span></td></tr>
+<tr class="codeline" data-linenumber="54"><td class="num" id="LN54">54</td><td class="line"><span class='directive'>#define <span class='macro'>MAYBE_dcpi1_divappr<span class='macro_popup'>(246 &lt; 264)</span></span>   1</span></td></tr>
+<tr class="codeline" data-linenumber="55"><td class="num" id="LN55">55</td><td class="line"><span class='directive'>#else</span></td></tr>
+<tr class="codeline" data-linenumber="56"><td class="num" id="LN56">56</td><td class="line"><span class='directive'>#define <span class='macro'>NPOWS<span class='macro_popup'>((sizeof(mp_size_t) &gt; 6 ? 48 : 8*sizeof(mp_size_t)) - (((246<br>) &gt;= 0x1) + ((246) &gt;= 0x2) + ((246) &gt;= 0x4) + ((246)<br> &gt;= 0x8) + ((246) &gt;= 0x10) + ((246) &gt;= 0x20) + ((246<br>) &gt;= 0x40) + ((246) &gt;= 0x80) + ((246) &gt;= 0x100) + ((<br>246) &gt;= 0x200) + ((246) &gt;= 0x400) + ((246) &gt;= 0x800)<br> + ((246) &gt;= 0x1000) + ((246) &gt;= 0x2000) + ((246) &gt;=<br> 0x4000) + ((246) &gt;= 0x8000)))</span></span> \</span></td></tr>
+<tr class="codeline" data-linenumber="57"><td class="num" id="LN57">57</td><td class="line"> <span class='directive'>((sizeof(mp_size_t) &gt; 6 ? 48 : 8*sizeof(mp_size_t)) - <span class='macro'>LOG2C (INV_NEWTON_THRESHOLD)<span class='macro_popup'>(((246) &gt;= 0x1) + ((246) &gt;= 0x2) + ((246) &gt;= 0x4) + (<br>(246) &gt;= 0x8) + ((246) &gt;= 0x10) + ((246) &gt;= 0x20) + (<br>(246) &gt;= 0x40) + ((246) &gt;= 0x80) + ((246) &gt;= 0x100) +<br> ((246) &gt;= 0x200) + ((246) &gt;= 0x400) + ((246) &gt;= 0x800<br>) + ((246) &gt;= 0x1000) + ((246) &gt;= 0x2000) + ((246) &gt;=<br> 0x4000) + ((246) &gt;= 0x8000))</span></span>)</span></td></tr>
+<tr class="codeline" data-linenumber="58"><td class="num" id="LN58">58</td><td class="line"><span class='directive'>#define <span class='macro'>MAYBE_dcpi1_divappr<span class='macro_popup'>(246 &lt; 264)</span></span> \</span></td></tr>
+<tr class="codeline" data-linenumber="59"><td class="num" id="LN59">59</td><td class="line">  <span class='directive'>(<span class='macro'>INV_NEWTON_THRESHOLD<span class='macro_popup'>246</span></span> &lt; <span class='macro'>DC_DIVAPPR_Q_THRESHOLD<span class='macro_popup'>264</span></span>)</span></td></tr>
+<tr class="codeline" data-linenumber="60"><td class="num" id="LN60">60</td><td class="line"><span class='directive'>#if (<span class='macro'>INV_NEWTON_THRESHOLD<span class='macro_popup'>246</span></span> &gt; <span class='macro'>INV_MULMOD_BNM1_THRESHOLD<span class='macro_popup'>0</span></span>) &amp;&amp; \</span></td></tr>
+<tr class="codeline" data-linenumber="61"><td class="num" id="LN61">61</td><td class="line">    <span class='directive'>(<span class='macro'>INV_APPR_THRESHOLD<span class='macro_popup'>244</span></span> &gt; <span class='macro'>INV_MULMOD_BNM1_THRESHOLD<span class='macro_popup'>0</span></span>)</span></td></tr>
+<tr class="codeline" data-linenumber="62"><td class="num" id="LN62">62</td><td class="line"><span class='directive'>#undef  <span class='macro'>INV_MULMOD_BNM1_THRESHOLD<span class='macro_popup'>0</span></span></span></td></tr>
+<tr class="codeline" data-linenumber="63"><td class="num" id="LN63">63</td><td class="line"><span class='directive'>#define <span class='macro'>INV_MULMOD_BNM1_THRESHOLD<span class='macro_popup'>0</span></span> 0 /* always when Newton */</span></td></tr>
+<tr class="codeline" data-linenumber="64"><td class="num" id="LN64">64</td><td class="line"><span class='directive'>#endif</span></td></tr>
+<tr class="codeline" data-linenumber="65"><td class="num" id="LN65">65</td><td class="line"><span class='directive'>#endif</span></td></tr>
+<tr class="codeline" data-linenumber="66"><td class="num" id="LN66">66</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="67"><td class="num" id="LN67">67</td><td class="line"><span class='comment'>/* All the three functions mpn{,_bc,_ni}_invertappr (ip, dp, n, scratch), take</span></td></tr>
+<tr class="codeline" data-linenumber="68"><td class="num" id="LN68">68</td><td class="line">   <span class='comment'>the strictly normalised value {dp,n} (i.e., most significant bit must be set)</span></td></tr>
+<tr class="codeline" data-linenumber="69"><td class="num" id="LN69">69</td><td class="line">   <span class='comment'>as an input, and compute {ip,n}: the approximate reciprocal of {dp,n}.</span></td></tr>
+<tr class="codeline" data-linenumber="70"><td class="num" id="LN70">70</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="71"><td class="num" id="LN71">71</td><td class="line">   <span class='comment'>Let e = mpn*_invertappr (ip, dp, n, scratch) be the returned value; the</span></td></tr>
+<tr class="codeline" data-linenumber="72"><td class="num" id="LN72">72</td><td class="line">   <span class='comment'>following conditions are satisfied by the output:</span></td></tr>
+<tr class="codeline" data-linenumber="73"><td class="num" id="LN73">73</td><td class="line">     <span class='comment'>0 &lt;= e &lt;= 1;</span></td></tr>
+<tr class="codeline" data-linenumber="74"><td class="num" id="LN74">74</td><td class="line">     <span class='comment'>{dp,n}*(B^n+{ip,n}) &lt; B^{2n} &lt;= {dp,n}*(B^n+{ip,n}+1+e) .</span></td></tr>
+<tr class="codeline" data-linenumber="75"><td class="num" id="LN75">75</td><td class="line">   <span class='comment'>I.e. e=0 means that the result {ip,n} equals the one given by mpn_invert.</span></td></tr>
+<tr class="codeline" data-linenumber="76"><td class="num" id="LN76">76</td><td class="line">	<span class='comment'>e=1 means that the result _may_ be one less than expected.</span></td></tr>
+<tr class="codeline" data-linenumber="77"><td class="num" id="LN77">77</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="78"><td class="num" id="LN78">78</td><td class="line">   <span class='comment'>The _bc version returns e=1 most of the time.</span></td></tr>
+<tr class="codeline" data-linenumber="79"><td class="num" id="LN79">79</td><td class="line">   <span class='comment'>The _ni version should return e=0 most of the time; only about 1% of</span></td></tr>
+<tr class="codeline" data-linenumber="80"><td class="num" id="LN80">80</td><td class="line">   <span class='comment'>possible random input should give e=1.</span></td></tr>
+<tr class="codeline" data-linenumber="81"><td class="num" id="LN81">81</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="82"><td class="num" id="LN82">82</td><td class="line">   <span class='comment'>When the strict result is needed, i.e., e=0 in the relation above:</span></td></tr>
+<tr class="codeline" data-linenumber="83"><td class="num" id="LN83">83</td><td class="line">     <span class='comment'>{dp,n}*(B^n+{ip,n}) &lt; B^{2n} &lt;= {dp,n}*(B^n+{ip,n}+1) ;</span></td></tr>
+<tr class="codeline" data-linenumber="84"><td class="num" id="LN84">84</td><td class="line">   <span class='comment'>the function mpn_invert (ip, dp, n, scratch) should be used instead.  */</span></td></tr>
+<tr class="codeline" data-linenumber="85"><td class="num" id="LN85">85</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="86"><td class="num" id="LN86">86</td><td class="line"><span class='comment'>/* Maximum scratch needed by this branch (at xp): 2*n */</span></td></tr>
+<tr class="codeline" data-linenumber="87"><td class="num" id="LN87">87</td><td class="line"><span class='keyword'>static</span> mp_limb_t</td></tr>
+<tr class="codeline" data-linenumber="88"><td class="num" id="LN88">88</td><td class="line">mpn_bc_invertappr (mp_ptr ip, mp_srcptr dp, mp_size_t n, mp_ptr xp)</td></tr>
+<tr class="codeline" data-linenumber="89"><td class="num" id="LN89">89</td><td class="line">{</td></tr>
+<tr class="codeline" data-linenumber="90"><td class="num" id="LN90">90</td><td class="line">  <span class='macro'>ASSERT (n &gt; 0)<span class='macro_popup'>do {} while (0)</span></span>;</td></tr>
+<tr class="codeline" data-linenumber="91"><td class="num" id="LN91">91</td><td class="line">  <span class='macro'>ASSERT (dp[n-1] &amp; GMP_NUMB_HIGHBIT)<span class='macro_popup'>do {} while (0)</span></span>;</td></tr>
+<tr class="codeline" data-linenumber="92"><td class="num" id="LN92">92</td><td class="line">  <span class='macro'>ASSERT (! MPN_OVERLAP_P (ip, n, dp, n))<span class='macro_popup'>do {} while (0)</span></span>;</td></tr>
+<tr class="codeline" data-linenumber="93"><td class="num" id="LN93">93</td><td class="line">  <span class='macro'>ASSERT (! MPN_OVERLAP_P (ip, n, xp, mpn_invertappr_itch(n)))<span class='macro_popup'>do {} while (0)</span></span>;</td></tr>
+<tr class="codeline" data-linenumber="94"><td class="num" id="LN94">94</td><td class="line">  <span class='macro'>ASSERT (! MPN_OVERLAP_P (dp, n, xp, mpn_invertappr_itch(n)))<span class='macro_popup'>do {} while (0)</span></span>;</td></tr>
+<tr class="codeline" data-linenumber="95"><td class="num" id="LN95">95</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="96"><td class="num" id="LN96">96</td><td class="line">  <span class='comment'>/* Compute a base value of r limbs. */</span></td></tr>
+<tr class="codeline" data-linenumber="97"><td class="num" id="LN97">97</td><td class="line">  <span class='keyword'>if</span> (n == 1)</td></tr>
+<tr class="codeline" data-linenumber="98"><td class="num" id="LN98">98</td><td class="line">    <span class='macro'>invert_limb (*ip, *dp)<span class='macro_popup'>do { (*ip) = __gmpn_invert_limb (*dp); } while (0)</span></span>;</td></tr>
+<tr class="codeline" data-linenumber="99"><td class="num" id="LN99">99</td><td class="line">  <span class='keyword'>else</span> {</td></tr>
+<tr class="codeline" data-linenumber="100"><td class="num" id="LN100">100</td><td class="line">    mp_size_t i;</td></tr>
+<tr class="codeline" data-linenumber="101"><td class="num" id="LN101">101</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="102"><td class="num" id="LN102">102</td><td class="line">    <span class='comment'>/* n &gt; 1 here */</span></td></tr>
+<tr class="codeline" data-linenumber="103"><td class="num" id="LN103">103</td><td class="line">    i = n;</td></tr>
+<tr class="codeline" data-linenumber="104"><td class="num" id="LN104">104</td><td class="line">    <span class='keyword'>do</span></td></tr>
+<tr class="codeline" data-linenumber="105"><td class="num" id="LN105">105</td><td class="line">      xp[--i] = <span class='macro'>GMP_NUMB_MAX<span class='macro_popup'>((~ ((mp_limb_t) (0))) &gt;&gt; 0)</span></span>;</td></tr>
+<tr class="codeline" data-linenumber="106"><td class="num" id="LN106">106</td><td class="line">    <span class='keyword'>while</span> (i);</td></tr>
+<tr class="codeline" data-linenumber="107"><td class="num" id="LN107">107</td><td class="line">    <span class='macro'>mpn_com<span class='macro_popup'>__gmpn_com</span></span> (xp + n, dp, n);</td></tr>
+<tr class="codeline" data-linenumber="108"><td class="num" id="LN108">108</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="109"><td class="num" id="LN109">109</td><td class="line">    <span class='comment'>/* Now xp contains B^2n - {dp,n}*B^n - 1 */</span></td></tr>
+<tr class="codeline" data-linenumber="110"><td class="num" id="LN110">110</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="111"><td class="num" id="LN111">111</td><td class="line">    <span class='comment'>/* FIXME: if mpn_*pi1_divappr_q handles n==2, use it! */</span></td></tr>
+<tr class="codeline" data-linenumber="112"><td class="num" id="LN112">112</td><td class="line">    <span class='keyword'>if</span> (n == 2) {</td></tr>
+<tr class="codeline" data-linenumber="113"><td class="num" id="LN113">113</td><td class="line">      <span class='macro'>mpn_divrem_2<span class='macro_popup'>__gmpn_divrem_2</span></span> (ip, 0, xp, 4, dp);</td></tr>
+<tr class="codeline" data-linenumber="114"><td class="num" id="LN114">114</td><td class="line">    } <span class='keyword'>else</span> {</td></tr>
+<tr class="codeline" data-linenumber="115"><td class="num" id="LN115">115</td><td class="line">      gmp_pi1_t inv;</td></tr>
+<tr class="codeline" data-linenumber="116"><td class="num" id="LN116">116</td><td class="line">      <span class='macro'>invert_pi1 (inv, dp[n-1], dp[n-2])<span class='macro_popup'>do { mp_limb_t _v, _p, _t1, _t0, _mask; do { (_v) = __gmpn_invert_limb<br> (dp[n-1]); } while (0); _p = (dp[n-1]) * _v; _p += (dp[n-2])<br>; if (_p &lt; (dp[n-2])) { _v--; _mask = -(mp_limb_t) (_p &gt;=<br> (dp[n-1])); _p -= (dp[n-1]); _v += _mask; _p -= _mask &amp; (<br>dp[n-1]); } __asm__ ("mulq %3" : "=a" (_t0), "=d" (_t1) : "%0"<br> ((UDItype)(dp[n-2])), "rm" ((UDItype)(_v))); _p += _t1; if (<br>_p &lt; _t1) { _v--; if (__builtin_expect ((_p &gt;= (dp[n-1]<br>)) != 0, 0)) { if (_p &gt; (dp[n-1]) || _t0 &gt;= (dp[n-2])) _v<br>--; } } (inv).inv32 = _v; } while (0)</span></span>;</td></tr>
+<tr class="codeline" data-linenumber="117"><td class="num" id="LN117">117</td><td class="line">      <span class='keyword'>if</span> (! <span class='macro'>MAYBE_dcpi1_divappr<span class='macro_popup'>(246 &lt; 264)</span></span></td></tr>
+<tr class="codeline" data-linenumber="118"><td class="num" id="LN118">118</td><td class="line">	  || <span class='macro'>BELOW_THRESHOLD (n, DC_DIVAPPR_Q_THRESHOLD)<span class='macro_popup'>(! ((__builtin_constant_p (264) &amp;&amp; (264) == 0) || (!(<br>__builtin_constant_p (264) &amp;&amp; (264) == 9223372036854775807L<br>) &amp;&amp; (n) &gt;= (264))))</span></span>)</td></tr>
+<tr class="codeline" data-linenumber="119"><td class="num" id="LN119">119</td><td class="line">	<span class='macro'>mpn_sbpi1_divappr_q<span class='macro_popup'>__gmpn_sbpi1_divappr_q</span></span> (ip, xp, 2 * n, dp, n, inv.inv32);</td></tr>
+<tr class="codeline" data-linenumber="120"><td class="num" id="LN120">120</td><td class="line">      <span class='keyword'>else</span></td></tr>
+<tr class="codeline" data-linenumber="121"><td class="num" id="LN121">121</td><td class="line">	<span class='macro'>mpn_dcpi1_divappr_q<span class='macro_popup'>__gmpn_dcpi1_divappr_q</span></span> (ip, xp, 2 * n, dp, n, &amp;inv);</td></tr>
+<tr class="codeline" data-linenumber="122"><td class="num" id="LN122">122</td><td class="line">      <span class='macro'>MPN_DECR_U(ip, n, CNST_LIMB (1))<span class='macro_popup'>do { mp_ptr __ptr_dummy; if (__builtin_constant_p (((mp_limb_t<br>) 1L)) &amp;&amp; (((mp_limb_t) 1L)) == 0) { } else if (__builtin_constant_p<br> (((mp_limb_t) 1L)) &amp;&amp; (((mp_limb_t) 1L)) == 1) { __asm__<br> __volatile__ ("\n" ".L" "asm_%=_" "top" ":\n" "\t" "subq" "\t$1, (%0)\n"<br> "\tlea\t%c2(%0), %0\n" "\tjc\t" ".L" "asm_%=_" "top" : "=r" (<br>__ptr_dummy) : "0" (ip), "n" (sizeof(mp_limb_t)) : "memory");<br> } else { __asm__ __volatile__ ( "subq" "\t%2, (%0)\n" "\tjnc\t"<br> ".L" "asm_%=_" "done" "\n" ".L" "asm_%=_" "top" ":\n" "\t" "subq"<br> "\t$1, %c3(%0)\n" "\tlea\t%c3(%0), %0\n" "\tjc\t" ".L" "asm_%=_"<br> "top" "\n" ".L" "asm_%=_" "done" ":\n" : "=r" (__ptr_dummy) :<br> "0" (ip), "re" ((mp_limb_t) (((mp_limb_t) 1L))), "n" (sizeof<br>(mp_limb_t)) : "memory"); } } while (0)</span></span>;</td></tr>
+<tr class="codeline" data-linenumber="123"><td class="num" id="LN123">123</td><td class="line">      <span class='keyword'>return</span> 1;</td></tr>
+<tr class="codeline" data-linenumber="124"><td class="num" id="LN124">124</td><td class="line">    }</td></tr>
+<tr class="codeline" data-linenumber="125"><td class="num" id="LN125">125</td><td class="line">  }</td></tr>
+<tr class="codeline" data-linenumber="126"><td class="num" id="LN126">126</td><td class="line">  <span class='keyword'>return</span> 0;</td></tr>
+<tr class="codeline" data-linenumber="127"><td class="num" id="LN127">127</td><td class="line">}</td></tr>
+<tr class="codeline" data-linenumber="128"><td class="num" id="LN128">128</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="129"><td class="num" id="LN129">129</td><td class="line"><span class='comment'>/* mpn_ni_invertappr: computes the approximate reciprocal using Newton's</span></td></tr>
+<tr class="codeline" data-linenumber="130"><td class="num" id="LN130">130</td><td class="line">   <span class='comment'>iterations (at least one).</span></td></tr>
+<tr class="codeline" data-linenumber="131"><td class="num" id="LN131">131</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="132"><td class="num" id="LN132">132</td><td class="line">   <span class='comment'>Inspired by Algorithm "ApproximateReciprocal", published in "Modern Computer</span></td></tr>
+<tr class="codeline" data-linenumber="133"><td class="num" id="LN133">133</td><td class="line">   <span class='comment'>Arithmetic" by Richard P. Brent and Paul Zimmermann, algorithm 3.5, page 121</span></td></tr>
+<tr class="codeline" data-linenumber="134"><td class="num" id="LN134">134</td><td class="line">   <span class='comment'>in version 0.4 of the book.</span></td></tr>
+<tr class="codeline" data-linenumber="135"><td class="num" id="LN135">135</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="136"><td class="num" id="LN136">136</td><td class="line">   <span class='comment'>Some adaptations were introduced, to allow product mod B^m-1 and return the</span></td></tr>
+<tr class="codeline" data-linenumber="137"><td class="num" id="LN137">137</td><td class="line">   <span class='comment'>value e.</span></td></tr>
+<tr class="codeline" data-linenumber="138"><td class="num" id="LN138">138</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="139"><td class="num" id="LN139">139</td><td class="line">   <span class='comment'>We introduced a correction in such a way that "the value of</span></td></tr>
+<tr class="codeline" data-linenumber="140"><td class="num" id="LN140">140</td><td class="line">   <span class='comment'>B^{n+h}-T computed at step 8 cannot exceed B^n-1" (the book reads</span></td></tr>
+<tr class="codeline" data-linenumber="141"><td class="num" id="LN141">141</td><td class="line">   <span class='comment'>"2B^n-1").</span></td></tr>
+<tr class="codeline" data-linenumber="142"><td class="num" id="LN142">142</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="143"><td class="num" id="LN143">143</td><td class="line">   <span class='comment'>Maximum scratch needed by this branch &lt;= 2*n, but have to fit 3*rn</span></td></tr>
+<tr class="codeline" data-linenumber="144"><td class="num" id="LN144">144</td><td class="line">   <span class='comment'>in the scratch, i.e. 3*rn &lt;= 2*n: we require n&gt;4.</span></td></tr>
+<tr class="codeline" data-linenumber="145"><td class="num" id="LN145">145</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="146"><td class="num" id="LN146">146</td><td class="line">   <span class='comment'>We use a wrapped product modulo B^m-1.  NOTE: is there any normalisation</span></td></tr>
+<tr class="codeline" data-linenumber="147"><td class="num" id="LN147">147</td><td class="line">   <span class='comment'>problem for the [0] class?  It shouldn't: we compute 2*|A*X_h - B^{n+h}| &lt;</span></td></tr>
+<tr class="codeline" data-linenumber="148"><td class="num" id="LN148">148</td><td class="line">   <span class='comment'>B^m-1.  We may get [0] if and only if we get AX_h = B^{n+h}.  This can</span></td></tr>
+<tr class="codeline" data-linenumber="149"><td class="num" id="LN149">149</td><td class="line">   <span class='comment'>happen only if A=B^{n}/2, but this implies X_h = B^{h}*2-1 i.e., AX_h =</span></td></tr>
+<tr class="codeline" data-linenumber="150"><td class="num" id="LN150">150</td><td class="line">   <span class='comment'>B^{n+h} - A, then we get into the "negative" branch, where X_h is not</span></td></tr>
+<tr class="codeline" data-linenumber="151"><td class="num" id="LN151">151</td><td class="line">   <span class='comment'>incremented (because A &lt; B^n).</span></td></tr>
+<tr class="codeline" data-linenumber="152"><td class="num" id="LN152">152</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="153"><td class="num" id="LN153">153</td><td class="line">   <span class='comment'>FIXME: the scratch for mulmod_bnm1 does not currently fit in the scratch, it</span></td></tr>
+<tr class="codeline" data-linenumber="154"><td class="num" id="LN154">154</td><td class="line">   <span class='comment'>is allocated apart.</span></td></tr>
+<tr class="codeline" data-linenumber="155"><td class="num" id="LN155">155</td><td class="line"> <span class='comment'>*/</span></td></tr>
+<tr class="codeline" data-linenumber="156"><td class="num" id="LN156">156</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="157"><td class="num" id="LN157">157</td><td class="line">mp_limb_t</td></tr>
+<tr class="codeline" data-linenumber="158"><td class="num" id="LN158">158</td><td class="line"><span class='macro'>mpn_ni_invertappr<span class='macro_popup'>__gmpn_ni_invertappr</span></span> (mp_ptr ip, mp_srcptr dp, mp_size_t n, mp_ptr scratch)</td></tr>
+<tr class="codeline" data-linenumber="159"><td class="num" id="LN159">159</td><td class="line">{</td></tr>
+<tr class="codeline" data-linenumber="160"><td class="num" id="LN160">160</td><td class="line">  mp_limb_t cy;</td></tr>
+<tr class="codeline" data-linenumber="161"><td class="num" id="LN161">161</td><td class="line">  mp_size_t rn, mn;</td></tr>
+<tr class="codeline" data-linenumber="162"><td class="num" id="LN162">162</td><td class="line">  mp_size_t sizes[<span class='macro'>NPOWS<span class='macro_popup'>((sizeof(mp_size_t) &gt; 6 ? 48 : 8*sizeof(mp_size_t)) - (((246<br>) &gt;= 0x1) + ((246) &gt;= 0x2) + ((246) &gt;= 0x4) + ((246)<br> &gt;= 0x8) + ((246) &gt;= 0x10) + ((246) &gt;= 0x20) + ((246<br>) &gt;= 0x40) + ((246) &gt;= 0x80) + ((246) &gt;= 0x100) + ((<br>246) &gt;= 0x200) + ((246) &gt;= 0x400) + ((246) &gt;= 0x800)<br> + ((246) &gt;= 0x1000) + ((246) &gt;= 0x2000) + ((246) &gt;=<br> 0x4000) + ((246) &gt;= 0x8000)))</span></span>], *sizp;</td></tr>
+<tr class="codeline" data-linenumber="163"><td class="num" id="LN163">163</td><td class="line">  mp_ptr tp;</td></tr>
+<tr class="codeline" data-linenumber="164"><td class="num" id="LN164">164</td><td class="line">  <span class='macro'>TMP_DECL<span class='macro_popup'>struct tmp_reentrant_t *__tmp_marker</span></span>;</td></tr>
+<tr class="codeline" data-linenumber="165"><td class="num" id="LN165">165</td><td class="line"><span class='directive'>#define xp scratch</span></td></tr>
+<tr class="codeline" data-linenumber="166"><td class="num" id="LN166">166</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="167"><td class="num" id="LN167">167</td><td class="line">  <span class='macro'>ASSERT (n &gt; 4)<span class='macro_popup'>do {} while (0)</span></span>;</td></tr>
+<tr class="codeline" data-linenumber="168"><td class="num" id="LN168">168</td><td class="line">  <span class='macro'>ASSERT (dp[n-1] &amp; GMP_NUMB_HIGHBIT)<span class='macro_popup'>do {} while (0)</span></span>;</td></tr>
+<tr class="codeline" data-linenumber="169"><td class="num" id="LN169">169</td><td class="line">  <span class='macro'>ASSERT (! MPN_OVERLAP_P (ip, n, dp, n))<span class='macro_popup'>do {} while (0)</span></span>;</td></tr>
+<tr class="codeline" data-linenumber="170"><td class="num" id="LN170">170</td><td class="line">  <span class='macro'>ASSERT (! MPN_OVERLAP_P (ip, n, scratch, mpn_invertappr_itch(n)))<span class='macro_popup'>do {} while (0)</span></span>;</td></tr>
+<tr class="codeline" data-linenumber="171"><td class="num" id="LN171">171</td><td class="line">  <span class='macro'>ASSERT (! MPN_OVERLAP_P (dp, n, scratch, mpn_invertappr_itch(n)))<span class='macro_popup'>do {} while (0)</span></span>;</td></tr>
+<tr class="codeline" data-linenumber="172"><td class="num" id="LN172">172</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="173"><td class="num" id="LN173">173</td><td class="line">  <span class='comment'>/* Compute the computation precisions from highest to lowest, leaving the</span></td></tr>
+<tr class="codeline" data-linenumber="174"><td class="num" id="LN174">174</td><td class="line">     <span class='comment'>base case size in 'rn'.  */</span></td></tr>
+<tr class="codeline" data-linenumber="175"><td class="num" id="LN175">175</td><td class="line">  sizp = sizes;</td></tr>
+<tr class="codeline" data-linenumber="176"><td class="num" id="LN176">176</td><td class="line">  rn = n;</td></tr>
+<tr class="codeline" data-linenumber="177"><td class="num" id="LN177">177</td><td class="line">  <span class='keyword'>do</span> {</td></tr>
+<tr class="codeline" data-linenumber="178"><td class="num" id="LN178">178</td><td class="line">    *sizp = rn;</td></tr>
+<tr class="codeline" data-linenumber="179"><td class="num" id="LN179">179</td><td class="line">    rn = (rn &gt;&gt; 1) + 1;</td></tr>
+<tr class="codeline" data-linenumber="180"><td class="num" id="LN180">180</td><td class="line">    ++sizp;</td></tr>
+<tr class="codeline" data-linenumber="181"><td class="num" id="LN181">181</td><td class="line">  } <span class='keyword'>while</span> (<span class='macro'>ABOVE_THRESHOLD (rn, INV_NEWTON_THRESHOLD)<span class='macro_popup'>((__builtin_constant_p (246) &amp;&amp; (246) == 0) || (!(__builtin_constant_p<br> (246) &amp;&amp; (246) == 9223372036854775807L) &amp;&amp; (<br>rn) &gt;= (246)))</span></span>);</td></tr>
+<tr class="codeline" data-linenumber="182"><td class="num" id="LN182">182</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="183"><td class="num" id="LN183">183</td><td class="line">  <span class='comment'>/* We search the inverse of 0.{dp,n}, we compute it as 1.{ip,n} */</span></td></tr>
+<tr class="codeline" data-linenumber="184"><td class="num" id="LN184">184</td><td class="line">  dp += n;</td></tr>
+<tr class="codeline" data-linenumber="185"><td class="num" id="LN185">185</td><td class="line">  ip += n;</td></tr>
+<tr class="codeline" data-linenumber="186"><td class="num" id="LN186">186</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="187"><td class="num" id="LN187">187</td><td class="line">  <span class='comment'>/* Compute a base value of rn limbs. */</span></td></tr>
+<tr class="codeline" data-linenumber="188"><td class="num" id="LN188">188</td><td class="line">  mpn_bc_invertappr (ip - rn, dp - rn, rn, scratch);</td></tr>
+<tr class="codeline" data-linenumber="189"><td class="num" id="LN189">189</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="190"><td class="num" id="LN190">190</td><td class="line">  <span class='macro'>TMP_MARK<span class='macro_popup'>__tmp_marker = 0</span></span>;</td></tr>
+<tr class="codeline" data-linenumber="191"><td class="num" id="LN191">191</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="192"><td class="num" id="LN192">192</td><td class="line">  <span class='keyword'>if</span> (<span class='macro'>ABOVE_THRESHOLD (n, INV_MULMOD_BNM1_THRESHOLD)<span class='macro_popup'>((__builtin_constant_p (0) &amp;&amp; (0) == 0) || (!(__builtin_constant_p<br> (0) &amp;&amp; (0) == 9223372036854775807L) &amp;&amp; (n) &gt;=<br> (0)))</span></span>)</td></tr>
+<tr class="codeline" data-linenumber="193"><td class="num" id="LN193">193</td><td class="line">    {</td></tr>
+<tr class="codeline" data-linenumber="194"><td class="num" id="LN194">194</td><td class="line">      mn = <span class='macro'>mpn_mulmod_bnm1_next_size<span class='macro_popup'>__gmpn_mulmod_bnm1_next_size</span></span> (n + 1);</td></tr>
+<tr class="codeline" data-linenumber="195"><td class="num" id="LN195">195</td><td class="line">      tp = <span class='macro'>TMP_ALLOC_LIMBS (mpn_mulmod_bnm1_itch (mn, n, (n &gt;&gt; 1) + 1))<span class='macro_popup'>((mp_limb_t *) (__builtin_expect ((((mpn_mulmod_bnm1_itch (mn<br>, n, (n &gt;&gt; 1) + 1)) * sizeof (mp_limb_t)) &lt;= 0x7f00)<br> != 0, 1) ? __builtin_alloca((mpn_mulmod_bnm1_itch (mn, n, (n<br> &gt;&gt; 1) + 1)) * sizeof (mp_limb_t)) : __gmp_tmp_reentrant_alloc<br> (&amp;__tmp_marker, (mpn_mulmod_bnm1_itch (mn, n, (n &gt;&gt;<br> 1) + 1)) * sizeof (mp_limb_t))))</span></span>;</td></tr>
+<tr class="codeline" data-linenumber="196"><td class="num" id="LN196">196</td><td class="line">    }</td></tr>
+<tr class="codeline" data-linenumber="197"><td class="num" id="LN197">197</td><td class="line">  <span class='comment'>/* Use Newton's iterations to get the desired precision.*/</span></td></tr>
+<tr class="codeline" data-linenumber="198"><td class="num" id="LN198">198</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="199"><td class="num" id="LN199">199</td><td class="line">  <span class='keyword'>while</span> (1) {</td></tr>
+<tr class="codeline" data-linenumber="200"><td class="num" id="LN200">200</td><td class="line">    n = *--sizp;</td></tr>
+<tr class="codeline" data-linenumber="201"><td class="num" id="LN201">201</td><td class="line">    <span class='comment'>/*</span></td></tr>
+<tr class="codeline" data-linenumber="202"><td class="num" id="LN202">202</td><td class="line">      <span class='comment'>v    n  v</span></td></tr>
+<tr class="codeline" data-linenumber="203"><td class="num" id="LN203">203</td><td class="line">      <span class='comment'>+----+--+</span></td></tr>
+<tr class="codeline" data-linenumber="204"><td class="num" id="LN204">204</td><td class="line">      <span class='comment'>^ rn ^</span></td></tr>
+<tr class="codeline" data-linenumber="205"><td class="num" id="LN205">205</td><td class="line">    <span class='comment'>*/</span></td></tr>
+<tr class="codeline" data-linenumber="206"><td class="num" id="LN206">206</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="207"><td class="num" id="LN207">207</td><td class="line">    <span class='comment'>/* Compute i_jd . */</span></td></tr>
+<tr class="codeline" data-linenumber="208"><td class="num" id="LN208">208</td><td class="line">    <span class='keyword'>if</span> (<span class='macro'>BELOW_THRESHOLD (n, INV_MULMOD_BNM1_THRESHOLD)<span class='macro_popup'>(! ((__builtin_constant_p (0) &amp;&amp; (0) == 0) || (!(__builtin_constant_p<br> (0) &amp;&amp; (0) == 9223372036854775807L) &amp;&amp; (n) &gt;=<br> (0))))</span></span></td></tr>
+<tr class="codeline" data-linenumber="209"><td class="num" id="LN209">209</td><td class="line">	|| ((mn = <span class='macro'>mpn_mulmod_bnm1_next_size<span class='macro_popup'>__gmpn_mulmod_bnm1_next_size</span></span> (n + 1)) &gt; (n + rn))) {</td></tr>
+<tr class="codeline" data-linenumber="210"><td class="num" id="LN210">210</td><td class="line">      <span class='comment'>/* FIXME: We do only need {xp,n+1}*/</span></td></tr>
+<tr class="codeline" data-linenumber="211"><td class="num" id="LN211">211</td><td class="line">      <span class='macro'>mpn_mul<span class='macro_popup'>__gmpn_mul</span></span> (xp, dp - n, n, ip - rn, rn);</td></tr>
+<tr class="codeline" data-linenumber="212"><td class="num" id="LN212">212</td><td class="line">      <span class='macro'>mpn_add_n<span class='macro_popup'>__gmpn_add_n</span></span> (xp + rn, xp + rn, dp - n, n - rn + 1);</td></tr>
+<tr class="codeline" data-linenumber="213"><td class="num" id="LN213">213</td><td class="line">      cy = <span class='macro'>CNST_LIMB(1)<span class='macro_popup'>((mp_limb_t) 1L)</span></span>; <span class='comment'>/* Remember we truncated, Mod B^(n+1) */</span></td></tr>
+<tr class="codeline" data-linenumber="214"><td class="num" id="LN214">214</td><td class="line">      <span class='comment'>/* We computed (truncated) {xp,n+1} &lt;- 1.{ip,rn} * 0.{dp,n} */</span></td></tr>
+<tr class="codeline" data-linenumber="215"><td class="num" id="LN215">215</td><td class="line">    } <span class='keyword'>else</span> { <span class='comment'>/* Use B^mn-1 wraparound */</span></td></tr>
+<tr class="codeline" data-linenumber="216"><td class="num" id="LN216">216</td><td class="line">      <span class='macro'>mpn_mulmod_bnm1<span class='macro_popup'>__gmpn_mulmod_bnm1</span></span> (xp, mn, dp - n, n, ip - rn, rn, tp);</td></tr>
+<tr class="codeline" data-linenumber="217"><td class="num" id="LN217">217</td><td class="line">      <span class='comment'>/* We computed {xp,mn} &lt;- {ip,rn} * {dp,n} mod (B^mn-1) */</span></td></tr>
+<tr class="codeline" data-linenumber="218"><td class="num" id="LN218">218</td><td class="line">      <span class='comment'>/* We know that 2*|ip*dp + dp*B^rn - B^{rn+n}| &lt; B^mn-1 */</span></td></tr>
+<tr class="codeline" data-linenumber="219"><td class="num" id="LN219">219</td><td class="line">      <span class='comment'>/* Add dp*B^rn mod (B^mn-1) */</span></td></tr>
+<tr class="codeline" data-linenumber="220"><td class="num" id="LN220">220</td><td class="line">      <span class='macro'>ASSERT (n &gt;= mn - rn)<span class='macro_popup'>do {} while (0)</span></span>;</td></tr>
+<tr class="codeline" data-linenumber="221"><td class="num" id="LN221">221</td><td class="line">      cy = <span class='macro'>mpn_add_n<span class='macro_popup'>__gmpn_add_n</span></span> (xp + rn, xp + rn, dp - n, mn - rn);</td></tr>
+<tr class="codeline" data-linenumber="222"><td class="num" id="LN222">222</td><td class="line">      cy = <span class='macro'>mpn_add_nc<span class='macro_popup'>__gmpn_add_nc</span></span> (xp, xp, dp - (n - (mn - rn)), n - (mn - rn), cy);</td></tr>
+<tr class="codeline" data-linenumber="223"><td class="num" id="LN223">223</td><td class="line">      <span class='comment'>/* Subtract B^{rn+n}, maybe only compensate the carry*/</span></td></tr>
+<tr class="codeline" data-linenumber="224"><td class="num" id="LN224">224</td><td class="line">      xp[mn] = <span class='macro'>CNST_LIMB (1)<span class='macro_popup'>((mp_limb_t) 1L)</span></span>; <span class='comment'>/* set a limit for DECR_U */</span></td></tr>
+<tr class="codeline" data-linenumber="225"><td class="num" id="LN225">225</td><td class="line">      <span class='macro'>MPN_DECR_U (xp + rn + n - mn, 2 * mn + 1 - rn - n, CNST_LIMB (1) - cy)<span class='macro_popup'>do { mp_ptr __ptr_dummy; if (__builtin_constant_p (((mp_limb_t<br>) 1L) - cy) &amp;&amp; (((mp_limb_t) 1L) - cy) == 0) { } else<br> if (__builtin_constant_p (((mp_limb_t) 1L) - cy) &amp;&amp; (<br>((mp_limb_t) 1L) - cy) == 1) { __asm__ __volatile__ ("\n" ".L"<br> "asm_%=_" "top" ":\n" "\t" "subq" "\t$1, (%0)\n" "\tlea\t%c2(%0), %0\n"<br> "\tjc\t" ".L" "asm_%=_" "top" : "=r" (__ptr_dummy) : "0" (xp<br> + rn + n - mn), "n" (sizeof(mp_limb_t)) : "memory"); } else {<br> __asm__ __volatile__ ( "subq" "\t%2, (%0)\n" "\tjnc\t" ".L" "asm_%=_"<br> "done" "\n" ".L" "asm_%=_" "top" ":\n" "\t" "subq" "\t$1, %c3(%0)\n"<br> "\tlea\t%c3(%0), %0\n" "\tjc\t" ".L" "asm_%=_" "top" "\n" ".L"<br> "asm_%=_" "done" ":\n" : "=r" (__ptr_dummy) : "0" (xp + rn +<br> n - mn), "re" ((mp_limb_t) (((mp_limb_t) 1L) - cy)), "n" (sizeof<br>(mp_limb_t)) : "memory"); } } while (0)</span></span>;</td></tr>
+<tr class="codeline" data-linenumber="226"><td class="num" id="LN226">226</td><td class="line">      <span class='macro'>MPN_DECR_U (xp, mn, CNST_LIMB (1) - xp[mn])<span class='macro_popup'>do { mp_ptr __ptr_dummy; if (__builtin_constant_p (((mp_limb_t<br>) 1L) - xp[mn]) &amp;&amp; (((mp_limb_t) 1L) - xp[mn]) == 0) {<br> } else if (__builtin_constant_p (((mp_limb_t) 1L) - xp[mn]) &amp;&amp;<br> (((mp_limb_t) 1L) - xp[mn]) == 1) { __asm__ __volatile__ ("\n"<br> ".L" "asm_%=_" "top" ":\n" "\t" "subq" "\t$1, (%0)\n" "\tlea\t%c2(%0), %0\n"<br> "\tjc\t" ".L" "asm_%=_" "top" : "=r" (__ptr_dummy) : "0" (xp<br>), "n" (sizeof(mp_limb_t)) : "memory"); } else { __asm__ __volatile__<br> ( "subq" "\t%2, (%0)\n" "\tjnc\t" ".L" "asm_%=_" "done" "\n"<br> ".L" "asm_%=_" "top" ":\n" "\t" "subq" "\t$1, %c3(%0)\n" "\tlea\t%c3(%0), %0\n"<br> "\tjc\t" ".L" "asm_%=_" "top" "\n" ".L" "asm_%=_" "done" ":\n"<br> : "=r" (__ptr_dummy) : "0" (xp), "re" ((mp_limb_t) (((mp_limb_t<br>) 1L) - xp[mn])), "n" (sizeof(mp_limb_t)) : "memory"); } } while<br> (0)</span></span>; <span class='comment'>/* if DECR_U eroded xp[mn] */</span></td></tr>
+<tr class="codeline" data-linenumber="227"><td class="num" id="LN227">227</td><td class="line">      cy = <span class='macro'>CNST_LIMB(0)<span class='macro_popup'>((mp_limb_t) 0L)</span></span>; <span class='comment'>/* Remember we are working Mod B^mn-1 */</span></td></tr>
+<tr class="codeline" data-linenumber="228"><td class="num" id="LN228">228</td><td class="line">    }</td></tr>
+<tr class="codeline" data-linenumber="229"><td class="num" id="LN229">229</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="230"><td class="num" id="LN230">230</td><td class="line">    <span class='keyword'>if</span> (xp[n] &lt; <span class='macro'>CNST_LIMB (2)<span class='macro_popup'>((mp_limb_t) 2L)</span></span>) { <span class='comment'>/* "positive" residue class */</span></td></tr>
+<tr class="codeline" data-linenumber="231"><td class="num" id="LN231">231</td><td class="line">      cy = xp[n]; <span class='comment'>/* 0 &lt;= cy &lt;= 1 here. */</span></td></tr>
+<tr class="codeline" data-linenumber="232"><td class="num" id="LN232">232</td><td class="line"><span class='directive'>#if <span class='macro'>HAVE_NATIVE_mpn_sublsh1_n<span class='macro_popup'>1</span></span></span></td></tr>
+<tr class="codeline" data-linenumber="233"><td class="num" id="LN233">233</td><td class="line">      <span class='keyword'>if</span> (cy++) {</td></tr>
+<tr class="codeline" data-linenumber="234"><td class="num" id="LN234">234</td><td class="line">	<span class='keyword'>if</span> (<span class='macro'>mpn_cmp<span class='macro_popup'>__gmpn_cmp</span></span> (xp, dp - n, n) &gt; 0) {</td></tr>
+<tr class="codeline" data-linenumber="235"><td class="num" id="LN235">235</td><td class="line">	  mp_limb_t chk;</td></tr>
+<tr class="codeline" data-linenumber="236"><td class="num" id="LN236">236</td><td class="line">	  chk = <span class="mrange"><span class='macro'>mpn_sublsh1_n<span class='macro_popup'>__gmpn_sublsh1_n</span></span> (xp, xp, dp - n, n)</span>;</td></tr>
+<tr><td class="num"></td><td class="line"><div id="EndPath" class="msg msgEvent" style="margin-left:11ex">Value stored to 'chk' is never read</div></td></tr>
+<tr class="codeline" data-linenumber="237"><td class="num" id="LN237">237</td><td class="line">	  <span class='macro'>ASSERT (chk == xp[n])<span class='macro_popup'>do {} while (0)</span></span>;</td></tr>
+<tr class="codeline" data-linenumber="238"><td class="num" id="LN238">238</td><td class="line">	  ++ cy;</td></tr>
+<tr class="codeline" data-linenumber="239"><td class="num" id="LN239">239</td><td class="line">	} <span class='keyword'>else</span></td></tr>
+<tr class="codeline" data-linenumber="240"><td class="num" id="LN240">240</td><td class="line">	  <span class='macro'>ASSERT_CARRY (mpn_sub_n (xp, xp, dp - n, n))<span class='macro_popup'>(__gmpn_sub_n (xp, xp, dp - n, n))</span></span>;</td></tr>
+<tr class="codeline" data-linenumber="241"><td class="num" id="LN241">241</td><td class="line">      }</td></tr>
+<tr class="codeline" data-linenumber="242"><td class="num" id="LN242">242</td><td class="line"><span class='directive'>#else /* no mpn_sublsh1_n*/</span></td></tr>
+<tr class="codeline" data-linenumber="243"><td class="num" id="LN243">243</td><td class="line">      <span class='keyword'>if</span> (cy++ &amp;&amp; !<span class='macro'>mpn_sub_n<span class='macro_popup'>__gmpn_sub_n</span></span> (xp, xp, dp - n, n)) {</td></tr>
+<tr class="codeline" data-linenumber="244"><td class="num" id="LN244">244</td><td class="line">	<span class='macro'>ASSERT_CARRY (mpn_sub_n (xp, xp, dp - n, n))<span class='macro_popup'>(__gmpn_sub_n (xp, xp, dp - n, n))</span></span>;</td></tr>
+<tr class="codeline" data-linenumber="245"><td class="num" id="LN245">245</td><td class="line">	++cy;</td></tr>
+<tr class="codeline" data-linenumber="246"><td class="num" id="LN246">246</td><td class="line">      }</td></tr>
+<tr class="codeline" data-linenumber="247"><td class="num" id="LN247">247</td><td class="line"><span class='directive'>#endif</span></td></tr>
+<tr class="codeline" data-linenumber="248"><td class="num" id="LN248">248</td><td class="line">      <span class='comment'>/* 1 &lt;= cy &lt;= 3 here. */</span></td></tr>
+<tr class="codeline" data-linenumber="249"><td class="num" id="LN249">249</td><td class="line"><span class='directive'>#if <span class='macro'>HAVE_NATIVE_mpn_rsblsh1_n<span class='macro_popup'>1</span></span></span></td></tr>
+<tr class="codeline" data-linenumber="250"><td class="num" id="LN250">250</td><td class="line">      <span class='keyword'>if</span> (<span class='macro'>mpn_cmp<span class='macro_popup'>__gmpn_cmp</span></span> (xp, dp - n, n) &gt; 0) {</td></tr>
+<tr class="codeline" data-linenumber="251"><td class="num" id="LN251">251</td><td class="line">	<span class='macro'>ASSERT_NOCARRY (mpn_rsblsh1_n (xp + n, xp, dp - n, n))<span class='macro_popup'>(__gmpn_rsblsh1_n (xp + n, xp, dp - n, n))</span></span>;</td></tr>
+<tr class="codeline" data-linenumber="252"><td class="num" id="LN252">252</td><td class="line">	++cy;</td></tr>
+<tr class="codeline" data-linenumber="253"><td class="num" id="LN253">253</td><td class="line">      } <span class='keyword'>else</span></td></tr>
+<tr class="codeline" data-linenumber="254"><td class="num" id="LN254">254</td><td class="line">	<span class='macro'>ASSERT_NOCARRY (mpn_sub_nc (xp + 2 * n - rn, dp - rn, xp + n - rn, rn, mpn_cmp (xp, dp - n, n - rn) &gt; 0))<span class='macro_popup'>(__gmpn_sub_nc (xp + 2 * n - rn, dp - rn, xp + n - rn, rn, __gmpn_cmp<br> (xp, dp - n, n - rn) &gt; 0))</span></span>;</td></tr>
+<tr class="codeline" data-linenumber="255"><td class="num" id="LN255">255</td><td class="line"><span class='directive'>#else /* no mpn_rsblsh1_n*/</span></td></tr>
+<tr class="codeline" data-linenumber="256"><td class="num" id="LN256">256</td><td class="line">      <span class='keyword'>if</span> (<span class='macro'>mpn_cmp<span class='macro_popup'>__gmpn_cmp</span></span> (xp, dp - n, n) &gt; 0) {</td></tr>
+<tr class="codeline" data-linenumber="257"><td class="num" id="LN257">257</td><td class="line">	<span class='macro'>ASSERT_NOCARRY (mpn_sub_n (xp, xp, dp - n, n))<span class='macro_popup'>(__gmpn_sub_n (xp, xp, dp - n, n))</span></span>;</td></tr>
+<tr class="codeline" data-linenumber="258"><td class="num" id="LN258">258</td><td class="line">	++cy;</td></tr>
+<tr class="codeline" data-linenumber="259"><td class="num" id="LN259">259</td><td class="line">      }</td></tr>
+<tr class="codeline" data-linenumber="260"><td class="num" id="LN260">260</td><td class="line">      <span class='macro'>ASSERT_NOCARRY (mpn_sub_nc (xp + 2 * n - rn, dp - rn, xp + n - rn, rn, mpn_cmp (xp, dp - n, n - rn) &gt; 0))<span class='macro_popup'>(__gmpn_sub_nc (xp + 2 * n - rn, dp - rn, xp + n - rn, rn, __gmpn_cmp<br> (xp, dp - n, n - rn) &gt; 0))</span></span>;</td></tr>
+<tr class="codeline" data-linenumber="261"><td class="num" id="LN261">261</td><td class="line"><span class='directive'>#endif</span></td></tr>
+<tr class="codeline" data-linenumber="262"><td class="num" id="LN262">262</td><td class="line">      <span class='macro'>MPN_DECR_U(ip - rn, rn, cy)<span class='macro_popup'>do { mp_ptr __ptr_dummy; if (__builtin_constant_p (cy) &amp;&amp;<br> (cy) == 0) { } else if (__builtin_constant_p (cy) &amp;&amp;<br> (cy) == 1) { __asm__ __volatile__ ("\n" ".L" "asm_%=_" "top"<br> ":\n" "\t" "subq" "\t$1, (%0)\n" "\tlea\t%c2(%0), %0\n" "\tjc\t"<br> ".L" "asm_%=_" "top" : "=r" (__ptr_dummy) : "0" (ip - rn), "n"<br> (sizeof(mp_limb_t)) : "memory"); } else { __asm__ __volatile__<br> ( "subq" "\t%2, (%0)\n" "\tjnc\t" ".L" "asm_%=_" "done" "\n"<br> ".L" "asm_%=_" "top" ":\n" "\t" "subq" "\t$1, %c3(%0)\n" "\tlea\t%c3(%0), %0\n"<br> "\tjc\t" ".L" "asm_%=_" "top" "\n" ".L" "asm_%=_" "done" ":\n"<br> : "=r" (__ptr_dummy) : "0" (ip - rn), "re" ((mp_limb_t) (cy)<br>), "n" (sizeof(mp_limb_t)) : "memory"); } } while (0)</span></span>; <span class='comment'>/* 1 &lt;= cy &lt;= 4 here. */</span></td></tr>
+<tr class="codeline" data-linenumber="263"><td class="num" id="LN263">263</td><td class="line">    } <span class='keyword'>else</span> { <span class='comment'>/* "negative" residue class */</span></td></tr>
+<tr class="codeline" data-linenumber="264"><td class="num" id="LN264">264</td><td class="line">      <span class='macro'>ASSERT (xp[n] &gt;= GMP_NUMB_MAX - CNST_LIMB(1))<span class='macro_popup'>do {} while (0)</span></span>;</td></tr>
+<tr class="codeline" data-linenumber="265"><td class="num" id="LN265">265</td><td class="line">      <span class='macro'>MPN_DECR_U(xp, n + 1, cy)<span class='macro_popup'>do { mp_ptr __ptr_dummy; if (__builtin_constant_p (cy) &amp;&amp;<br> (cy) == 0) { } else if (__builtin_constant_p (cy) &amp;&amp;<br> (cy) == 1) { __asm__ __volatile__ ("\n" ".L" "asm_%=_" "top"<br> ":\n" "\t" "subq" "\t$1, (%0)\n" "\tlea\t%c2(%0), %0\n" "\tjc\t"<br> ".L" "asm_%=_" "top" : "=r" (__ptr_dummy) : "0" (xp), "n" (sizeof<br>(mp_limb_t)) : "memory"); } else { __asm__ __volatile__ ( "subq"<br> "\t%2, (%0)\n" "\tjnc\t" ".L" "asm_%=_" "done" "\n" ".L" "asm_%=_"<br> "top" ":\n" "\t" "subq" "\t$1, %c3(%0)\n" "\tlea\t%c3(%0), %0\n"<br> "\tjc\t" ".L" "asm_%=_" "top" "\n" ".L" "asm_%=_" "done" ":\n"<br> : "=r" (__ptr_dummy) : "0" (xp), "re" ((mp_limb_t) (cy)), "n"<br> (sizeof(mp_limb_t)) : "memory"); } } while (0)</span></span>;</td></tr>
+<tr class="codeline" data-linenumber="266"><td class="num" id="LN266">266</td><td class="line">      <span class='keyword'>if</span> (xp[n] != <span class='macro'>GMP_NUMB_MAX<span class='macro_popup'>((~ ((mp_limb_t) (0))) &gt;&gt; 0)</span></span>) {</td></tr>
+<tr class="codeline" data-linenumber="267"><td class="num" id="LN267">267</td><td class="line">	<span class='macro'>MPN_INCR_U(ip - rn, rn, CNST_LIMB (1))<span class='macro_popup'>do { mp_ptr __ptr_dummy; if (__builtin_constant_p (((mp_limb_t<br>) 1L)) &amp;&amp; (((mp_limb_t) 1L)) == 0) { } else if (__builtin_constant_p<br> (((mp_limb_t) 1L)) &amp;&amp; (((mp_limb_t) 1L)) == 1) { __asm__<br> __volatile__ ("\n" ".L" "asm_%=_" "top" ":\n" "\t" "addq" "\t$1, (%0)\n"<br> "\tlea\t%c2(%0), %0\n" "\tjc\t" ".L" "asm_%=_" "top" : "=r" (<br>__ptr_dummy) : "0" (ip - rn), "n" (sizeof(mp_limb_t)) : "memory"<br>); } else { __asm__ __volatile__ ( "addq" "\t%2, (%0)\n" "\tjnc\t"<br> ".L" "asm_%=_" "done" "\n" ".L" "asm_%=_" "top" ":\n" "\t" "addq"<br> "\t$1, %c3(%0)\n" "\tlea\t%c3(%0), %0\n" "\tjc\t" ".L" "asm_%=_"<br> "top" "\n" ".L" "asm_%=_" "done" ":\n" : "=r" (__ptr_dummy) :<br> "0" (ip - rn), "re" ((mp_limb_t) (((mp_limb_t) 1L))), "n" (sizeof<br>(mp_limb_t)) : "memory"); } } while (0)</span></span>;</td></tr>
+<tr class="codeline" data-linenumber="268"><td class="num" id="LN268">268</td><td class="line">	<span class='macro'>ASSERT_CARRY (mpn_add_n (xp, xp, dp - n, n))<span class='macro_popup'>(__gmpn_add_n (xp, xp, dp - n, n))</span></span>;</td></tr>
+<tr class="codeline" data-linenumber="269"><td class="num" id="LN269">269</td><td class="line">      }</td></tr>
+<tr class="codeline" data-linenumber="270"><td class="num" id="LN270">270</td><td class="line">      <span class='macro'>mpn_com<span class='macro_popup'>__gmpn_com</span></span> (xp + 2 * n - rn, xp + n - rn, rn);</td></tr>
+<tr class="codeline" data-linenumber="271"><td class="num" id="LN271">271</td><td class="line">    }</td></tr>
+<tr class="codeline" data-linenumber="272"><td class="num" id="LN272">272</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="273"><td class="num" id="LN273">273</td><td class="line">    <span class='comment'>/* Compute x_ju_j. FIXME:We need {xp+rn,rn}, mulhi? */</span></td></tr>
+<tr class="codeline" data-linenumber="274"><td class="num" id="LN274">274</td><td class="line">    <span class='macro'>mpn_mul_n<span class='macro_popup'>__gmpn_mul_n</span></span> (xp, xp + 2 * n - rn, ip - rn, rn);</td></tr>
+<tr class="codeline" data-linenumber="275"><td class="num" id="LN275">275</td><td class="line">    cy = <span class='macro'>mpn_add_n<span class='macro_popup'>__gmpn_add_n</span></span> (xp + rn, xp + rn, xp + 2 * n - rn, 2 * rn - n);</td></tr>
+<tr class="codeline" data-linenumber="276"><td class="num" id="LN276">276</td><td class="line">    cy = <span class='macro'>mpn_add_nc<span class='macro_popup'>__gmpn_add_nc</span></span> (ip - n, xp + 3 * rn - n, xp + n + rn, n - rn, cy);</td></tr>
+<tr class="codeline" data-linenumber="277"><td class="num" id="LN277">277</td><td class="line">    <span class='macro'>MPN_INCR_U (ip - rn, rn, cy)<span class='macro_popup'>do { mp_ptr __ptr_dummy; if (__builtin_constant_p (cy) &amp;&amp;<br> (cy) == 0) { } else if (__builtin_constant_p (cy) &amp;&amp;<br> (cy) == 1) { __asm__ __volatile__ ("\n" ".L" "asm_%=_" "top"<br> ":\n" "\t" "addq" "\t$1, (%0)\n" "\tlea\t%c2(%0), %0\n" "\tjc\t"<br> ".L" "asm_%=_" "top" : "=r" (__ptr_dummy) : "0" (ip - rn), "n"<br> (sizeof(mp_limb_t)) : "memory"); } else { __asm__ __volatile__<br> ( "addq" "\t%2, (%0)\n" "\tjnc\t" ".L" "asm_%=_" "done" "\n"<br> ".L" "asm_%=_" "top" ":\n" "\t" "addq" "\t$1, %c3(%0)\n" "\tlea\t%c3(%0), %0\n"<br> "\tjc\t" ".L" "asm_%=_" "top" "\n" ".L" "asm_%=_" "done" ":\n"<br> : "=r" (__ptr_dummy) : "0" (ip - rn), "re" ((mp_limb_t) (cy)<br>), "n" (sizeof(mp_limb_t)) : "memory"); } } while (0)</span></span>;</td></tr>
+<tr class="codeline" data-linenumber="278"><td class="num" id="LN278">278</td><td class="line">    <span class='keyword'>if</span> (sizp == sizes) { <span class='comment'>/* Get out of the cycle */</span></td></tr>
+<tr class="codeline" data-linenumber="279"><td class="num" id="LN279">279</td><td class="line">      <span class='comment'>/* Check for possible carry propagation from below. */</span></td></tr>
+<tr class="codeline" data-linenumber="280"><td class="num" id="LN280">280</td><td class="line">      cy = xp[3 * rn - n - 1] &gt; <span class='macro'>GMP_NUMB_MAX<span class='macro_popup'>((~ ((mp_limb_t) (0))) &gt;&gt; 0)</span></span> - <span class='macro'>CNST_LIMB (7)<span class='macro_popup'>((mp_limb_t) 7L)</span></span>; <span class='comment'>/* Be conservative. */</span></td></tr>
+<tr class="codeline" data-linenumber="281"><td class="num" id="LN281">281</td><td class="line">      <span class='comment'>/*    cy = mpn_add_1 (xp + rn, xp + rn, 2*rn - n, 4); */</span></td></tr>
+<tr class="codeline" data-linenumber="282"><td class="num" id="LN282">282</td><td class="line">      <span class='keyword'>break</span>;</td></tr>
+<tr class="codeline" data-linenumber="283"><td class="num" id="LN283">283</td><td class="line">    }</td></tr>
+<tr class="codeline" data-linenumber="284"><td class="num" id="LN284">284</td><td class="line">    rn = n;</td></tr>
+<tr class="codeline" data-linenumber="285"><td class="num" id="LN285">285</td><td class="line">  }</td></tr>
+<tr class="codeline" data-linenumber="286"><td class="num" id="LN286">286</td><td class="line">  <span class='macro'>TMP_FREE<span class='macro_popup'>do { if (__builtin_expect ((__tmp_marker != 0) != 0, 0)) __gmp_tmp_reentrant_free<br> (__tmp_marker); } while (0)</span></span>;</td></tr>
+<tr class="codeline" data-linenumber="287"><td class="num" id="LN287">287</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="288"><td class="num" id="LN288">288</td><td class="line">  <span class='keyword'>return</span> cy;</td></tr>
+<tr class="codeline" data-linenumber="289"><td class="num" id="LN289">289</td><td class="line"><span class='directive'>#undef xp</span></td></tr>
+<tr class="codeline" data-linenumber="290"><td class="num" id="LN290">290</td><td class="line">}</td></tr>
+<tr class="codeline" data-linenumber="291"><td class="num" id="LN291">291</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="292"><td class="num" id="LN292">292</td><td class="line">mp_limb_t</td></tr>
+<tr class="codeline" data-linenumber="293"><td class="num" id="LN293">293</td><td class="line"><span class='macro'>mpn_invertappr<span class='macro_popup'>__gmpn_invertappr</span></span> (mp_ptr ip, mp_srcptr dp, mp_size_t n, mp_ptr scratch)</td></tr>
+<tr class="codeline" data-linenumber="294"><td class="num" id="LN294">294</td><td class="line">{</td></tr>
+<tr class="codeline" data-linenumber="295"><td class="num" id="LN295">295</td><td class="line">  <span class='macro'>ASSERT (n &gt; 0)<span class='macro_popup'>do {} while (0)</span></span>;</td></tr>
+<tr class="codeline" data-linenumber="296"><td class="num" id="LN296">296</td><td class="line">  <span class='macro'>ASSERT (dp[n-1] &amp; GMP_NUMB_HIGHBIT)<span class='macro_popup'>do {} while (0)</span></span>;</td></tr>
+<tr class="codeline" data-linenumber="297"><td class="num" id="LN297">297</td><td class="line">  <span class='macro'>ASSERT (! MPN_OVERLAP_P (ip, n, dp, n))<span class='macro_popup'>do {} while (0)</span></span>;</td></tr>
+<tr class="codeline" data-linenumber="298"><td class="num" id="LN298">298</td><td class="line">  <span class='macro'>ASSERT (! MPN_OVERLAP_P (ip, n, scratch, mpn_invertappr_itch(n)))<span class='macro_popup'>do {} while (0)</span></span>;</td></tr>
+<tr class="codeline" data-linenumber="299"><td class="num" id="LN299">299</td><td class="line">  <span class='macro'>ASSERT (! MPN_OVERLAP_P (dp, n, scratch, mpn_invertappr_itch(n)))<span class='macro_popup'>do {} while (0)</span></span>;</td></tr>
+<tr class="codeline" data-linenumber="300"><td class="num" id="LN300">300</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="301"><td class="num" id="LN301">301</td><td class="line">  <span class='keyword'>if</span> (<span class='macro'>BELOW_THRESHOLD (n, INV_NEWTON_THRESHOLD)<span class='macro_popup'>(! ((__builtin_constant_p (246) &amp;&amp; (246) == 0) || (!(<br>__builtin_constant_p (246) &amp;&amp; (246) == 9223372036854775807L<br>) &amp;&amp; (n) &gt;= (246))))</span></span>)</td></tr>
+<tr class="codeline" data-linenumber="302"><td class="num" id="LN302">302</td><td class="line">    <span class='keyword'>return</span> mpn_bc_invertappr (ip, dp, n, scratch);</td></tr>
+<tr class="codeline" data-linenumber="303"><td class="num" id="LN303">303</td><td class="line">  <span class='keyword'>else</span></td></tr>
+<tr class="codeline" data-linenumber="304"><td class="num" id="LN304">304</td><td class="line">    <span class='keyword'>return</span> <span class='macro'>mpn_ni_invertappr<span class='macro_popup'>__gmpn_ni_invertappr</span></span> (ip, dp, n, scratch);</td></tr>
+<tr class="codeline" data-linenumber="305"><td class="num" id="LN305">305</td><td class="line">}</td></tr>
+</table></body></html>

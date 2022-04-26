@@ -1,0 +1,1383 @@
+<html>
+<head>
+<title>build - scan-build results</title>
+<link type="text/css" rel="stylesheet" href="scanview.css"/>
+<script src="sorttable.js"></script>
+<script language='javascript' type="text/javascript">
+function SetDisplay(RowClass, DisplayVal)
+{
+  var Rows = document.getElementsByTagName("tr");
+  for ( var i = 0 ; i < Rows.length; ++i ) {
+    if (Rows[i].className == RowClass) {
+      Rows[i].style.display = DisplayVal;
+    }
+  }
+}
+
+function CopyCheckedStateToCheckButtons(SummaryCheckButton) {
+  var Inputs = document.getElementsByTagName("input");
+  for ( var i = 0 ; i < Inputs.length; ++i ) {
+    if (Inputs[i].type == "checkbox") {
+      if(Inputs[i] != SummaryCheckButton) {
+        Inputs[i].checked = SummaryCheckButton.checked;
+        Inputs[i].onclick();
+      }
+    }
+  }
+}
+
+function returnObjById( id ) {
+    if (document.getElementById)
+        var returnVar = document.getElementById(id);
+    else if (document.all)
+        var returnVar = document.all[id];
+    else if (document.layers)
+        var returnVar = document.layers[id];
+    return returnVar;
+}
+
+var NumUnchecked = 0;
+
+function ToggleDisplay(CheckButton, ClassName) {
+  if (CheckButton.checked) {
+    SetDisplay(ClassName, "");
+    if (--NumUnchecked == 0) {
+      returnObjById("AllBugsCheck").checked = true;
+    }
+  }
+  else {
+    SetDisplay(ClassName, "none");
+    NumUnchecked++;
+    returnObjById("AllBugsCheck").checked = false;
+  }
+}
+</script>
+<!-- SUMMARYENDHEAD -->
+</head>
+<body>
+<h1>build - scan-build results</h1>
+
+<table>
+<tr><th>User:</th><td>zach@DESKTOP-F4G7LBJ</td></tr>
+<tr><th>Working Directory:</th><td>/home/zach/inkscape/build</td></tr>
+<tr><th>Command Line:</th><td>make -j8</td></tr>
+<tr><th>Clang Version:</th><td>clang version 10.0.0-4ubuntu1 
+</td></tr>
+<tr><th>Date:</th><td>Tue Apr 26 13:25:44 2022</td></tr>
+</table>
+<h2>Bug Summary</h2><table>
+<thead><tr><td>Bug Type</td><td>Quantity</td><td class="sorttable_nosort">Display?</td></tr></thead>
+<tr style="font-weight:bold"><td class="SUMM_DESC">All Bugs</td><td class="Q">424</td><td><center><input type="checkbox" id="AllBugsCheck" onClick="CopyCheckedStateToCheckButtons(this);" checked/></center></td></tr>
+<tr><th>API</th><th colspan=2></th></tr>
+<tr><td class="SUMM_DESC">Argument with 'nonnull' attribute passed null</td><td class="Q">5</td><td><center><input type="checkbox" onClick="ToggleDisplay(this,'bt_api_argument_with_nonnull_attribute_passed_null');" checked/></center></td></tr>
+<tr><th>Dead store</th><th colspan=2></th></tr>
+<tr><td class="SUMM_DESC">Dead assignment</td><td class="Q">131</td><td><center><input type="checkbox" onClick="ToggleDisplay(this,'bt_dead_store_dead_assignment');" checked/></center></td></tr>
+<tr><td class="SUMM_DESC">Dead increment</td><td class="Q">12</td><td><center><input type="checkbox" onClick="ToggleDisplay(this,'bt_dead_store_dead_increment');" checked/></center></td></tr>
+<tr><td class="SUMM_DESC">Dead initialization</td><td class="Q">25</td><td><center><input type="checkbox" onClick="ToggleDisplay(this,'bt_dead_store_dead_initialization');" checked/></center></td></tr>
+<tr><td class="SUMM_DESC">Dead nested assignment</td><td class="Q">5</td><td><center><input type="checkbox" onClick="ToggleDisplay(this,'bt_dead_store_dead_nested_assignment');" checked/></center></td></tr>
+<tr><th>Logic error</th><th colspan=2></th></tr>
+<tr><td class="SUMM_DESC">Assigned value is garbage or undefined</td><td class="Q">18</td><td><center><input type="checkbox" onClick="ToggleDisplay(this,'bt_logic_error_assigned_value_is_garbage_or_undefined');" checked/></center></td></tr>
+<tr><td class="SUMM_DESC">Branch condition evaluates to a garbage value</td><td class="Q">1</td><td><center><input type="checkbox" onClick="ToggleDisplay(this,'bt_logic_error_branch_condition_evaluates_to_a_garbage_value');" checked/></center></td></tr>
+<tr><td class="SUMM_DESC">Called C++ object pointer is null</td><td class="Q">107</td><td><center><input type="checkbox" onClick="ToggleDisplay(this,'bt_logic_error_called_c++_object_pointer_is_null');" checked/></center></td></tr>
+<tr><td class="SUMM_DESC">Called C++ object pointer is uninitialized</td><td class="Q">1</td><td><center><input type="checkbox" onClick="ToggleDisplay(this,'bt_logic_error_called_c++_object_pointer_is_uninitialized');" checked/></center></td></tr>
+<tr><td class="SUMM_DESC">Dereference of null pointer</td><td class="Q">58</td><td><center><input type="checkbox" onClick="ToggleDisplay(this,'bt_logic_error_dereference_of_null_pointer');" checked/></center></td></tr>
+<tr><td class="SUMM_DESC">Dereference of undefined pointer value</td><td class="Q">1</td><td><center><input type="checkbox" onClick="ToggleDisplay(this,'bt_logic_error_dereference_of_undefined_pointer_value');" checked/></center></td></tr>
+<tr><td class="SUMM_DESC">Division by zero</td><td class="Q">4</td><td><center><input type="checkbox" onClick="ToggleDisplay(this,'bt_logic_error_division_by_zero');" checked/></center></td></tr>
+<tr><td class="SUMM_DESC">Result of operation is garbage or undefined</td><td class="Q">17</td><td><center><input type="checkbox" onClick="ToggleDisplay(this,'bt_logic_error_result_of_operation_is_garbage_or_undefined');" checked/></center></td></tr>
+<tr><td class="SUMM_DESC">Uninitialized argument value</td><td class="Q">10</td><td><center><input type="checkbox" onClick="ToggleDisplay(this,'bt_logic_error_uninitialized_argument_value');" checked/></center></td></tr>
+<tr><th>Memory error</th><th colspan=2></th></tr>
+<tr><td class="SUMM_DESC">Double delete</td><td class="Q">1</td><td><center><input type="checkbox" onClick="ToggleDisplay(this,'bt_memory_error_double_delete');" checked/></center></td></tr>
+<tr><td class="SUMM_DESC">Memory leak</td><td class="Q">23</td><td><center><input type="checkbox" onClick="ToggleDisplay(this,'bt_memory_error_memory_leak');" checked/></center></td></tr>
+<tr><td class="SUMM_DESC">Use of zero allocated</td><td class="Q">1</td><td><center><input type="checkbox" onClick="ToggleDisplay(this,'bt_memory_error_use_of_zero_allocated');" checked/></center></td></tr>
+<tr><td class="SUMM_DESC">Use-after-free</td><td class="Q">4</td><td><center><input type="checkbox" onClick="ToggleDisplay(this,'bt_memory_error_use-after-free');" checked/></center></td></tr>
+</table>
+<h2>Reports</h2>
+
+<table class="sortable" style="table-layout:automatic">
+<thead><tr>
+  <td>Bug Group</td>
+  <td class="sorttable_sorted">Bug Type<span id="sorttable_sortfwdind">&nbsp;&#x25BE;</span></td>
+  <td>File</td>
+  <td>Function/Method</td>
+  <td class="Q">Line</td>
+  <td class="Q">Path Length</td>
+  <td class="sorttable_nosort"></td>
+  <!-- REPORTBUGCOL -->
+</tr></thead>
+<tbody>
+<tr class="bt_api_argument_with_nonnull_attribute_passed_null"><td class="DESC">API</td><td class="DESC">Argument with 'nonnull' attribute passed null</td><td>home/zach/inkscape/src/3rdparty/libuemf/upmf.c</td><td class="DESC">U_PO_po_append</td><td class="Q">589</td><td class="Q">53</td><td><a href="report-0f84f7.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-0f84f7.html" -->
+</tr>
+<tr class="bt_api_argument_with_nonnull_attribute_passed_null"><td class="DESC">API</td><td class="DESC">Argument with 'nonnull' attribute passed null</td><td>home/zach/inkscape/src/3rdparty/libuemf/upmf.c</td><td class="DESC">U_PO_po_append</td><td class="Q">592</td><td class="Q">46</td><td><a href="report-0b69ae.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-0b69ae.html" -->
+</tr>
+<tr class="bt_api_argument_with_nonnull_attribute_passed_null"><td class="DESC">API</td><td class="DESC">Argument with 'nonnull' attribute passed null</td><td>home/zach/inkscape/src/3rdparty/autotrace/autotrace.c</td><td class="DESC">at_bitmap_copy</td><td class="Q">156</td><td class="Q">5</td><td><a href="report-83ebbb.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-83ebbb.html" -->
+</tr>
+<tr class="bt_api_argument_with_nonnull_attribute_passed_null"><td class="DESC">API</td><td class="DESC">Argument with 'nonnull' attribute passed null</td><td>home/zach/inkscape/src/3rdparty/libcroco/cr-style.c</td><td class="DESC">set_prop_margin_x_from_value</td><td class="Q">785</td><td class="Q">26</td><td><a href="report-517824.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-517824.html" -->
+</tr>
+<tr class="bt_api_argument_with_nonnull_attribute_passed_null"><td class="DESC">API</td><td class="DESC">Argument with 'nonnull' attribute passed null</td><td>home/zach/inkscape/src/3rdparty/libuemf/upmf.c</td><td class="DESC">U_PO_po_append</td><td class="Q">590</td><td class="Q">48</td><td><a href="report-bf201f.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-bf201f.html" -->
+</tr>
+<tr class="bt_logic_error_assigned_value_is_garbage_or_undefined"><td class="DESC">Logic error</td><td class="DESC">Assigned value is garbage or undefined</td><td>home/zach/inkscape/src/livarot/PathSimplify.cpp</td><td class="DESC">AttemptSimplify</td><td class="Q">848</td><td class="Q">46</td><td><a href="report-0a62c6.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-0a62c6.html" -->
+</tr>
+<tr class="bt_logic_error_assigned_value_is_garbage_or_undefined"><td class="DESC">Logic error</td><td class="DESC">Assigned value is garbage or undefined</td><td>home/zach/inkscape/src/3rdparty/adaptagrams/libcola/convex_hull.cpp</td><td class="DESC">CounterClockwiseOrder</td><td class="Q">46</td><td class="Q">6</td><td><a href="report-1420a0.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-1420a0.html" -->
+</tr>
+<tr class="bt_logic_error_assigned_value_is_garbage_or_undefined"><td class="DESC">Logic error</td><td class="DESC">Assigned value is garbage or undefined</td><td>home/zach/inkscape/src/livarot/Shape.cpp</td><td class="DESC">SortEdges</td><td class="Q">1519</td><td class="Q">15</td><td><a href="report-1b44d1.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-1b44d1.html" -->
+</tr>
+<tr class="bt_logic_error_assigned_value_is_garbage_or_undefined"><td class="DESC">Logic error</td><td class="DESC">Assigned value is garbage or undefined</td><td>home/zach/inkscape/src/livarot/Shape.cpp</td><td class="DESC">SortEdges</td><td class="Q">1520</td><td class="Q">35</td><td><a href="report-6ed705.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-6ed705.html" -->
+</tr>
+<tr class="bt_logic_error_assigned_value_is_garbage_or_undefined"><td class="DESC">Logic error</td><td class="DESC">Assigned value is garbage or undefined</td><td>home/zach/inkscape/src/display/cairo-utils.cpp</td><td class="DESC">pixbuf_to_png</td><td class="Q">1841</td><td class="Q">16</td><td><a href="report-ef4e4a.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-ef4e4a.html" -->
+</tr>
+<tr class="bt_logic_error_assigned_value_is_garbage_or_undefined"><td class="DESC">Logic error</td><td class="DESC">Assigned value is garbage or undefined</td><td>home/zach/inkscape/src/svg/svg-length.cpp</td><td class="DESC">read</td><td class="Q">173</td><td class="Q">31</td><td><a href="report-6f5a96.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-6f5a96.html" -->
+</tr>
+<tr class="bt_logic_error_assigned_value_is_garbage_or_undefined"><td class="DESC">Logic error</td><td class="DESC">Assigned value is garbage or undefined</td><td>home/zach/inkscape/src/3rdparty/2geom/src/2geom/bezier.cpp</td><td class="DESC">elevate_degree</td><td class="Q">132</td><td class="Q">20</td><td><a href="report-fa338a.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-fa338a.html" -->
+</tr>
+<tr class="bt_logic_error_assigned_value_is_garbage_or_undefined"><td class="DESC">Logic error</td><td class="DESC">Assigned value is garbage or undefined</td><td>home/zach/inkscape/src/livarot/BitLigne.cpp</td><td class="DESC">AddBord</td><td class="Q">118</td><td class="Q">37</td><td><a href="report-7a9e0e.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-7a9e0e.html" -->
+</tr>
+<tr class="bt_logic_error_assigned_value_is_garbage_or_undefined"><td class="DESC">Logic error</td><td class="DESC">Assigned value is garbage or undefined</td><td>home/zach/inkscape/src/3rdparty/adaptagrams/libcola/convex_hull.cpp</td><td class="DESC">CounterClockwiseOrder</td><td class="Q">46</td><td class="Q">6</td><td><a href="report-6c10a3.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-6c10a3.html" -->
+</tr>
+<tr class="bt_logic_error_assigned_value_is_garbage_or_undefined"><td class="DESC">Logic error</td><td class="DESC">Assigned value is garbage or undefined</td><td>home/zach/inkscape/src/livarot/BitLigne.cpp</td><td class="DESC">AddBord</td><td class="Q">146</td><td class="Q">42</td><td><a href="report-1727bf.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-1727bf.html" -->
+</tr>
+<tr class="bt_logic_error_assigned_value_is_garbage_or_undefined"><td class="DESC">Logic error</td><td class="DESC">Assigned value is garbage or undefined</td><td>home/zach/inkscape/src/svg/svg-length.cpp</td><td class="DESC">sp_svg_length_read_ldd</td><td class="Q">442</td><td class="Q">31</td><td><a href="report-87324e.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-87324e.html" -->
+</tr>
+<tr class="bt_logic_error_assigned_value_is_garbage_or_undefined"><td class="DESC">Logic error</td><td class="DESC">Assigned value is garbage or undefined</td><td>home/zach/inkscape/src/3rdparty/libuemf/upmf.c</td><td class="DESC">U_PMF_VARRECTS_get</td><td class="Q">6681</td><td class="Q">52</td><td><a href="report-7052bb.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-7052bb.html" -->
+</tr>
+<tr class="bt_logic_error_assigned_value_is_garbage_or_undefined"><td class="DESC">Logic error</td><td class="DESC">Assigned value is garbage or undefined</td><td>home/zach/inkscape/src/livarot/BitLigne.cpp</td><td class="DESC">AddBord</td><td class="Q">109</td><td class="Q">27</td><td><a href="report-5f305b.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-5f305b.html" -->
+</tr>
+<tr class="bt_logic_error_assigned_value_is_garbage_or_undefined"><td class="DESC">Logic error</td><td class="DESC">Assigned value is garbage or undefined</td><td>home/zach/inkscape/src/3rdparty/adaptagrams/libcola/cola.cpp</td><td class="DESC">ConstrainedMajorizationLayout</td><td class="Q">112</td><td class="Q">34</td><td><a href="report-bb0606.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-bb0606.html" -->
+</tr>
+<tr class="bt_logic_error_assigned_value_is_garbage_or_undefined"><td class="DESC">Logic error</td><td class="DESC">Assigned value is garbage or undefined</td><td>home/zach/inkscape/src/3rdparty/adaptagrams/libcola/convex_hull.cpp</td><td class="DESC">convex</td><td class="Q">90</td><td class="Q">16</td><td><a href="report-0c2139.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-0c2139.html" -->
+</tr>
+<tr class="bt_logic_error_assigned_value_is_garbage_or_undefined"><td class="DESC">Logic error</td><td class="DESC">Assigned value is garbage or undefined</td><td>home/zach/inkscape/src/live_effects/lpe-tiling.cpp</td><td class="DESC">doAfterEffect</td><td class="Q">383</td><td class="Q">59</td><td><a href="report-34cda7.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-34cda7.html" -->
+</tr>
+<tr class="bt_logic_error_assigned_value_is_garbage_or_undefined"><td class="DESC">Logic error</td><td class="DESC">Assigned value is garbage or undefined</td><td>home/zach/inkscape/src/livarot/BitLigne.cpp</td><td class="DESC">AddBord</td><td class="Q">133</td><td class="Q">29</td><td><a href="report-8d53b4.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-8d53b4.html" -->
+</tr>
+<tr class="bt_logic_error_assigned_value_is_garbage_or_undefined"><td class="DESC">Logic error</td><td class="DESC">Assigned value is garbage or undefined</td><td>home/zach/inkscape/src/livarot/BitLigne.cpp</td><td class="DESC">AddBord</td><td class="Q">158</td><td class="Q">44</td><td><a href="report-41678f.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-41678f.html" -->
+</tr>
+<tr class="bt_logic_error_branch_condition_evaluates_to_a_garbage_value"><td class="DESC">Logic error</td><td class="DESC">Branch condition evaluates to a garbage value</td><td>home/zach/inkscape/src/trace/autotrace/inkscape-autotrace.cpp</td><td class="DESC">trace</td><td class="Q">199</td><td class="Q">6</td><td><a href="report-bd7167.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-bd7167.html" -->
+</tr>
+<tr class="bt_logic_error_called_c++_object_pointer_is_null"><td class="DESC">Logic error</td><td class="DESC">Called C++ object pointer is null</td><td>home/zach/inkscape/src/selection-chemistry.cpp</td><td class="DESC">sp_selection_to_guides_recursive</td><td class="Q">3164</td><td class="Q">2</td><td><a href="report-74633c.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-74633c.html" -->
+</tr>
+<tr class="bt_logic_error_called_c++_object_pointer_is_null"><td class="DESC">Logic error</td><td class="DESC">Called C++ object pointer is null</td><td>home/zach/inkscape/src/3rdparty/adaptagrams/libavoid/orthogonal.cpp</td><td class="DESC">generateStaticOrthogonalVisGraph</td><td class="Q">1753</td><td class="Q">5</td><td><a href="report-5639d6.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-5639d6.html" -->
+</tr>
+<tr class="bt_logic_error_called_c++_object_pointer_is_null"><td class="DESC">Logic error</td><td class="DESC">Called C++ object pointer is null</td><td>home/zach/inkscape/src/ui/tools/spray-tool.cpp</td><td class="DESC">sp_spray_recursive</td><td class="Q">897</td><td class="Q">28</td><td><a href="report-413864.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-413864.html" -->
+</tr>
+<tr class="bt_logic_error_called_c++_object_pointer_is_null"><td class="DESC">Logic error</td><td class="DESC">Called C++ object pointer is null</td><td>home/zach/inkscape/src/livarot/ShapeSweep.cpp</td><td class="DESC">AddChgt</td><td class="Q">3000</td><td class="Q">25</td><td><a href="report-c8cf4d.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-c8cf4d.html" -->
+</tr>
+<tr class="bt_logic_error_called_c++_object_pointer_is_null"><td class="DESC">Logic error</td><td class="DESC">Called C++ object pointer is null</td><td>home/zach/inkscape/src/livarot/PathCutting.cpp</td><td class="DESC">SubPaths</td><td class="Q">571</td><td class="Q">3</td><td><a href="report-a0dcc8.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-a0dcc8.html" -->
+</tr>
+<tr class="bt_logic_error_called_c++_object_pointer_is_null"><td class="DESC">Logic error</td><td class="DESC">Called C++ object pointer is null</td><td>home/zach/inkscape/src/ui/tool/path-manipulator.cpp</td><td class="DESC">PathManipulator</td><td class="Q">122</td><td class="Q">5</td><td><a href="report-da1e04.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-da1e04.html" -->
+</tr>
+<tr class="bt_logic_error_called_c++_object_pointer_is_null"><td class="DESC">Logic error</td><td class="DESC">Called C++ object pointer is null</td><td>home/zach/inkscape/src/ui/dialog/export.cpp</td><td class="DESC">Export</td><td class="Q">85</td><td class="Q">6</td><td><a href="report-cb4c6b.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-cb4c6b.html" -->
+</tr>
+<tr class="bt_logic_error_called_c++_object_pointer_is_null"><td class="DESC">Logic error</td><td class="DESC">Called C++ object pointer is null</td><td>home/zach/inkscape/src/ui/dialog/inkscape-preferences.cpp</td><td class="DESC">get_num_matches</td><td class="Q">158</td><td class="Q">29</td><td><a href="report-efb534.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-efb534.html" -->
+</tr>
+<tr class="bt_logic_error_called_c++_object_pointer_is_null"><td class="DESC">Logic error</td><td class="DESC">Called C++ object pointer is null</td><td>home/zach/inkscape/src/ui/dialog/styledialog.cpp</td><td class="DESC">_writeStyleElement</td><td class="Q">1059</td><td class="Q">10</td><td><a href="report-d97926.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-d97926.html" -->
+</tr>
+<tr class="bt_logic_error_called_c++_object_pointer_is_null"><td class="DESC">Logic error</td><td class="DESC">Called C++ object pointer is null</td><td>home/zach/inkscape/src/live_effects/lpe-parallel.cpp</td><td class="DESC">doOnApply</td><td class="Q">73</td><td class="Q">4</td><td><a href="report-990adb.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-990adb.html" -->
+</tr>
+<tr class="bt_logic_error_called_c++_object_pointer_is_null"><td class="DESC">Logic error</td><td class="DESC">Called C++ object pointer is null</td><td>home/zach/inkscape/src/live_effects/lpe-mirror_symmetry.cpp</td><td class="DESC">cloneStyle</td><td class="Q">324</td><td class="Q">31</td><td><a href="report-a2d568.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-a2d568.html" -->
+</tr>
+<tr class="bt_logic_error_called_c++_object_pointer_is_null"><td class="DESC">Logic error</td><td class="DESC">Called C++ object pointer is null</td><td>home/zach/inkscape/src/object/sp-flowdiv.cpp</td><td class="DESC">update</td><td class="Q">301</td><td class="Q">7</td><td><a href="report-f1bbe0.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-f1bbe0.html" -->
+</tr>
+<tr class="bt_logic_error_called_c++_object_pointer_is_null"><td class="DESC">Logic error</td><td class="DESC">Called C++ object pointer is null</td><td>home/zach/inkscape/src/live_effects/lpe-slice.cpp</td><td class="DESC">split</td><td class="Q">479</td><td class="Q">60</td><td><a href="report-1423f9.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-1423f9.html" -->
+</tr>
+<tr class="bt_logic_error_called_c++_object_pointer_is_null"><td class="DESC">Logic error</td><td class="DESC">Called C++ object pointer is null</td><td>home/zach/inkscape/src/live_effects/lpe-bspline.cpp</td><td class="DESC">doOnApply</td><td class="Q">77</td><td class="Q">4</td><td><a href="report-75d4de.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-75d4de.html" -->
+</tr>
+<tr class="bt_logic_error_called_c++_object_pointer_is_null"><td class="DESC">Logic error</td><td class="DESC">Called C++ object pointer is null</td><td>home/zach/inkscape/src/text-editing.cpp</td><td class="DESC">sp_te_delete</td><td class="Q">868</td><td class="Q">24</td><td><a href="report-0afb3d.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-0afb3d.html" -->
+</tr>
+<tr class="bt_logic_error_called_c++_object_pointer_is_null"><td class="DESC">Logic error</td><td class="DESC">Called C++ object pointer is null</td><td>home/zach/inkscape/src/object/sp-rect.cpp</td><td class="DESC">write</td><td class="Q">171</td><td class="Q">5</td><td><a href="report-d46281.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-d46281.html" -->
+</tr>
+<tr class="bt_logic_error_called_c++_object_pointer_is_null"><td class="DESC">Logic error</td><td class="DESC">Called C++ object pointer is null</td><td>home/zach/inkscape/src/live_effects/lpe-copy_rotate.cpp</td><td class="DESC">cloneStyle</td><td class="Q">228</td><td class="Q">44</td><td><a href="report-5f7b97.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-5f7b97.html" -->
+</tr>
+<tr class="bt_logic_error_called_c++_object_pointer_is_null"><td class="DESC">Logic error</td><td class="DESC">Called C++ object pointer is null</td><td>home/zach/inkscape/src/ui/dialog/inkscape-preferences.cpp</td><td class="DESC">get_widgets_in_grid</td><td class="Q">384</td><td class="Q">12</td><td><a href="report-1715a3.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-1715a3.html" -->
+</tr>
+<tr class="bt_logic_error_called_c++_object_pointer_is_null"><td class="DESC">Logic error</td><td class="DESC">Called C++ object pointer is null</td><td>home/zach/inkscape/src/text-editing.cpp</td><td class="DESC">delete_line_break</td><td class="Q">718</td><td class="Q">34</td><td><a href="report-56568e.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-56568e.html" -->
+</tr>
+<tr class="bt_logic_error_called_c++_object_pointer_is_null"><td class="DESC">Logic error</td><td class="DESC">Called C++ object pointer is null</td><td>home/zach/inkscape/src/ui/tools/tweak-tool.cpp</td><td class="DESC">sp_tweak_dilate_recursive</td><td class="Q">402</td><td class="Q">14</td><td><a href="report-2cae81.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-2cae81.html" -->
+</tr>
+<tr class="bt_logic_error_called_c++_object_pointer_is_null"><td class="DESC">Logic error</td><td class="DESC">Called C++ object pointer is null</td><td>home/zach/inkscape/src/helper/pixbuf-ops.cpp</td><td class="DESC">hide_other_items_recursively</td><td class="Q">53</td><td class="Q">23</td><td><a href="report-ccc4e4.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-ccc4e4.html" -->
+</tr>
+<tr class="bt_logic_error_called_c++_object_pointer_is_null"><td class="DESC">Logic error</td><td class="DESC">Called C++ object pointer is null</td><td>home/zach/inkscape/src/livarot/PathCutting.cpp</td><td class="DESC">SubPathsWithNesting</td><td class="Q">667</td><td class="Q">5</td><td><a href="report-737a5a.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-737a5a.html" -->
+</tr>
+<tr class="bt_logic_error_called_c++_object_pointer_is_null"><td class="DESC">Logic error</td><td class="DESC">Called C++ object pointer is null</td><td>home/zach/inkscape/src/livarot/PathCutting.cpp</td><td class="DESC">MakePathVector</td><td class="Q">380</td><td class="Q">17</td><td><a href="report-ffc1aa.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-ffc1aa.html" -->
+</tr>
+<tr class="bt_logic_error_called_c++_object_pointer_is_null"><td class="DESC">Logic error</td><td class="DESC">Called C++ object pointer is null</td><td>home/zach/inkscape/src/ui/tools/spray-tool.cpp</td><td class="DESC">sp_spray_recursive</td><td class="Q">1029</td><td class="Q">34</td><td><a href="report-b5a402.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-b5a402.html" -->
+</tr>
+<tr class="bt_logic_error_called_c++_object_pointer_is_null"><td class="DESC">Logic error</td><td class="DESC">Called C++ object pointer is null</td><td>home/zach/inkscape/src/ui/dialog/spellcheck.cpp</td><td class="DESC">allTextItems</td><td class="Q">237</td><td class="Q">5</td><td><a href="report-02d284.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-02d284.html" -->
+</tr>
+<tr class="bt_logic_error_called_c++_object_pointer_is_null"><td class="DESC">Logic error</td><td class="DESC">Called C++ object pointer is null</td><td>home/zach/inkscape/src/text-editing.cpp</td><td class="DESC">sp_te_insert</td><td class="Q">608</td><td class="Q">11</td><td><a href="report-47fa6b.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-47fa6b.html" -->
+</tr>
+<tr class="bt_logic_error_called_c++_object_pointer_is_null"><td class="DESC">Logic error</td><td class="DESC">Called C++ object pointer is null</td><td>home/zach/inkscape/src/seltrans.cpp</td><td class="DESC">transform</td><td class="Q">401</td><td class="Q">26</td><td><a href="report-acd984.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-acd984.html" -->
+</tr>
+<tr class="bt_logic_error_called_c++_object_pointer_is_null"><td class="DESC">Logic error</td><td class="DESC">Called C++ object pointer is null</td><td>home/zach/inkscape/src/ui/widget/paint-selector.cpp</td><td class="DESC">set_style_buttons</td><td class="Q">1001</td><td class="Q">39</td><td><a href="report-c65892.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-c65892.html" -->
+</tr>
+<tr class="bt_logic_error_called_c++_object_pointer_is_null"><td class="DESC">Logic error</td><td class="DESC">Called C++ object pointer is null</td><td>home/zach/inkscape/src/livarot/PathCutting.cpp</td><td class="DESC">MakePathVector</td><td class="Q">331</td><td class="Q">5</td><td><a href="report-25bcfa.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-25bcfa.html" -->
+</tr>
+<tr class="bt_logic_error_called_c++_object_pointer_is_null"><td class="DESC">Logic error</td><td class="DESC">Called C++ object pointer is null</td><td>home/zach/inkscape/src/3rdparty/adaptagrams/libavoid/vpsc.cpp</td><td class="DESC">constraintGraphIsCyclic</td><td class="Q">170</td><td class="Q">9</td><td><a href="report-51b391.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-51b391.html" -->
+</tr>
+<tr class="bt_logic_error_called_c++_object_pointer_is_null"><td class="DESC">Logic error</td><td class="DESC">Called C++ object pointer is null</td><td>home/zach/inkscape/src/ui/toolbar/text-toolbar.cpp</td><td class="DESC">lineheight_unit_changed</td><td class="Q">1544</td><td class="Q">39</td><td><a href="report-193818.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-193818.html" -->
+</tr>
+<tr class="bt_logic_error_called_c++_object_pointer_is_null"><td class="DESC">Logic error</td><td class="DESC">Called C++ object pointer is null</td><td>home/zach/inkscape/src/file-update.cpp</td><td class="DESC">sp_file_text_run_recursive</td><td class="Q">186</td><td class="Q">8</td><td><a href="report-859170.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-859170.html" -->
+</tr>
+<tr class="bt_logic_error_called_c++_object_pointer_is_null"><td class="DESC">Logic error</td><td class="DESC">Called C++ object pointer is null</td><td>home/zach/inkscape/src/ui/widget/page-properties.cpp</td><td class="DESC">PagePropertiesBox</td><td class="Q">117</td><td class="Q">8</td><td><a href="report-1b67a3.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-1b67a3.html" -->
+</tr>
+<tr class="bt_logic_error_called_c++_object_pointer_is_null"><td class="DESC">Logic error</td><td class="DESC">Called C++ object pointer is null</td><td>home/zach/inkscape/src/3rdparty/adaptagrams/libavoid/router.cpp</td><td class="DESC">~Router</td><td class="Q">127</td><td class="Q">10</td><td><a href="report-f7d183.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-f7d183.html" -->
+</tr>
+<tr class="bt_logic_error_called_c++_object_pointer_is_null"><td class="DESC">Logic error</td><td class="DESC">Called C++ object pointer is null</td><td>home/zach/inkscape/src/ui/dialog/dialog-multipaned.cpp</td><td class="DESC">on_size_allocate</td><td class="Q">775</td><td class="Q">9</td><td><a href="report-04baeb.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-04baeb.html" -->
+</tr>
+<tr class="bt_logic_error_called_c++_object_pointer_is_null"><td class="DESC">Logic error</td><td class="DESC">Called C++ object pointer is null</td><td>home/zach/inkscape/src/live_effects/lpe-slice.cpp</td><td class="DESC">split</td><td class="Q">477</td><td class="Q">84</td><td><a href="report-f34a09.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-f34a09.html" -->
+</tr>
+<tr class="bt_logic_error_called_c++_object_pointer_is_null"><td class="DESC">Logic error</td><td class="DESC">Called C++ object pointer is null</td><td>home/zach/inkscape/src/ui/tools/tweak-tool.cpp</td><td class="DESC">sp_tweak_dilate_recursive</td><td class="Q">387</td><td class="Q">12</td><td><a href="report-b33023.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-b33023.html" -->
+</tr>
+<tr class="bt_logic_error_called_c++_object_pointer_is_null"><td class="DESC">Logic error</td><td class="DESC">Called C++ object pointer is null</td><td>home/zach/inkscape/src/object/sp-text.cpp</td><td class="DESC">remove_newlines_recursive</td><td class="Q">950</td><td class="Q">10</td><td><a href="report-c07637.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-c07637.html" -->
+</tr>
+<tr class="bt_logic_error_called_c++_object_pointer_is_null"><td class="DESC">Logic error</td><td class="DESC">Called C++ object pointer is null</td><td>home/zach/inkscape/src/livarot/PathCutting.cpp</td><td class="DESC">SubPaths</td><td class="Q">577</td><td class="Q">3</td><td><a href="report-8b74d2.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-8b74d2.html" -->
+</tr>
+<tr class="bt_logic_error_called_c++_object_pointer_is_null"><td class="DESC">Logic error</td><td class="DESC">Called C++ object pointer is null</td><td>home/zach/inkscape/src/ui/dialog/export.cpp</td><td class="DESC">Export</td><td class="Q">89</td><td class="Q">6</td><td><a href="report-087d2d.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-087d2d.html" -->
+</tr>
+<tr class="bt_logic_error_called_c++_object_pointer_is_null"><td class="DESC">Logic error</td><td class="DESC">Called C++ object pointer is null</td><td>home/zach/inkscape/src/livarot/PathCutting.cpp</td><td class="DESC">SubPaths</td><td class="Q">559</td><td class="Q">3</td><td><a href="report-673232.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-673232.html" -->
+</tr>
+<tr class="bt_logic_error_called_c++_object_pointer_is_null"><td class="DESC">Logic error</td><td class="DESC">Called C++ object pointer is null</td><td>home/zach/inkscape/src/livarot/PathCutting.cpp</td><td class="DESC">SubPaths</td><td class="Q">553</td><td class="Q">3</td><td><a href="report-2abd4d.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-2abd4d.html" -->
+</tr>
+<tr class="bt_logic_error_called_c++_object_pointer_is_null"><td class="DESC">Logic error</td><td class="DESC">Called C++ object pointer is null</td><td>home/zach/inkscape/src/object/sp-flowregion.cpp</td><td class="DESC">update</td><td class="Q">238</td><td class="Q">8</td><td><a href="report-7dd367.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-7dd367.html" -->
+</tr>
+<tr class="bt_logic_error_called_c++_object_pointer_is_null"><td class="DESC">Logic error</td><td class="DESC">Called C++ object pointer is null</td><td>home/zach/inkscape/src/livarot/PathCutting.cpp</td><td class="DESC">SubPathsWithNesting</td><td class="Q">685</td><td class="Q">5</td><td><a href="report-c4b398.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-c4b398.html" -->
+</tr>
+<tr class="bt_logic_error_called_c++_object_pointer_is_null"><td class="DESC">Logic error</td><td class="DESC">Called C++ object pointer is null</td><td>home/zach/inkscape/src/actions/actions-layer.cpp</td><td class="DESC">layer_from_group</td><td class="Q">413</td><td class="Q">5</td><td><a href="report-8ca7f0.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-8ca7f0.html" -->
+</tr>
+<tr class="bt_logic_error_called_c++_object_pointer_is_null"><td class="DESC">Logic error</td><td class="DESC">Called C++ object pointer is null</td><td>home/zach/inkscape/src/ui/tools/tweak-tool.cpp</td><td class="DESC">sp_tweak_dilate_recursive</td><td class="Q">360</td><td class="Q">8</td><td><a href="report-472aa0.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-472aa0.html" -->
+</tr>
+<tr class="bt_logic_error_called_c++_object_pointer_is_null"><td class="DESC">Logic error</td><td class="DESC">Called C++ object pointer is null</td><td>home/zach/inkscape/src/ui/tools/tweak-tool.cpp</td><td class="DESC">sp_tweak_dilate_recursive</td><td class="Q">429</td><td class="Q">18</td><td><a href="report-fb6251.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-fb6251.html" -->
+</tr>
+<tr class="bt_logic_error_called_c++_object_pointer_is_null"><td class="DESC">Logic error</td><td class="DESC">Called C++ object pointer is null</td><td>home/zach/inkscape/src/live_effects/lpe-measure-segments.cpp</td><td class="DESC">doOnApply</td><td class="Q">658</td><td class="Q">4</td><td><a href="report-ae0fe6.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-ae0fe6.html" -->
+</tr>
+<tr class="bt_logic_error_called_c++_object_pointer_is_null"><td class="DESC">Logic error</td><td class="DESC">Called C++ object pointer is null</td><td>home/zach/inkscape/src/ui/dialog/find.cpp</td><td class="DESC">all_items</td><td class="Q">891</td><td class="Q">12</td><td><a href="report-c8b199.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-c8b199.html" -->
+</tr>
+<tr class="bt_logic_error_called_c++_object_pointer_is_null"><td class="DESC">Logic error</td><td class="DESC">Called C++ object pointer is null</td><td>home/zach/inkscape/src/livarot/PathCutting.cpp</td><td class="DESC">SubPaths</td><td class="Q">565</td><td class="Q">3</td><td><a href="report-c4c34d.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-c4c34d.html" -->
+</tr>
+<tr class="bt_logic_error_called_c++_object_pointer_is_null"><td class="DESC">Logic error</td><td class="DESC">Called C++ object pointer is null</td><td>home/zach/inkscape/src/3rdparty/adaptagrams/libavoid/makepath.cpp</td><td class="DESC">constructPolygonPath</td><td class="Q">232</td><td class="Q">45</td><td><a href="report-d1475a.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-d1475a.html" -->
+</tr>
+<tr class="bt_logic_error_called_c++_object_pointer_is_null"><td class="DESC">Logic error</td><td class="DESC">Called C++ object pointer is null</td><td>home/zach/inkscape/src/ui/clipboard.cpp</td><td class="DESC">_copyUsedDefs</td><td class="Q">1193</td><td class="Q">40</td><td><a href="report-a9a6b5.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-a9a6b5.html" -->
+</tr>
+<tr class="bt_logic_error_called_c++_object_pointer_is_null"><td class="DESC">Logic error</td><td class="DESC">Called C++ object pointer is null</td><td>home/zach/inkscape/src/ui/widget/paint-selector.cpp</td><td class="DESC">set_style_buttons</td><td class="Q">1007</td><td class="Q">43</td><td><a href="report-9ea1a4.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-9ea1a4.html" -->
+</tr>
+<tr class="bt_logic_error_called_c++_object_pointer_is_null"><td class="DESC">Logic error</td><td class="DESC">Called C++ object pointer is null</td><td>home/zach/inkscape/src/livarot/PathCutting.cpp</td><td class="DESC">SubPathsWithNesting</td><td class="Q">691</td><td class="Q">5</td><td><a href="report-587124.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-587124.html" -->
+</tr>
+<tr class="bt_logic_error_called_c++_object_pointer_is_null"><td class="DESC">Logic error</td><td class="DESC">Called C++ object pointer is null</td><td>home/zach/inkscape/src/live_effects/lpe-embrodery-stitch-ordering.cpp</td><td class="DESC">FindShortestReconnect</td><td class="Q">774</td><td class="Q">36</td><td><a href="report-7f1d44.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-7f1d44.html" -->
+</tr>
+<tr class="bt_logic_error_called_c++_object_pointer_is_null"><td class="DESC">Logic error</td><td class="DESC">Called C++ object pointer is null</td><td>home/zach/inkscape/src/live_effects/lpe-tiling.cpp</td><td class="DESC">cloneStyle</td><td class="Q">449</td><td class="Q">30</td><td><a href="report-827246.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-827246.html" -->
+</tr>
+<tr class="bt_logic_error_called_c++_object_pointer_is_null"><td class="DESC">Logic error</td><td class="DESC">Called C++ object pointer is null</td><td>home/zach/inkscape/src/livarot/PathCutting.cpp</td><td class="DESC">SubPathsWithNesting</td><td class="Q">679</td><td class="Q">5</td><td><a href="report-6f34cf.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-6f34cf.html" -->
+</tr>
+<tr class="bt_logic_error_called_c++_object_pointer_is_null"><td class="DESC">Logic error</td><td class="DESC">Called C++ object pointer is null</td><td>home/zach/inkscape/src/ui/widget/paint-selector.cpp</td><td class="DESC">set_style_buttons</td><td class="Q">1005</td><td class="Q">42</td><td><a href="report-bc0f49.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-bc0f49.html" -->
+</tr>
+<tr class="bt_logic_error_called_c++_object_pointer_is_null"><td class="DESC">Logic error</td><td class="DESC">Called C++ object pointer is null</td><td>home/zach/inkscape/src/3rdparty/adaptagrams/libavoid/scanline.cpp</td><td class="DESC">buildOrthogonalChannelInfo</td><td class="Q">491</td><td class="Q">7</td><td><a href="report-2a9f09.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-2a9f09.html" -->
+</tr>
+<tr class="bt_logic_error_called_c++_object_pointer_is_null"><td class="DESC">Logic error</td><td class="DESC">Called C++ object pointer is null</td><td>home/zach/inkscape/src/live_effects/lpe-fillet-chamfer.cpp</td><td class="DESC">doOnApply</td><td class="Q">178</td><td class="Q">10</td><td><a href="report-4c533b.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-4c533b.html" -->
+</tr>
+<tr class="bt_logic_error_called_c++_object_pointer_is_null"><td class="DESC">Logic error</td><td class="DESC">Called C++ object pointer is null</td><td>home/zach/inkscape/src/live_effects/lpe-bool.cpp</td><td class="DESC">doOnRemove</td><td class="Q">913</td><td class="Q">8</td><td><a href="report-fccaa5.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-fccaa5.html" -->
+</tr>
+<tr class="bt_logic_error_called_c++_object_pointer_is_null"><td class="DESC">Logic error</td><td class="DESC">Called C++ object pointer is null</td><td>home/zach/inkscape/src/3rdparty/adaptagrams/libvpsc/solve_VPSC.cpp</td><td class="DESC">blockGraphIsCyclic</td><td class="Q">549</td><td class="Q">9</td><td><a href="report-6e1279.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-6e1279.html" -->
+</tr>
+<tr class="bt_logic_error_called_c++_object_pointer_is_null"><td class="DESC">Logic error</td><td class="DESC">Called C++ object pointer is null</td><td>home/zach/inkscape/src/text-editing.cpp</td><td class="DESC">te_update_layout_now_recursive</td><td class="Q">78</td><td class="Q">5</td><td><a href="report-21a8de.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-21a8de.html" -->
+</tr>
+<tr class="bt_logic_error_called_c++_object_pointer_is_null"><td class="DESC">Logic error</td><td class="DESC">Called C++ object pointer is null</td><td>home/zach/inkscape/src/ui/tools/tweak-tool.cpp</td><td class="DESC">sp_tweak_dilate_recursive</td><td class="Q">415</td><td class="Q">16</td><td><a href="report-8c127f.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-8c127f.html" -->
+</tr>
+<tr class="bt_logic_error_called_c++_object_pointer_is_null"><td class="DESC">Logic error</td><td class="DESC">Called C++ object pointer is null</td><td>home/zach/inkscape/src/display/control/canvas-item.cpp</td><td class="DESC">set_z_position</td><td class="Q">90</td><td class="Q">5</td><td><a href="report-f625b6.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-f625b6.html" -->
+</tr>
+<tr class="bt_logic_error_called_c++_object_pointer_is_null"><td class="DESC">Logic error</td><td class="DESC">Called C++ object pointer is null</td><td>home/zach/inkscape/src/display/control/canvas-item.cpp</td><td class="DESC">lower_to_bottom</td><td class="Q">122</td><td class="Q">8</td><td><a href="report-bb04cb.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-bb04cb.html" -->
+</tr>
+<tr class="bt_logic_error_called_c++_object_pointer_is_null"><td class="DESC">Logic error</td><td class="DESC">Called C++ object pointer is null</td><td>home/zach/inkscape/src/livarot/PathCutting.cpp</td><td class="DESC">MakePathVector</td><td class="Q">291</td><td class="Q">5</td><td><a href="report-ecfa94.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-ecfa94.html" -->
+</tr>
+<tr class="bt_logic_error_called_c++_object_pointer_is_null"><td class="DESC">Logic error</td><td class="DESC">Called C++ object pointer is null</td><td>home/zach/inkscape/src/livarot/PathCutting.cpp</td><td class="DESC">MakePathVector</td><td class="Q">298</td><td class="Q">5</td><td><a href="report-502be1.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-502be1.html" -->
+</tr>
+<tr class="bt_logic_error_called_c++_object_pointer_is_null"><td class="DESC">Logic error</td><td class="DESC">Called C++ object pointer is null</td><td>home/zach/inkscape/src/live_effects/lpe-embrodery-stitch-ordering.cpp</td><td class="DESC">FindShortestReconnect</td><td class="Q">661</td><td class="Q">20</td><td><a href="report-8a128f.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-8a128f.html" -->
+</tr>
+<tr class="bt_logic_error_called_c++_object_pointer_is_null"><td class="DESC">Logic error</td><td class="DESC">Called C++ object pointer is null</td><td>home/zach/inkscape/src/3rdparty/adaptagrams/libvpsc/solve_VPSC.cpp</td><td class="DESC">constraintGraphIsCyclic</td><td class="Q">489</td><td class="Q">9</td><td><a href="report-e2db34.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-e2db34.html" -->
+</tr>
+<tr class="bt_logic_error_called_c++_object_pointer_is_null"><td class="DESC">Logic error</td><td class="DESC">Called C++ object pointer is null</td><td>home/zach/inkscape/src/object/sp-flowregion.cpp</td><td class="DESC">update</td><td class="Q">86</td><td class="Q">8</td><td><a href="report-f54107.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-f54107.html" -->
+</tr>
+<tr class="bt_logic_error_called_c++_object_pointer_is_null"><td class="DESC">Logic error</td><td class="DESC">Called C++ object pointer is null</td><td>home/zach/inkscape/src/ui/dialog/inkscape-preferences.cpp</td><td class="DESC">num_widgets_in_grid</td><td class="Q">412</td><td class="Q">13</td><td><a href="report-981e55.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-981e55.html" -->
+</tr>
+<tr class="bt_logic_error_called_c++_object_pointer_is_null"><td class="DESC">Logic error</td><td class="DESC">Called C++ object pointer is null</td><td>home/zach/inkscape/src/live_effects/lpe-mirror_symmetry.cpp</td><td class="DESC">cloneD</td><td class="Q">384</td><td class="Q">43</td><td><a href="report-8afcb3.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-8afcb3.html" -->
+</tr>
+<tr class="bt_logic_error_called_c++_object_pointer_is_null"><td class="DESC">Logic error</td><td class="DESC">Called C++ object pointer is null</td><td>home/zach/inkscape/src/ui/tools/tweak-tool.cpp</td><td class="DESC">sp_tweak_dilate_recursive</td><td class="Q">373</td><td class="Q">10</td><td><a href="report-c0eea2.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-c0eea2.html" -->
+</tr>
+<tr class="bt_logic_error_called_c++_object_pointer_is_null"><td class="DESC">Logic error</td><td class="DESC">Called C++ object pointer is null</td><td>home/zach/inkscape/src/preferences.cpp</td><td class="DESC">remove</td><td class="Q">500</td><td class="Q">20</td><td><a href="report-c48a53.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-c48a53.html" -->
+</tr>
+<tr class="bt_logic_error_called_c++_object_pointer_is_null"><td class="DESC">Logic error</td><td class="DESC">Called C++ object pointer is null</td><td>home/zach/inkscape/src/live_effects/lpe-copy_rotate.cpp</td><td class="DESC">cloneD</td><td class="Q">288</td><td class="Q">50</td><td><a href="report-3a8879.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-3a8879.html" -->
+</tr>
+<tr class="bt_logic_error_called_c++_object_pointer_is_null"><td class="DESC">Logic error</td><td class="DESC">Called C++ object pointer is null</td><td>home/zach/inkscape/src/live_effects/lpe-powermask.cpp</td><td class="DESC">setMask</td><td class="Q">263</td><td class="Q">26</td><td><a href="report-49ab70.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-49ab70.html" -->
+</tr>
+<tr class="bt_logic_error_called_c++_object_pointer_is_null"><td class="DESC">Logic error</td><td class="DESC">Called C++ object pointer is null</td><td>home/zach/inkscape/src/ui/widget/page-properties.cpp</td><td class="DESC">PagePropertiesBox</td><td class="Q">121</td><td class="Q">8</td><td><a href="report-c671d3.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-c671d3.html" -->
+</tr>
+<tr class="bt_logic_error_called_c++_object_pointer_is_null"><td class="DESC">Logic error</td><td class="DESC">Called C++ object pointer is null</td><td>home/zach/inkscape/src/livarot/PathCutting.cpp</td><td class="DESC">MakePathVector</td><td class="Q">317</td><td class="Q">6</td><td><a href="report-f0ba29.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-f0ba29.html" -->
+</tr>
+<tr class="bt_logic_error_called_c++_object_pointer_is_null"><td class="DESC">Logic error</td><td class="DESC">Called C++ object pointer is null</td><td>home/zach/inkscape/src/object-snapper.cpp</td><td class="DESC">_collectPaths</td><td class="Q">317</td><td class="Q">24</td><td><a href="report-49fcfc.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-49fcfc.html" -->
+</tr>
+<tr class="bt_logic_error_called_c++_object_pointer_is_null"><td class="DESC">Logic error</td><td class="DESC">Called C++ object pointer is null</td><td>home/zach/inkscape/src/object/sp-flowdiv.cpp</td><td class="DESC">update</td><td class="Q">177</td><td class="Q">7</td><td><a href="report-ff9783.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-ff9783.html" -->
+</tr>
+<tr class="bt_logic_error_called_c++_object_pointer_is_null"><td class="DESC">Logic error</td><td class="DESC">Called C++ object pointer is null</td><td>home/zach/inkscape/src/selection-chemistry.cpp</td><td class="DESC">applyAffine</td><td class="Q">1696</td><td class="Q">14</td><td><a href="report-464457.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-464457.html" -->
+</tr>
+<tr class="bt_logic_error_called_c++_object_pointer_is_null"><td class="DESC">Logic error</td><td class="DESC">Called C++ object pointer is null</td><td>home/zach/inkscape/src/livarot/PathCutting.cpp</td><td class="DESC">MakePathVector</td><td class="Q">350</td><td class="Q">9</td><td><a href="report-c02bac.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-c02bac.html" -->
+</tr>
+<tr class="bt_logic_error_called_c++_object_pointer_is_null"><td class="DESC">Logic error</td><td class="DESC">Called C++ object pointer is null</td><td>home/zach/inkscape/src/object/sp-flowdiv.cpp</td><td class="DESC">update</td><td class="Q">51</td><td class="Q">7</td><td><a href="report-9617ca.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-9617ca.html" -->
+</tr>
+<tr class="bt_logic_error_called_c++_object_pointer_is_null"><td class="DESC">Logic error</td><td class="DESC">Called C++ object pointer is null</td><td>home/zach/inkscape/src/ui/widget/paint-selector.cpp</td><td class="DESC">set_style_buttons</td><td class="Q">1009</td><td class="Q">45</td><td><a href="report-cdfa6c.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-cdfa6c.html" -->
+</tr>
+<tr class="bt_logic_error_called_c++_object_pointer_is_null"><td class="DESC">Logic error</td><td class="DESC">Called C++ object pointer is null</td><td>home/zach/inkscape/src/ui/toolbar/text-toolbar.cpp</td><td class="DESC">lineheight_unit_changed</td><td class="Q">1535</td><td class="Q">31</td><td><a href="report-c07762.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-c07762.html" -->
+</tr>
+<tr class="bt_logic_error_called_c++_object_pointer_is_null"><td class="DESC">Logic error</td><td class="DESC">Called C++ object pointer is null</td><td>home/zach/inkscape/src/object/sp-flowtext.cpp</td><td class="DESC">update</td><td class="Q">99</td><td class="Q">8</td><td><a href="report-218abf.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-218abf.html" -->
+</tr>
+<tr class="bt_logic_error_called_c++_object_pointer_is_null"><td class="DESC">Logic error</td><td class="DESC">Called C++ object pointer is null</td><td>home/zach/inkscape/src/ui/widget/paint-selector.cpp</td><td class="DESC">set_style_buttons</td><td class="Q">1002</td><td class="Q">40</td><td><a href="report-ead9dc.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-ead9dc.html" -->
+</tr>
+<tr class="bt_logic_error_called_c++_object_pointer_is_null"><td class="DESC">Logic error</td><td class="DESC">Called C++ object pointer is null</td><td>home/zach/inkscape/src/livarot/PathCutting.cpp</td><td class="DESC">MakePathVector</td><td class="Q">340</td><td class="Q">7</td><td><a href="report-197016.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-197016.html" -->
+</tr>
+<tr class="bt_logic_error_called_c++_object_pointer_is_null"><td class="DESC">Logic error</td><td class="DESC">Called C++ object pointer is null</td><td>home/zach/inkscape/src/text-editing.cpp</td><td class="DESC">sp_te_set_repr_text_multiline</td><td class="Q">995</td><td class="Q">15</td><td><a href="report-9ff626.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-9ff626.html" -->
+</tr>
+<tr class="bt_logic_error_called_c++_object_pointer_is_null"><td class="DESC">Logic error</td><td class="DESC">Called C++ object pointer is null</td><td>home/zach/inkscape/src/live_effects/lpe-clone-original.cpp</td><td class="DESC">doBeforeEffect</td><td class="Q">353</td><td class="Q">25</td><td><a href="report-d36ec6.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-d36ec6.html" -->
+</tr>
+<tr class="bt_logic_error_called_c++_object_pointer_is_null"><td class="DESC">Logic error</td><td class="DESC">Called C++ object pointer is null</td><td>home/zach/inkscape/src/livarot/PathCutting.cpp</td><td class="DESC">SubPathsWithNesting</td><td class="Q">697</td><td class="Q">5</td><td><a href="report-29894d.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-29894d.html" -->
+</tr>
+<tr class="bt_logic_error_called_c++_object_pointer_is_null"><td class="DESC">Logic error</td><td class="DESC">Called C++ object pointer is null</td><td>home/zach/inkscape/src/display/drawing-item.cpp</td><td class="DESC">~DrawingItem</td><td class="Q">116</td><td class="Q">8</td><td><a href="report-7a029e.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-7a029e.html" -->
+</tr>
+<tr class="bt_logic_error_called_c++_object_pointer_is_null"><td class="DESC">Logic error</td><td class="DESC">Called C++ object pointer is null</td><td>home/zach/inkscape/src/ui/widget/paint-selector.cpp</td><td class="DESC">set_style_buttons</td><td class="Q">1008</td><td class="Q">44</td><td><a href="report-57baf4.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-57baf4.html" -->
+</tr>
+<tr class="bt_logic_error_called_c++_object_pointer_is_null"><td class="DESC">Logic error</td><td class="DESC">Called C++ object pointer is null</td><td>home/zach/inkscape/src/object/sp-item-group.cpp</td><td class="DESC">update</td><td class="Q">166</td><td class="Q">7</td><td><a href="report-b028f4.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-b028f4.html" -->
+</tr>
+<tr class="bt_logic_error_called_c++_object_pointer_is_null"><td class="DESC">Logic error</td><td class="DESC">Called C++ object pointer is null</td><td>home/zach/inkscape/src/livarot/PathCutting.cpp</td><td class="DESC">SubPaths</td><td class="Q">583</td><td class="Q">3</td><td><a href="report-ffcad0.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-ffcad0.html" -->
+</tr>
+<tr class="bt_logic_error_called_c++_object_pointer_is_null"><td class="DESC">Logic error</td><td class="DESC">Called C++ object pointer is null</td><td>home/zach/inkscape/src/livarot/PathCutting.cpp</td><td class="DESC">SubPathsWithNesting</td><td class="Q">673</td><td class="Q">5</td><td><a href="report-d2e953.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-d2e953.html" -->
+</tr>
+<tr class="bt_logic_error_called_c++_object_pointer_is_null"><td class="DESC">Logic error</td><td class="DESC">Called C++ object pointer is null</td><td>home/zach/inkscape/src/ui/widget/marker-combo-box.cpp</td><td class="DESC">create_marker_image</td><td class="Q">745</td><td class="Q">31</td><td><a href="report-823bbd.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-823bbd.html" -->
+</tr>
+<tr class="bt_logic_error_called_c++_object_pointer_is_null"><td class="DESC">Logic error</td><td class="DESC">Called C++ object pointer is null</td><td>home/zach/inkscape/src/3rdparty/adaptagrams/libavoid/mtst.cpp</td><td class="DESC">buildHyperedgeTreeToRoot</td><td class="Q">214</td><td class="Q">33</td><td><a href="report-192488.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-192488.html" -->
+</tr>
+<tr class="bt_logic_error_called_c++_object_pointer_is_null"><td class="DESC">Logic error</td><td class="DESC">Called C++ object pointer is null</td><td>home/zach/inkscape/src/ui/widget/paint-selector.cpp</td><td class="DESC">set_style_buttons</td><td class="Q">1000</td><td class="Q">38</td><td><a href="report-a18ca4.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-a18ca4.html" -->
+</tr>
+<tr class="bt_logic_error_called_c++_object_pointer_is_null"><td class="DESC">Logic error</td><td class="DESC">Called C++ object pointer is null</td><td>home/zach/inkscape/src/ui/widget/paint-selector.cpp</td><td class="DESC">set_style_buttons</td><td class="Q">1003</td><td class="Q">41</td><td><a href="report-9d7524.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-9d7524.html" -->
+</tr>
+<tr class="bt_logic_error_called_c++_object_pointer_is_null"><td class="DESC">Logic error</td><td class="DESC">Called C++ object pointer is null</td><td>home/zach/inkscape/src/ui/widget/entity-entry.cpp</td><td class="DESC">create</td><td class="Q">57</td><td class="Q">5</td><td><a href="report-4613f3.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-4613f3.html" -->
+</tr>
+<tr class="bt_logic_error_called_c++_object_pointer_is_null"><td class="DESC">Logic error</td><td class="DESC">Called C++ object pointer is null</td><td>home/zach/inkscape/src/widgets/sp-xmlview-tree.cpp</td><td class="DESC">on_row_changed</td><td class="Q">592</td><td class="Q">13</td><td><a href="report-afadbb.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-afadbb.html" -->
+</tr>
+<tr class="bt_logic_error_called_c++_object_pointer_is_null"><td class="DESC">Logic error</td><td class="DESC">Called C++ object pointer is null</td><td>home/zach/inkscape/src/path-chemistry.cpp</td><td class="DESC">combine</td><td class="Q">154</td><td class="Q">12</td><td><a href="report-bed0bc.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-bed0bc.html" -->
+</tr>
+<tr class="bt_logic_error_called_c++_object_pointer_is_null"><td class="DESC">Logic error</td><td class="DESC">Called C++ object pointer is null</td><td>home/zach/inkscape/src/3rdparty/adaptagrams/libavoid/vpsc.cpp</td><td class="DESC">blockGraphIsCyclic</td><td class="Q">230</td><td class="Q">9</td><td><a href="report-ce849e.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-ce849e.html" -->
+</tr>
+<tr class="bt_logic_error_called_c++_object_pointer_is_null"><td class="DESC">Logic error</td><td class="DESC">Called C++ object pointer is null</td><td>home/zach/inkscape/src/selection-chemistry.cpp</td><td class="DESC">find_clone_to_group</td><td class="Q">863</td><td class="Q">11</td><td><a href="report-243d94.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-243d94.html" -->
+</tr>
+<tr class="bt_logic_error_called_c++_object_pointer_is_null"><td class="DESC">Logic error</td><td class="DESC">Called C++ object pointer is null</td><td>home/zach/inkscape/src/live_effects/lpe-tiling.cpp</td><td class="DESC">cloneD</td><td class="Q">509</td><td class="Q">36</td><td><a href="report-fbbf82.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-fbbf82.html" -->
+</tr>
+<tr class="bt_logic_error_called_c++_object_pointer_is_uninitialized"><td class="DESC">Logic error</td><td class="DESC">Called C++ object pointer is uninitialized</td><td>home/zach/inkscape/src/ui/dialog/styledialog.cpp</td><td class="DESC">_selectTree</td><td class="Q">349</td><td class="Q">3</td><td><a href="report-18a75c.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-18a75c.html" -->
+</tr>
+<tr class="bt_dead_store_dead_assignment"><td class="DESC">Dead store</td><td class="DESC">Dead assignment</td><td>home/zach/inkscape/src/svg/svg-affine-parser.cpp</td><td class="DESC">sp_svg_transform_read</td><td class="Q">1189</td><td class="Q">1</td><td><a href="report-5a20a6.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-5a20a6.html" -->
+</tr>
+<tr class="bt_dead_store_dead_assignment"><td class="DESC">Dead store</td><td class="DESC">Dead assignment</td><td>home/zach/inkscape/src/live_effects/lpe-powermask.cpp</td><td class="DESC">tryForkMask</td><td class="Q">100</td><td class="Q">1</td><td><a href="report-053992.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-053992.html" -->
+</tr>
+<tr class="bt_dead_store_dead_assignment"><td class="DESC">Dead store</td><td class="DESC">Dead assignment</td><td>home/zach/inkscape/src/3rdparty/libcroco/cr-parser.c</td><td class="DESC">cr_parser_parse_any_core</td><td class="Q">1275</td><td class="Q">1</td><td><a href="report-4ad201.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-4ad201.html" -->
+</tr>
+<tr class="bt_dead_store_dead_assignment"><td class="DESC">Dead store</td><td class="DESC">Dead assignment</td><td>home/zach/inkscape/src/3rdparty/libcroco/cr-tknzr.c</td><td class="DESC">cr_tknzr_parse_uri</td><td class="Q">1198</td><td class="Q">1</td><td><a href="report-de0425.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-de0425.html" -->
+</tr>
+<tr class="bt_dead_store_dead_assignment"><td class="DESC">Dead store</td><td class="DESC">Dead assignment</td><td>home/zach/inkscape/src/live_effects/lpe-tiling.cpp</td><td class="DESC">doEffect_path_post</td><td class="Q">1330</td><td class="Q">1</td><td><a href="report-1bb2dd.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-1bb2dd.html" -->
+</tr>
+<tr class="bt_dead_store_dead_assignment"><td class="DESC">Dead store</td><td class="DESC">Dead assignment</td><td>home/zach/inkscape/src/trace/autotrace/inkscape-autotrace.cpp</td><td class="DESC">trace</td><td class="Q">207</td><td class="Q">1</td><td><a href="report-63431e.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-63431e.html" -->
+</tr>
+<tr class="bt_dead_store_dead_assignment"><td class="DESC">Dead store</td><td class="DESC">Dead assignment</td><td>home/zach/inkscape/src/ui/dialog/dialog-window.cpp</td><td class="DESC">DialogWindow</td><td class="Q">67</td><td class="Q">1</td><td><a href="report-81c4ca.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-81c4ca.html" -->
+</tr>
+<tr class="bt_dead_store_dead_assignment"><td class="DESC">Dead store</td><td class="DESC">Dead assignment</td><td>home/zach/inkscape/src/3rdparty/libcroco/cr-tknzr.c</td><td class="DESC">cr_tknzr_get_next_token</td><td class="Q">2466</td><td class="Q">1</td><td><a href="report-4acec6.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-4acec6.html" -->
+</tr>
+<tr class="bt_dead_store_dead_assignment"><td class="DESC">Dead store</td><td class="DESC">Dead assignment</td><td>home/zach/inkscape/src/ui/dialog/swatches.cpp</td><td class="DESC">SwatchesPanel</td><td class="Q">761</td><td class="Q">1</td><td><a href="report-cc15e4.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-cc15e4.html" -->
+</tr>
+<tr class="bt_dead_store_dead_assignment"><td class="DESC">Dead store</td><td class="DESC">Dead assignment</td><td>home/zach/inkscape/src/3rdparty/libcroco/cr-parser.c</td><td class="DESC">cr_parser_parse_simple_selector</td><td class="Q">1854</td><td class="Q">1</td><td><a href="report-236d5b.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-236d5b.html" -->
+</tr>
+<tr class="bt_dead_store_dead_assignment"><td class="DESC">Dead store</td><td class="DESC">Dead assignment</td><td>home/zach/inkscape/src/3rdparty/libcroco/cr-style.c</td><td class="DESC">set_prop_border_x_from_value</td><td class="Q">1158</td><td class="Q">1</td><td><a href="report-16e247.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-16e247.html" -->
+</tr>
+<tr class="bt_dead_store_dead_assignment"><td class="DESC">Dead store</td><td class="DESC">Dead assignment</td><td>home/zach/inkscape/src/3rdparty/libcroco/cr-statement.c</td><td class="DESC">cr_statement_at_page_rule_parse_from_buf</td><td class="Q">1556</td><td class="Q">1</td><td><a href="report-41bd40.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-41bd40.html" -->
+</tr>
+<tr class="bt_dead_store_dead_assignment"><td class="DESC">Dead store</td><td class="DESC">Dead assignment</td><td>home/zach/inkscape/src/3rdparty/libcroco/cr-tknzr.c</td><td class="DESC">cr_tknzr_get_next_token</td><td class="Q">2431</td><td class="Q">1</td><td><a href="report-0d92a1.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-0d92a1.html" -->
+</tr>
+<tr class="bt_dead_store_dead_assignment"><td class="DESC">Dead store</td><td class="DESC">Dead assignment</td><td>home/zach/inkscape/src/live_effects/parameter/togglebutton.cpp</td><td class="DESC">refresh_button</td><td class="Q">175</td><td class="Q">1</td><td><a href="report-74b955.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-74b955.html" -->
+</tr>
+<tr class="bt_dead_store_dead_assignment"><td class="DESC">Dead store</td><td class="DESC">Dead assignment</td><td>home/zach/inkscape/src/3rdparty/libcroco/cr-style.c</td><td class="DESC">set_prop_padding_x_from_value</td><td class="Q">471</td><td class="Q">1</td><td><a href="report-7b5dae.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-7b5dae.html" -->
+</tr>
+<tr class="bt_dead_store_dead_assignment"><td class="DESC">Dead store</td><td class="DESC">Dead assignment</td><td>home/zach/inkscape/src/3rdparty/libcroco/cr-parser.c</td><td class="DESC">cr_parser_parse_selector</td><td class="Q">2074</td><td class="Q">1</td><td><a href="report-14fe6f.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-14fe6f.html" -->
+</tr>
+<tr class="bt_dead_store_dead_assignment"><td class="DESC">Dead store</td><td class="DESC">Dead assignment</td><td>home/zach/inkscape/src/3rdparty/libcroco/cr-tknzr.c</td><td class="DESC">cr_tknzr_parse_w</td><td class="Q">303</td><td class="Q">1</td><td><a href="report-137099.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-137099.html" -->
+</tr>
+<tr class="bt_dead_store_dead_assignment"><td class="DESC">Dead store</td><td class="DESC">Dead assignment</td><td>home/zach/inkscape/src/ui/widget/combo-box-entry-tool-item.cpp</td><td class="DESC">set_extra_width</td><td class="Q">324</td><td class="Q">1</td><td><a href="report-c920cc.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-c920cc.html" -->
+</tr>
+<tr class="bt_dead_store_dead_assignment"><td class="DESC">Dead store</td><td class="DESC">Dead assignment</td><td>home/zach/inkscape/src/3rdparty/libcroco/cr-tknzr.c</td><td class="DESC">cr_tknzr_get_next_token</td><td class="Q">2491</td><td class="Q">1</td><td><a href="report-51700d.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-51700d.html" -->
+</tr>
+<tr class="bt_dead_store_dead_assignment"><td class="DESC">Dead store</td><td class="DESC">Dead assignment</td><td>home/zach/inkscape/src/livarot/PathSimplify.cpp</td><td class="DESC">AttemptSimplify</td><td class="Q">1085</td><td class="Q">1</td><td><a href="report-4fb819.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-4fb819.html" -->
+</tr>
+<tr class="bt_dead_store_dead_assignment"><td class="DESC">Dead store</td><td class="DESC">Dead assignment</td><td>home/zach/inkscape/src/live_effects/lpe-copy_rotate.cpp</td><td class="DESC">toItem</td><td class="Q">374</td><td class="Q">1</td><td><a href="report-9a1e7d.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-9a1e7d.html" -->
+</tr>
+<tr class="bt_dead_store_dead_assignment"><td class="DESC">Dead store</td><td class="DESC">Dead assignment</td><td>home/zach/inkscape/src/live_effects/parameter/nodesatellitesarray.cpp</td><td class="DESC">updateCanvasIndicators</td><td class="Q">147</td><td class="Q">1</td><td><a href="report-d01ada.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-d01ada.html" -->
+</tr>
+<tr class="bt_dead_store_dead_assignment"><td class="DESC">Dead store</td><td class="DESC">Dead assignment</td><td>home/zach/inkscape/src/3rdparty/libcroco/cr-tknzr.c</td><td class="DESC">cr_tknzr_parse_nl</td><td class="Q">364</td><td class="Q">1</td><td><a href="report-f0c5e6.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-f0c5e6.html" -->
+</tr>
+<tr class="bt_dead_store_dead_assignment"><td class="DESC">Dead store</td><td class="DESC">Dead assignment</td><td>home/zach/inkscape/src/livarot/PathStroke.cpp</td><td class="DESC">DoStroke</td><td class="Q">183</td><td class="Q">1</td><td><a href="report-0dedd0.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-0dedd0.html" -->
+</tr>
+<tr class="bt_dead_store_dead_assignment"><td class="DESC">Dead store</td><td class="DESC">Dead assignment</td><td>home/zach/inkscape/src/livarot/PathCutting.cpp</td><td class="DESC">DashSubPath</td><td class="Q">242</td><td class="Q">1</td><td><a href="report-acf8fb.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-acf8fb.html" -->
+</tr>
+<tr class="bt_dead_store_dead_assignment"><td class="DESC">Dead store</td><td class="DESC">Dead assignment</td><td>home/zach/inkscape/src/live_effects/lpe-bool.cpp</td><td class="DESC">get_union</td><td class="Q">649</td><td class="Q">1</td><td><a href="report-b11d12.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-b11d12.html" -->
+</tr>
+<tr class="bt_dead_store_dead_assignment"><td class="DESC">Dead store</td><td class="DESC">Dead assignment</td><td>home/zach/inkscape/src/livarot/PathSimplify.cpp</td><td class="DESC">AttemptSimplify</td><td class="Q">594</td><td class="Q">1</td><td><a href="report-5af10f.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-5af10f.html" -->
+</tr>
+<tr class="bt_dead_store_dead_assignment"><td class="DESC">Dead store</td><td class="DESC">Dead assignment</td><td>home/zach/inkscape/src/3rdparty/libcroco/cr-parser.c</td><td class="DESC">cr_parser_parse_any_core</td><td class="Q">1262</td><td class="Q">1</td><td><a href="report-d72d37.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-d72d37.html" -->
+</tr>
+<tr class="bt_dead_store_dead_assignment"><td class="DESC">Dead store</td><td class="DESC">Dead assignment</td><td>home/zach/inkscape/src/svg/svg-affine-parser.cpp</td><td class="DESC">sp_svg_transform_read</td><td class="Q">1049</td><td class="Q">1</td><td><a href="report-987fcf.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-987fcf.html" -->
+</tr>
+<tr class="bt_dead_store_dead_assignment"><td class="DESC">Dead store</td><td class="DESC">Dead assignment</td><td>home/zach/inkscape/src/livarot/PathStroke.cpp</td><td class="DESC">DoJoin</td><td class="Q">342</td><td class="Q">1</td><td><a href="report-46fae8.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-46fae8.html" -->
+</tr>
+<tr class="bt_dead_store_dead_assignment"><td class="DESC">Dead store</td><td class="DESC">Dead assignment</td><td>home/zach/inkscape/src/3rdparty/libcroco/cr-tknzr.c</td><td class="DESC">cr_tknzr_parse_ident</td><td class="Q">966</td><td class="Q">1</td><td><a href="report-e13fe4.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-e13fe4.html" -->
+</tr>
+<tr class="bt_dead_store_dead_assignment"><td class="DESC">Dead store</td><td class="DESC">Dead assignment</td><td>home/zach/inkscape/src/live_effects/lpe-pts2ellipse.cpp</td><td class="DESC">genSteinerEllipse</td><td class="Q">593</td><td class="Q">1</td><td><a href="report-b50dd3.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-b50dd3.html" -->
+</tr>
+<tr class="bt_dead_store_dead_assignment"><td class="DESC">Dead store</td><td class="DESC">Dead assignment</td><td>home/zach/inkscape/src/3rdparty/libcroco/cr-parser.c</td><td class="DESC">cr_parser_parse_term</td><td class="Q">1578</td><td class="Q">1</td><td><a href="report-6779eb.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-6779eb.html" -->
+</tr>
+<tr class="bt_dead_store_dead_assignment"><td class="DESC">Dead store</td><td class="DESC">Dead assignment</td><td>home/zach/inkscape/src/3rdparty/libcroco/cr-parser.c</td><td class="DESC">cr_parser_parse_simple_sels</td><td class="Q">2010</td><td class="Q">1</td><td><a href="report-722905.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-722905.html" -->
+</tr>
+<tr class="bt_dead_store_dead_assignment"><td class="DESC">Dead store</td><td class="DESC">Dead assignment</td><td>home/zach/inkscape/src/live_effects/lpe-mirror_symmetry.cpp</td><td class="DESC">toMirror</td><td class="Q">454</td><td class="Q">1</td><td><a href="report-f9792b.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-f9792b.html" -->
+</tr>
+<tr class="bt_dead_store_dead_assignment"><td class="DESC">Dead store</td><td class="DESC">Dead assignment</td><td>home/zach/inkscape/src/3rdparty/libcroco/cr-tknzr.c</td><td class="DESC">cr_tknzr_get_next_token</td><td class="Q">2417</td><td class="Q">1</td><td><a href="report-70a212.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-70a212.html" -->
+</tr>
+<tr class="bt_dead_store_dead_assignment"><td class="DESC">Dead store</td><td class="DESC">Dead assignment</td><td>home/zach/inkscape/src/libnrtype/Layout-TNG-OutIter.cpp</td><td class="DESC">_cursorXOnLineToIterator</td><td class="Q">80</td><td class="Q">1</td><td><a href="report-fcb918.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-fcb918.html" -->
+</tr>
+<tr class="bt_dead_store_dead_assignment"><td class="DESC">Dead store</td><td class="DESC">Dead assignment</td><td>home/zach/inkscape/src/3rdparty/autotrace/image-proc.c</td><td class="DESC">new_distance_map</td><td class="Q">138</td><td class="Q">1</td><td><a href="report-0102cd.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-0102cd.html" -->
+</tr>
+<tr class="bt_dead_store_dead_assignment"><td class="DESC">Dead store</td><td class="DESC">Dead assignment</td><td>home/zach/inkscape/src/3rdparty/libcroco/cr-parser.c</td><td class="DESC">cr_parser_parse_stylesheet</td><td class="Q">2563</td><td class="Q">1</td><td><a href="report-f1aef0.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-f1aef0.html" -->
+</tr>
+<tr class="bt_dead_store_dead_assignment"><td class="DESC">Dead store</td><td class="DESC">Dead assignment</td><td>home/zach/inkscape/src/3rdparty/libcroco/cr-input.c</td><td class="DESC">cr_input_new_from_uri</td><td class="Q">235</td><td class="Q">1</td><td><a href="report-407816.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-407816.html" -->
+</tr>
+<tr class="bt_dead_store_dead_assignment"><td class="DESC">Dead store</td><td class="DESC">Dead assignment</td><td>home/zach/inkscape/src/3rdparty/libcroco/cr-parser.c</td><td class="DESC">cr_parser_parse_import</td><td class="Q">3654</td><td class="Q">1</td><td><a href="report-b7b845.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-b7b845.html" -->
+</tr>
+<tr class="bt_dead_store_dead_assignment"><td class="DESC">Dead store</td><td class="DESC">Dead assignment</td><td>home/zach/inkscape/src/3rdparty/libcroco/cr-parser.c</td><td class="DESC">cr_parser_parse_declaration</td><td class="Q">3259</td><td class="Q">1</td><td><a href="report-0eccab.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-0eccab.html" -->
+</tr>
+<tr class="bt_dead_store_dead_assignment"><td class="DESC">Dead store</td><td class="DESC">Dead assignment</td><td>home/zach/inkscape/src/svg/svg-affine-parser.cpp</td><td class="DESC">sp_svg_transform_read</td><td class="Q">1179</td><td class="Q">1</td><td><a href="report-55eb68.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-55eb68.html" -->
+</tr>
+<tr class="bt_dead_store_dead_assignment"><td class="DESC">Dead store</td><td class="DESC">Dead assignment</td><td>home/zach/inkscape/src/3rdparty/adaptagrams/libcola/straightener.cpp</td><td class="DESC">rerouteAround</td><td class="Q">111</td><td class="Q">1</td><td><a href="report-027a5a.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-027a5a.html" -->
+</tr>
+<tr class="bt_dead_store_dead_assignment"><td class="DESC">Dead store</td><td class="DESC">Dead assignment</td><td>home/zach/inkscape/src/3rdparty/libcroco/cr-tknzr.c</td><td class="DESC">cr_tknzr_get_next_token</td><td class="Q">2482</td><td class="Q">1</td><td><a href="report-0199c4.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-0199c4.html" -->
+</tr>
+<tr class="bt_dead_store_dead_assignment"><td class="DESC">Dead store</td><td class="DESC">Dead assignment</td><td>home/zach/inkscape/src/3rdparty/libcroco/cr-parser.c</td><td class="DESC">cr_parser_parse_stylesheet</td><td class="Q">2428</td><td class="Q">1</td><td><a href="report-45cbfa.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-45cbfa.html" -->
+</tr>
+<tr class="bt_dead_store_dead_assignment"><td class="DESC">Dead store</td><td class="DESC">Dead assignment</td><td>home/zach/inkscape/src/3rdparty/libcroco/cr-tknzr.c</td><td class="DESC">cr_tknzr_get_next_token</td><td class="Q">2445</td><td class="Q">1</td><td><a href="report-909bbb.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-909bbb.html" -->
+</tr>
+<tr class="bt_dead_store_dead_assignment"><td class="DESC">Dead store</td><td class="DESC">Dead assignment</td><td>home/zach/inkscape/src/3rdparty/libcroco/cr-tknzr.c</td><td class="DESC">cr_tknzr_parse_nl</td><td class="Q">374</td><td class="Q">1</td><td><a href="report-8bed8f.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-8bed8f.html" -->
+</tr>
+<tr class="bt_dead_store_dead_assignment"><td class="DESC">Dead store</td><td class="DESC">Dead assignment</td><td>home/zach/inkscape/src/3rdparty/2geom/src/2geom/sbasis-roots.cpp</td><td class="DESC">level_sets_internal</td><td class="Q">438</td><td class="Q">1</td><td><a href="report-f2af83.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-f2af83.html" -->
+</tr>
+<tr class="bt_dead_store_dead_assignment"><td class="DESC">Dead store</td><td class="DESC">Dead assignment</td><td>home/zach/inkscape/src/3rdparty/autotrace/pxl-outline.c</td><td class="DESC">find_outline_pixels</td><td class="Q">147</td><td class="Q">1</td><td><a href="report-61730a.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-61730a.html" -->
+</tr>
+<tr class="bt_dead_store_dead_assignment"><td class="DESC">Dead store</td><td class="DESC">Dead assignment</td><td>home/zach/inkscape/src/live_effects/parameter/nodesatellitesarray.cpp</td><td class="DESC">knot_set_offset</td><td class="Q">514</td><td class="Q">1</td><td><a href="report-56fcd5.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-56fcd5.html" -->
+</tr>
+<tr class="bt_dead_store_dead_assignment"><td class="DESC">Dead store</td><td class="DESC">Dead assignment</td><td>home/zach/inkscape/src/live_effects/lpe-embrodery-stitch-ordering.cpp</td><td class="DESC">FindShortestReconnect</td><td class="Q">732</td><td class="Q">1</td><td><a href="report-bbd734.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-bbd734.html" -->
+</tr>
+<tr class="bt_dead_store_dead_assignment"><td class="DESC">Dead store</td><td class="DESC">Dead assignment</td><td>home/zach/inkscape/src/ui/dialog/export-single.cpp</td><td class="DESC">areaXChange</td><td class="Q">682</td><td class="Q">1</td><td><a href="report-1bf348.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-1bf348.html" -->
+</tr>
+<tr class="bt_dead_store_dead_assignment"><td class="DESC">Dead store</td><td class="DESC">Dead assignment</td><td>home/zach/inkscape/src/livarot/ShapeSweep.cpp</td><td class="DESC">ConvertToShape</td><td class="Q">639</td><td class="Q">1</td><td><a href="report-24694b.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-24694b.html" -->
+</tr>
+<tr class="bt_dead_store_dead_assignment"><td class="DESC">Dead store</td><td class="DESC">Dead assignment</td><td>home/zach/inkscape/src/live_effects/lpe-copy_rotate.cpp</td><td class="DESC">toItem</td><td class="Q">367</td><td class="Q">1</td><td><a href="report-3f49ee.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-3f49ee.html" -->
+</tr>
+<tr class="bt_dead_store_dead_assignment"><td class="DESC">Dead store</td><td class="DESC">Dead assignment</td><td>home/zach/inkscape/src/live_effects/lpe-tiling.cpp</td><td class="DESC">toItem</td><td class="Q">588</td><td class="Q">1</td><td><a href="report-e2ceac.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-e2ceac.html" -->
+</tr>
+<tr class="bt_dead_store_dead_assignment"><td class="DESC">Dead store</td><td class="DESC">Dead assignment</td><td>home/zach/inkscape/src/live_effects/lpe-copy_rotate.cpp</td><td class="DESC">toItem</td><td class="Q">363</td><td class="Q">1</td><td><a href="report-a15f9c.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-a15f9c.html" -->
+</tr>
+<tr class="bt_dead_store_dead_assignment"><td class="DESC">Dead store</td><td class="DESC">Dead assignment</td><td>home/zach/inkscape/src/3rdparty/libcroco/cr-parser.c</td><td class="DESC">cr_parser_parse_any_core</td><td class="Q">1247</td><td class="Q">1</td><td><a href="report-5ab25a.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-5ab25a.html" -->
+</tr>
+<tr class="bt_dead_store_dead_assignment"><td class="DESC">Dead store</td><td class="DESC">Dead assignment</td><td>home/zach/inkscape/src/3rdparty/libcroco/cr-sel-eng.c</td><td class="DESC">cr_sel_eng_get_matched_properties_from_cascade</td><td class="Q">2154</td><td class="Q">1</td><td><a href="report-e79954.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-e79954.html" -->
+</tr>
+<tr class="bt_dead_store_dead_assignment"><td class="DESC">Dead store</td><td class="DESC">Dead assignment</td><td>home/zach/inkscape/src/ui/dialog/dialog-multipaned.cpp</td><td class="DESC">on_size_allocate</td><td class="Q">835</td><td class="Q">1</td><td><a href="report-33015e.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-33015e.html" -->
+</tr>
+<tr class="bt_dead_store_dead_assignment"><td class="DESC">Dead store</td><td class="DESC">Dead assignment</td><td>home/zach/inkscape/src/3rdparty/adaptagrams/libvpsc/rectangle.cpp</td><td class="DESC">generateXConstraints</td><td class="Q">282</td><td class="Q">1</td><td><a href="report-95fd48.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-95fd48.html" -->
+</tr>
+<tr class="bt_dead_store_dead_assignment"><td class="DESC">Dead store</td><td class="DESC">Dead assignment</td><td>home/zach/inkscape/src/3rdparty/libcroco/cr-tknzr.c</td><td class="DESC">cr_tknzr_get_next_token</td><td class="Q">2498</td><td class="Q">1</td><td><a href="report-d1c936.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-d1c936.html" -->
+</tr>
+<tr class="bt_dead_store_dead_assignment"><td class="DESC">Dead store</td><td class="DESC">Dead assignment</td><td>home/zach/inkscape/src/livarot/AlphaLigne.cpp</td><td class="DESC">Raster</td><td class="Q">283</td><td class="Q">1</td><td><a href="report-df0577.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-df0577.html" -->
+</tr>
+<tr class="bt_dead_store_dead_assignment"><td class="DESC">Dead store</td><td class="DESC">Dead assignment</td><td>home/zach/inkscape/src/3rdparty/2geom/src/2geom/sbasis-roots.cpp</td><td class="DESC">level_sets_internal</td><td class="Q">437</td><td class="Q">1</td><td><a href="report-414d9f.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-414d9f.html" -->
+</tr>
+<tr class="bt_dead_store_dead_assignment"><td class="DESC">Dead store</td><td class="DESC">Dead assignment</td><td>home/zach/inkscape/src/3rdparty/libcroco/cr-tknzr.c</td><td class="DESC">cr_tknzr_parse_uri</td><td class="Q">1188</td><td class="Q">1</td><td><a href="report-d1b187.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-d1b187.html" -->
+</tr>
+<tr class="bt_dead_store_dead_assignment"><td class="DESC">Dead store</td><td class="DESC">Dead assignment</td><td>home/zach/inkscape/src/live_effects/parameter/nodesatellitesarray.cpp</td><td class="DESC">knot_click</td><td class="Q">416</td><td class="Q">1</td><td><a href="report-f50804.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-f50804.html" -->
+</tr>
+<tr class="bt_dead_store_dead_assignment"><td class="DESC">Dead store</td><td class="DESC">Dead assignment</td><td>home/zach/inkscape/src/livarot/PathStroke.cpp</td><td class="DESC">DoJoin</td><td class="Q">386</td><td class="Q">1</td><td><a href="report-076b18.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-076b18.html" -->
+</tr>
+<tr class="bt_dead_store_dead_assignment"><td class="DESC">Dead store</td><td class="DESC">Dead assignment</td><td>home/zach/inkscape/src/live_effects/parameter/nodesatellitesarray.cpp</td><td class="DESC">updateCanvasIndicators</td><td class="Q">142</td><td class="Q">1</td><td><a href="report-3daddb.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-3daddb.html" -->
+</tr>
+<tr class="bt_dead_store_dead_assignment"><td class="DESC">Dead store</td><td class="DESC">Dead assignment</td><td>home/zach/inkscape/src/3rdparty/libcroco/cr-parser.c</td><td class="DESC">cr_parser_parse_ruleset_core</td><td class="Q">859</td><td class="Q">1</td><td><a href="report-62cafb.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-62cafb.html" -->
+</tr>
+<tr class="bt_dead_store_dead_assignment"><td class="DESC">Dead store</td><td class="DESC">Dead assignment</td><td>home/zach/inkscape/src/ui/dialog/styledialog.cpp</td><td class="DESC">readStyleElement</td><td class="Q">414</td><td class="Q">1</td><td><a href="report-080ee7.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-080ee7.html" -->
+</tr>
+<tr class="bt_dead_store_dead_assignment"><td class="DESC">Dead store</td><td class="DESC">Dead assignment</td><td>home/zach/inkscape/src/3rdparty/libcroco/cr-tknzr.c</td><td class="DESC">cr_tknzr_parse_nmchar</td><td class="Q">899</td><td class="Q">1</td><td><a href="report-5c20b2.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-5c20b2.html" -->
+</tr>
+<tr class="bt_dead_store_dead_assignment"><td class="DESC">Dead store</td><td class="DESC">Dead assignment</td><td>home/zach/inkscape/src/display/cairo-utils.cpp</td><td class="DESC">create_from_buffer</td><td class="Q">390</td><td class="Q">1</td><td><a href="report-8e84a8.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-8e84a8.html" -->
+</tr>
+<tr class="bt_dead_store_dead_assignment"><td class="DESC">Dead store</td><td class="DESC">Dead assignment</td><td>home/zach/inkscape/src/3rdparty/autotrace/image-proc.c</td><td class="DESC">new_distance_map</td><td class="Q">167</td><td class="Q">1</td><td><a href="report-c067c6.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-c067c6.html" -->
+</tr>
+<tr class="bt_dead_store_dead_assignment"><td class="DESC">Dead store</td><td class="DESC">Dead assignment</td><td>home/zach/inkscape/src/object/sp-lpe-item.cpp</td><td class="DESC">sp_lpe_item_cleanup_original_path_recursive</td><td class="Q">640</td><td class="Q">1</td><td><a href="report-44d2b6.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-44d2b6.html" -->
+</tr>
+<tr class="bt_dead_store_dead_assignment"><td class="DESC">Dead store</td><td class="DESC">Dead assignment</td><td>home/zach/inkscape/src/3rdparty/libcroco/cr-tknzr.c</td><td class="DESC">cr_tknzr_get_next_token</td><td class="Q">2452</td><td class="Q">1</td><td><a href="report-43bf5d.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-43bf5d.html" -->
+</tr>
+<tr class="bt_dead_store_dead_assignment"><td class="DESC">Dead store</td><td class="DESC">Dead assignment</td><td>home/zach/inkscape/src/3rdparty/libcroco/cr-declaration.c</td><td class="DESC">cr_declaration_parse_list_from_buf</td><td class="Q">220</td><td class="Q">1</td><td><a href="report-332145.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-332145.html" -->
+</tr>
+<tr class="bt_dead_store_dead_assignment"><td class="DESC">Dead store</td><td class="DESC">Dead assignment</td><td>home/zach/inkscape/src/3rdparty/2geom/src/2geom/intersection-graph.cpp</td><td class="DESC">_getResult</td><td class="Q">373</td><td class="Q">1</td><td><a href="report-e52dd6.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-e52dd6.html" -->
+</tr>
+<tr class="bt_dead_store_dead_assignment"><td class="DESC">Dead store</td><td class="DESC">Dead assignment</td><td>home/zach/inkscape/src/3rdparty/libcroco/cr-parser.c</td><td class="DESC">cr_parser_parse_any_core</td><td class="Q">1218</td><td class="Q">1</td><td><a href="report-fe3749.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-fe3749.html" -->
+</tr>
+<tr class="bt_dead_store_dead_assignment"><td class="DESC">Dead store</td><td class="DESC">Dead assignment</td><td>home/zach/inkscape/src/extension/internal/cairo-renderer-pdf-out.cpp</td><td class="DESC">pdf_render_document_to_file</td><td class="Q">161</td><td class="Q">1</td><td><a href="report-a27c7b.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-a27c7b.html" -->
+</tr>
+<tr class="bt_dead_store_dead_assignment"><td class="DESC">Dead store</td><td class="DESC">Dead assignment</td><td>home/zach/inkscape/src/3rdparty/libcroco/cr-parser.c</td><td class="DESC">cr_parser_parse_import</td><td class="Q">3617</td><td class="Q">1</td><td><a href="report-cb247d.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-cb247d.html" -->
+</tr>
+<tr class="bt_dead_store_dead_assignment"><td class="DESC">Dead store</td><td class="DESC">Dead assignment</td><td>home/zach/inkscape/src/live_effects/lpe-tiling.cpp</td><td class="DESC">toItem</td><td class="Q">584</td><td class="Q">1</td><td><a href="report-651222.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-651222.html" -->
+</tr>
+<tr class="bt_dead_store_dead_assignment"><td class="DESC">Dead store</td><td class="DESC">Dead assignment</td><td>home/zach/inkscape/src/live_effects/parameter/nodesatellitesarray.cpp</td><td class="DESC">knot_set</td><td class="Q">275</td><td class="Q">1</td><td><a href="report-0f87c6.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-0f87c6.html" -->
+</tr>
+<tr class="bt_dead_store_dead_assignment"><td class="DESC">Dead store</td><td class="DESC">Dead assignment</td><td>home/zach/inkscape/src/3rdparty/libcroco/cr-tknzr.c</td><td class="DESC">cr_tknzr_parse_uri</td><td class="Q">1206</td><td class="Q">1</td><td><a href="report-a72c7d.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-a72c7d.html" -->
+</tr>
+<tr class="bt_dead_store_dead_assignment"><td class="DESC">Dead store</td><td class="DESC">Dead assignment</td><td>home/zach/inkscape/src/ui/dialog/export-single.cpp</td><td class="DESC">areaYChange</td><td class="Q">732</td><td class="Q">1</td><td><a href="report-f6f930.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-f6f930.html" -->
+</tr>
+<tr class="bt_dead_store_dead_assignment"><td class="DESC">Dead store</td><td class="DESC">Dead assignment</td><td>home/zach/inkscape/src/3rdparty/libcroco/cr-parser.c</td><td class="DESC">cr_parser_parse_any_core</td><td class="Q">1290</td><td class="Q">1</td><td><a href="report-1eb779.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-1eb779.html" -->
+</tr>
+<tr class="bt_dead_store_dead_assignment"><td class="DESC">Dead store</td><td class="DESC">Dead assignment</td><td>home/zach/inkscape/src/3rdparty/libcroco/cr-tknzr.c</td><td class="DESC">cr_tknzr_parse_rgb</td><td class="Q">1329</td><td class="Q">1</td><td><a href="report-6e1b29.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-6e1b29.html" -->
+</tr>
+<tr class="bt_dead_store_dead_assignment"><td class="DESC">Dead store</td><td class="DESC">Dead assignment</td><td>home/zach/inkscape/src/livarot/ShapeSweep.cpp</td><td class="DESC">Booleen</td><td class="Q">1457</td><td class="Q">1</td><td><a href="report-27430c.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-27430c.html" -->
+</tr>
+<tr class="bt_dead_store_dead_assignment"><td class="DESC">Dead store</td><td class="DESC">Dead assignment</td><td>home/zach/inkscape/src/3rdparty/libcroco/cr-tknzr.c</td><td class="DESC">cr_tknzr_get_next_token</td><td class="Q">2511</td><td class="Q">1</td><td><a href="report-b57aaf.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-b57aaf.html" -->
+</tr>
+<tr class="bt_dead_store_dead_assignment"><td class="DESC">Dead store</td><td class="DESC">Dead assignment</td><td>home/zach/inkscape/src/3rdparty/libcroco/cr-parser.c</td><td class="DESC">cr_parser_parse_stylesheet_core</td><td class="Q">700</td><td class="Q">1</td><td><a href="report-04756e.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-04756e.html" -->
+</tr>
+<tr class="bt_dead_store_dead_assignment"><td class="DESC">Dead store</td><td class="DESC">Dead assignment</td><td>home/zach/inkscape/src/3rdparty/libcroco/cr-tknzr.c</td><td class="DESC">cr_tknzr_get_next_token</td><td class="Q">2459</td><td class="Q">1</td><td><a href="report-1fc2af.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-1fc2af.html" -->
+</tr>
+<tr class="bt_dead_store_dead_assignment"><td class="DESC">Dead store</td><td class="DESC">Dead assignment</td><td>home/zach/inkscape/src/3rdparty/libcroco/cr-rgb.c</td><td class="DESC">cr_rgb_parse_from_buf</td><td class="Q">675</td><td class="Q">1</td><td><a href="report-04ca5c.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-04ca5c.html" -->
+</tr>
+<tr class="bt_dead_store_dead_assignment"><td class="DESC">Dead store</td><td class="DESC">Dead assignment</td><td>home/zach/inkscape/src/3rdparty/libcroco/cr-parser.c</td><td class="DESC">cr_parser_parse_stylesheet</td><td class="Q">2519</td><td class="Q">1</td><td><a href="report-71ddf3.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-71ddf3.html" -->
+</tr>
+<tr class="bt_dead_store_dead_assignment"><td class="DESC">Dead store</td><td class="DESC">Dead assignment</td><td>home/zach/inkscape/src/3rdparty/libcroco/cr-tknzr.c</td><td class="DESC">cr_tknzr_get_next_token</td><td class="Q">2474</td><td class="Q">1</td><td><a href="report-fbf589.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-fbf589.html" -->
+</tr>
+<tr class="bt_dead_store_dead_assignment"><td class="DESC">Dead store</td><td class="DESC">Dead assignment</td><td>home/zach/inkscape/src/3rdparty/libcroco/cr-parser.c</td><td class="DESC">cr_parser_parse_ruleset</td><td class="Q">3453</td><td class="Q">1</td><td><a href="report-61d4ec.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-61d4ec.html" -->
+</tr>
+<tr class="bt_dead_store_dead_assignment"><td class="DESC">Dead store</td><td class="DESC">Dead assignment</td><td>home/zach/inkscape/src/extension/internal/cairo-renderer-pdf-out.cpp</td><td class="DESC">pdf_render_document_to_file</td><td class="Q">116</td><td class="Q">1</td><td><a href="report-3623a3.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-3623a3.html" -->
+</tr>
+<tr class="bt_dead_store_dead_assignment"><td class="DESC">Dead store</td><td class="DESC">Dead assignment</td><td>home/zach/inkscape/src/3rdparty/libcroco/cr-parser.c</td><td class="DESC">cr_parser_parse_stylesheet</td><td class="Q">2541</td><td class="Q">1</td><td><a href="report-865a05.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-865a05.html" -->
+</tr>
+<tr class="bt_dead_store_dead_assignment"><td class="DESC">Dead store</td><td class="DESC">Dead assignment</td><td>home/zach/inkscape/src/3rdparty/libcroco/cr-parser.c</td><td class="DESC">cr_parser_parse_ruleset_core</td><td class="Q">890</td><td class="Q">1</td><td><a href="report-280c57.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-280c57.html" -->
+</tr>
+<tr class="bt_dead_store_dead_assignment"><td class="DESC">Dead store</td><td class="DESC">Dead assignment</td><td>home/zach/inkscape/src/ui/toolbar/text-toolbar.cpp</td><td class="DESC">lineheight_unit_changed</td><td class="Q">1426</td><td class="Q">1</td><td><a href="report-fa6f8b.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-fa6f8b.html" -->
+</tr>
+<tr class="bt_dead_store_dead_assignment"><td class="DESC">Dead store</td><td class="DESC">Dead assignment</td><td>home/zach/inkscape/src/livarot/ShapeSweep.cpp</td><td class="DESC">AssembleAretes</td><td class="Q">2249</td><td class="Q">1</td><td><a href="report-b79d71.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-b79d71.html" -->
+</tr>
+<tr class="bt_dead_store_dead_assignment"><td class="DESC">Dead store</td><td class="DESC">Dead assignment</td><td>home/zach/inkscape/src/livarot/PathSimplify.cpp</td><td class="DESC">AttemptSimplify</td><td class="Q">720</td><td class="Q">1</td><td><a href="report-d1bf4b.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-d1bf4b.html" -->
+</tr>
+<tr class="bt_dead_store_dead_assignment"><td class="DESC">Dead store</td><td class="DESC">Dead assignment</td><td>home/zach/inkscape/src/3rdparty/libcroco/cr-tknzr.c</td><td class="DESC">cr_tknzr_parse_string</td><td class="Q">748</td><td class="Q">1</td><td><a href="report-61b369.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-61b369.html" -->
+</tr>
+<tr class="bt_dead_store_dead_assignment"><td class="DESC">Dead store</td><td class="DESC">Dead assignment</td><td>home/zach/inkscape/src/live_effects/lpe-offset.cpp</td><td class="DESC">doEffect_path</td><td class="Q">531</td><td class="Q">1</td><td><a href="report-3bd842.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-3bd842.html" -->
+</tr>
+<tr class="bt_dead_store_dead_assignment"><td class="DESC">Dead store</td><td class="DESC">Dead assignment</td><td>home/zach/inkscape/src/livarot/PathSimplify.cpp</td><td class="DESC">AttemptSimplify</td><td class="Q">966</td><td class="Q">1</td><td><a href="report-79d151.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-79d151.html" -->
+</tr>
+<tr class="bt_dead_store_dead_assignment"><td class="DESC">Dead store</td><td class="DESC">Dead assignment</td><td>home/zach/inkscape/src/3rdparty/libcroco/cr-style.c</td><td class="DESC">set_prop_font_size_from_value</td><td class="Q">1534</td><td class="Q">1</td><td><a href="report-5fc547.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-5fc547.html" -->
+</tr>
+<tr class="bt_dead_store_dead_assignment"><td class="DESC">Dead store</td><td class="DESC">Dead assignment</td><td>home/zach/inkscape/src/3rdparty/libcroco/cr-parser.c</td><td class="DESC">cr_parser_parse_ruleset</td><td class="Q">3509</td><td class="Q">1</td><td><a href="report-2f3cd3.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-2f3cd3.html" -->
+</tr>
+<tr class="bt_dead_store_dead_assignment"><td class="DESC">Dead store</td><td class="DESC">Dead assignment</td><td>home/zach/inkscape/src/live_effects/lpe-powermask.cpp</td><td class="DESC">setMask</td><td class="Q">266</td><td class="Q">1</td><td><a href="report-37560e.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-37560e.html" -->
+</tr>
+<tr class="bt_dead_store_dead_assignment"><td class="DESC">Dead store</td><td class="DESC">Dead assignment</td><td>home/zach/inkscape/src/3rdparty/libcroco/cr-tknzr.c</td><td class="DESC">cr_tknzr_get_next_token</td><td class="Q">2519</td><td class="Q">1</td><td><a href="report-3b1c4d.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-3b1c4d.html" -->
+</tr>
+<tr class="bt_dead_store_dead_assignment"><td class="DESC">Dead store</td><td class="DESC">Dead assignment</td><td>home/zach/inkscape/src/3rdparty/libcroco/cr-parser.c</td><td class="DESC">cr_parser_parse_selector</td><td class="Q">2089</td><td class="Q">1</td><td><a href="report-07dbf5.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-07dbf5.html" -->
+</tr>
+<tr class="bt_dead_store_dead_assignment"><td class="DESC">Dead store</td><td class="DESC">Dead assignment</td><td>home/zach/inkscape/src/livarot/PathStroke.cpp</td><td class="DESC">DoStroke</td><td class="Q">132</td><td class="Q">1</td><td><a href="report-8c8fe7.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-8c8fe7.html" -->
+</tr>
+<tr class="bt_dead_store_dead_assignment"><td class="DESC">Dead store</td><td class="DESC">Dead assignment</td><td>home/zach/inkscape/src/3rdparty/libcroco/cr-tknzr.c</td><td class="DESC">cr_tknzr_get_next_token</td><td class="Q">2525</td><td class="Q">1</td><td><a href="report-19e8ae.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-19e8ae.html" -->
+</tr>
+<tr class="bt_dead_store_dead_assignment"><td class="DESC">Dead store</td><td class="DESC">Dead assignment</td><td>home/zach/inkscape/src/3rdparty/libcroco/cr-tknzr.c</td><td class="DESC">cr_tknzr_parse_rgb</td><td class="Q">1275</td><td class="Q">1</td><td><a href="report-e5e14c.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-e5e14c.html" -->
+</tr>
+<tr class="bt_dead_store_dead_assignment"><td class="DESC">Dead store</td><td class="DESC">Dead assignment</td><td>home/zach/inkscape/src/3rdparty/libcroco/cr-tknzr.c</td><td class="DESC">cr_tknzr_parse_uri</td><td class="Q">1166</td><td class="Q">1</td><td><a href="report-95548c.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-95548c.html" -->
+</tr>
+<tr class="bt_dead_store_dead_assignment"><td class="DESC">Dead store</td><td class="DESC">Dead assignment</td><td>home/zach/inkscape/src/3rdparty/libcroco/cr-parser.c</td><td class="DESC">cr_parser_parse_value_core</td><td class="Q">1131</td><td class="Q">1</td><td><a href="report-e969ef.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-e969ef.html" -->
+</tr>
+<tr class="bt_dead_store_dead_assignment"><td class="DESC">Dead store</td><td class="DESC">Dead assignment</td><td>home/zach/inkscape/src/object/sp-lpe-item.cpp</td><td class="DESC">sp_lpe_item_cleanup_original_path_recursive</td><td class="Q">601</td><td class="Q">1</td><td><a href="report-1f698d.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-1f698d.html" -->
+</tr>
+<tr class="bt_dead_store_dead_assignment"><td class="DESC">Dead store</td><td class="DESC">Dead assignment</td><td>home/zach/inkscape/src/ui/dialog/selectorsdialog.cpp</td><td class="DESC">_selectRow</td><td class="Q">1316</td><td class="Q">1</td><td><a href="report-281f12.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-281f12.html" -->
+</tr>
+<tr class="bt_dead_store_dead_assignment"><td class="DESC">Dead store</td><td class="DESC">Dead assignment</td><td>home/zach/inkscape/src/3rdparty/adaptagrams/libvpsc/rectangle.cpp</td><td class="DESC">generateXConstraints</td><td class="Q">308</td><td class="Q">1</td><td><a href="report-f06f95.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-f06f95.html" -->
+</tr>
+<tr class="bt_dead_store_dead_assignment"><td class="DESC">Dead store</td><td class="DESC">Dead assignment</td><td>home/zach/inkscape/src/live_effects/lpe-tiling.cpp</td><td class="DESC">toItem</td><td class="Q">594</td><td class="Q">1</td><td><a href="report-2d1fbb.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-2d1fbb.html" -->
+</tr>
+<tr class="bt_dead_store_dead_assignment"><td class="DESC">Dead store</td><td class="DESC">Dead assignment</td><td>home/zach/inkscape/src/live_effects/lpe-powermask.cpp</td><td class="DESC">setMask</td><td class="Q">190</td><td class="Q">1</td><td><a href="report-875f01.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-875f01.html" -->
+</tr>
+<tr class="bt_dead_store_dead_assignment"><td class="DESC">Dead store</td><td class="DESC">Dead assignment</td><td>home/zach/inkscape/src/3rdparty/libcroco/cr-tknzr.c</td><td class="DESC">cr_tknzr_get_next_token</td><td class="Q">2438</td><td class="Q">1</td><td><a href="report-f86dab.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-f86dab.html" -->
+</tr>
+<tr class="bt_dead_store_dead_assignment"><td class="DESC">Dead store</td><td class="DESC">Dead assignment</td><td>home/zach/inkscape/src/3rdparty/adaptagrams/libvpsc/rectangle.cpp</td><td class="DESC">generateXConstraints</td><td class="Q">292</td><td class="Q">1</td><td><a href="report-25e318.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-25e318.html" -->
+</tr>
+<tr class="bt_dead_store_dead_assignment"><td class="DESC">Dead store</td><td class="DESC">Dead assignment</td><td>home/zach/inkscape/src/live_effects/lpe-measure-segments.cpp</td><td class="DESC">createArrowMarker</td><td class="Q">383</td><td class="Q">1</td><td><a href="report-bef05b.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-bef05b.html" -->
+</tr>
+<tr class="bt_dead_store_dead_assignment"><td class="DESC">Dead store</td><td class="DESC">Dead assignment</td><td>home/zach/inkscape/src/3rdparty/libcroco/cr-parser.c</td><td class="DESC">cr_parser_parse_value_core</td><td class="Q">1117</td><td class="Q">1</td><td><a href="report-76d54f.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-76d54f.html" -->
+</tr>
+<tr class="bt_dead_store_dead_assignment"><td class="DESC">Dead store</td><td class="DESC">Dead assignment</td><td>home/zach/inkscape/src/3rdparty/libcroco/cr-tknzr.c</td><td class="DESC">cr_tknzr_parse_nmstart</td><td class="Q">832</td><td class="Q">1</td><td><a href="report-696456.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-696456.html" -->
+</tr>
+<tr class="bt_dead_store_dead_assignment"><td class="DESC">Dead store</td><td class="DESC">Dead assignment</td><td>home/zach/inkscape/src/live_effects/parameter/togglebutton.cpp</td><td class="DESC">refresh_button</td><td class="Q">177</td><td class="Q">1</td><td><a href="report-33470e.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-33470e.html" -->
+</tr>
+<tr class="bt_dead_store_dead_assignment"><td class="DESC">Dead store</td><td class="DESC">Dead assignment</td><td>home/zach/inkscape/src/3rdparty/libcroco/cr-parser.c</td><td class="DESC">cr_parser_parse_stylesheet</td><td class="Q">2575</td><td class="Q">1</td><td><a href="report-ef8ba7.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-ef8ba7.html" -->
+</tr>
+<tr class="bt_dead_store_dead_assignment"><td class="DESC">Dead store</td><td class="DESC">Dead assignment</td><td>home/zach/inkscape/src/3rdparty/libcroco/cr-tknzr.c</td><td class="DESC">cr_tknzr_get_next_token</td><td class="Q">2504</td><td class="Q">1</td><td><a href="report-88056c.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-88056c.html" -->
+</tr>
+<tr class="bt_dead_store_dead_assignment"><td class="DESC">Dead store</td><td class="DESC">Dead assignment</td><td>home/zach/inkscape/src/3rdparty/libcroco/cr-tknzr.c</td><td class="DESC">cr_tknzr_get_next_token</td><td class="Q">2424</td><td class="Q">1</td><td><a href="report-af0a32.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-af0a32.html" -->
+</tr>
+<tr class="bt_dead_store_dead_assignment"><td class="DESC">Dead store</td><td class="DESC">Dead assignment</td><td>home/zach/inkscape/src/live_effects/lpe-measure-segments.cpp</td><td class="DESC">createLine</td><td class="Q">646</td><td class="Q">1</td><td><a href="report-775394.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-775394.html" -->
+</tr>
+<tr class="bt_dead_store_dead_assignment"><td class="DESC">Dead store</td><td class="DESC">Dead assignment</td><td>home/zach/inkscape/src/3rdparty/libcroco/cr-style.c</td><td class="DESC">set_prop_font_size_from_value</td><td class="Q">1551</td><td class="Q">1</td><td><a href="report-5fe4c7.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-5fe4c7.html" -->
+</tr>
+<tr class="bt_dead_store_dead_assignment"><td class="DESC">Dead store</td><td class="DESC">Dead assignment</td><td>home/zach/inkscape/src/libnrtype/Layout-TNG-Compute.cpp</td><td class="DESC">_outputLine</td><td class="Q">1095</td><td class="Q">1</td><td><a href="report-753f1f.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-753f1f.html" -->
+</tr>
+<tr class="bt_dead_store_dead_assignment"><td class="DESC">Dead store</td><td class="DESC">Dead assignment</td><td>home/zach/inkscape/src/3rdparty/libcroco/cr-statement.c</td><td class="DESC">parse_at_media_end_media_cb</td><td class="Q">393</td><td class="Q">1</td><td><a href="report-1a23f3.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-1a23f3.html" -->
+</tr>
+<tr class="bt_dead_store_dead_increment"><td class="DESC">Dead store</td><td class="DESC">Dead increment</td><td>home/zach/inkscape/src/livarot/PathOutline.cpp</td><td class="DESC">RecStdArcTo</td><td class="Q">1450</td><td class="Q">1</td><td><a href="report-952092.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-952092.html" -->
+</tr>
+<tr class="bt_dead_store_dead_increment"><td class="DESC">Dead store</td><td class="DESC">Dead increment</td><td>home/zach/inkscape/src/object/sp-offset.cpp</td><td class="DESC">vectors_are_clockwise</td><td class="Q">724</td><td class="Q">1</td><td><a href="report-7587b6.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-7587b6.html" -->
+</tr>
+<tr class="bt_dead_store_dead_increment"><td class="DESC">Dead store</td><td class="DESC">Dead increment</td><td>home/zach/inkscape/src/live_effects/lpe-tiling.cpp</td><td class="DESC">doAfterEffect</td><td class="Q">365</td><td class="Q">1</td><td><a href="report-0a0704.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-0a0704.html" -->
+</tr>
+<tr class="bt_dead_store_dead_increment"><td class="DESC">Dead store</td><td class="DESC">Dead increment</td><td>home/zach/inkscape/src/live_effects/lpe-tiling.cpp</td><td class="DESC">doAfterEffect</td><td class="Q">294</td><td class="Q">1</td><td><a href="report-debd1c.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-debd1c.html" -->
+</tr>
+<tr class="bt_dead_store_dead_increment"><td class="DESC">Dead store</td><td class="DESC">Dead increment</td><td>home/zach/inkscape/src/live_effects/lpe-tiling.cpp</td><td class="DESC">doEffect_path_post</td><td class="Q">1249</td><td class="Q">1</td><td><a href="report-35de45.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-35de45.html" -->
+</tr>
+<tr class="bt_dead_store_dead_increment"><td class="DESC">Dead store</td><td class="DESC">Dead increment</td><td>home/zach/inkscape/src/livarot/float-line.cpp</td><td class="DESC">Flatten</td><td class="Q">524</td><td class="Q">1</td><td><a href="report-c9b973.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-c9b973.html" -->
+</tr>
+<tr class="bt_dead_store_dead_increment"><td class="DESC">Dead store</td><td class="DESC">Dead increment</td><td>home/zach/inkscape/src/svg/svg-length.cpp</td><td class="DESC">sp_svg_number_write_d</td><td class="Q">95</td><td class="Q">1</td><td><a href="report-091984.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-091984.html" -->
+</tr>
+<tr class="bt_dead_store_dead_increment"><td class="DESC">Dead store</td><td class="DESC">Dead increment</td><td>home/zach/inkscape/src/object/sp-flowdiv.cpp</td><td class="DESC">modified</td><td class="Q">442</td><td class="Q">1</td><td><a href="report-74a5b0.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-74a5b0.html" -->
+</tr>
+<tr class="bt_dead_store_dead_increment"><td class="DESC">Dead store</td><td class="DESC">Dead increment</td><td>home/zach/inkscape/src/live_effects/lpe-tiling.cpp</td><td class="DESC">doEffect_path_post</td><td class="Q">1245</td><td class="Q">1</td><td><a href="report-63dd51.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-63dd51.html" -->
+</tr>
+<tr class="bt_dead_store_dead_increment"><td class="DESC">Dead store</td><td class="DESC">Dead increment</td><td>home/zach/inkscape/src/live_effects/lpe-tiling.cpp</td><td class="DESC">doAfterEffect</td><td class="Q">290</td><td class="Q">1</td><td><a href="report-750d77.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-750d77.html" -->
+</tr>
+<tr class="bt_dead_store_dead_increment"><td class="DESC">Dead store</td><td class="DESC">Dead increment</td><td>home/zach/inkscape/src/livarot/PathOutline.cpp</td><td class="DESC">RecStdCubicTo</td><td class="Q">1322</td><td class="Q">1</td><td><a href="report-8544e5.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-8544e5.html" -->
+</tr>
+<tr class="bt_dead_store_dead_increment"><td class="DESC">Dead store</td><td class="DESC">Dead increment</td><td>home/zach/inkscape/src/object/sp-flowdiv.cpp</td><td class="DESC">modified</td><td class="Q">406</td><td class="Q">1</td><td><a href="report-5ef053.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-5ef053.html" -->
+</tr>
+<tr class="bt_dead_store_dead_initialization"><td class="DESC">Dead store</td><td class="DESC">Dead initialization</td><td>home/zach/inkscape/src/ui/widget/object-composite-settings.cpp</td><td class="DESC">_blendBlurValueChanged</td><td class="Q">114</td><td class="Q">1</td><td><a href="report-8959eb.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-8959eb.html" -->
+</tr>
+<tr class="bt_dead_store_dead_initialization"><td class="DESC">Dead store</td><td class="DESC">Dead initialization</td><td>home/zach/inkscape/src/ui/dialog/filter-effects-dialog.cpp</td><td class="DESC">on_selection_toggled</td><td class="Q">1499</td><td class="Q">1</td><td><a href="report-0a6436.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-0a6436.html" -->
+</tr>
+<tr class="bt_dead_store_dead_initialization"><td class="DESC">Dead store</td><td class="DESC">Dead initialization</td><td>home/zach/inkscape/src/document.cpp</td><td class="DESC">bindObjectToId</td><td class="Q">1050</td><td class="Q">1</td><td><a href="report-b82fb1.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-b82fb1.html" -->
+</tr>
+<tr class="bt_dead_store_dead_initialization"><td class="DESC">Dead store</td><td class="DESC">Dead initialization</td><td>home/zach/inkscape/src/svg/svg-color.cpp</td><td class="DESC">sp_svg_read_color</td><td class="Q">408</td><td class="Q">1</td><td><a href="report-db1c77.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-db1c77.html" -->
+</tr>
+<tr class="bt_dead_store_dead_initialization"><td class="DESC">Dead store</td><td class="DESC">Dead initialization</td><td>home/zach/inkscape/src/document.cpp</td><td class="DESC">bindObjectToRepr</td><td class="Q">1234</td><td class="Q">1</td><td><a href="report-0e54f6.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-0e54f6.html" -->
+</tr>
+<tr class="bt_dead_store_dead_initialization"><td class="DESC">Dead store</td><td class="DESC">Dead initialization</td><td>home/zach/inkscape/src/filter-chemistry.cpp</td><td class="DESC">new_filter_gaussian_blur</td><td class="Q">210</td><td class="Q">1</td><td><a href="report-ea4299.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-ea4299.html" -->
+</tr>
+<tr class="bt_dead_store_dead_initialization"><td class="DESC">Dead store</td><td class="DESC">Dead initialization</td><td>home/zach/inkscape/src/svg/svg-affine-parser.cpp</td><td class="DESC">sp_svg_transform_read</td><td class="Q">1016</td><td class="Q">1</td><td><a href="report-7708c2.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-7708c2.html" -->
+</tr>
+<tr class="bt_dead_store_dead_initialization"><td class="DESC">Dead store</td><td class="DESC">Dead initialization</td><td>home/zach/inkscape/src/live_effects/lpe-embrodery-stitch-ordering.cpp</td><td class="DESC">AssertIsTour</td><td class="Q">789</td><td class="Q">1</td><td><a href="report-29b534.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-29b534.html" -->
+</tr>
+<tr class="bt_dead_store_dead_initialization"><td class="DESC">Dead store</td><td class="DESC">Dead initialization</td><td>home/zach/inkscape/src/file.cpp</td><td class="DESC">sp_file_revert_dialog</td><td class="Q">169</td><td class="Q">1</td><td><a href="report-653ce1.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-653ce1.html" -->
+</tr>
+<tr class="bt_dead_store_dead_initialization"><td class="DESC">Dead store</td><td class="DESC">Dead initialization</td><td>home/zach/inkscape/src/ui/tools/freehand-base.cpp</td><td class="DESC">spdc_check_for_and_apply_waiting_LPE</td><td class="Q">495</td><td class="Q">1</td><td><a href="report-deda60.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-deda60.html" -->
+</tr>
+<tr class="bt_dead_store_dead_initialization"><td class="DESC">Dead store</td><td class="DESC">Dead initialization</td><td>home/zach/inkscape/src/ui/dialog/undo-history.cpp</td><td class="DESC">render_vfunc</td><td class="Q">41</td><td class="Q">1</td><td><a href="report-90e4d2.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-90e4d2.html" -->
+</tr>
+<tr class="bt_dead_store_dead_initialization"><td class="DESC">Dead store</td><td class="DESC">Dead initialization</td><td>home/zach/inkscape/src/live_effects/lpe-embrodery-stitch-ordering.cpp</td><td class="DESC">FindShortestReconnect</td><td class="Q">726</td><td class="Q">1</td><td><a href="report-495942.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-495942.html" -->
+</tr>
+<tr class="bt_dead_store_dead_initialization"><td class="DESC">Dead store</td><td class="DESC">Dead initialization</td><td>home/zach/inkscape/src/widgets/sp-xmlview-tree.cpp</td><td class="DESC">on_test_expand_row</td><td class="Q">141</td><td class="Q">1</td><td><a href="report-806c77.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-806c77.html" -->
+</tr>
+<tr class="bt_dead_store_dead_initialization"><td class="DESC">Dead store</td><td class="DESC">Dead initialization</td><td>home/zach/inkscape/src/ui/dialog/objects.cpp</td><td class="DESC">transferChild</td><td class="Q">135</td><td class="Q">1</td><td><a href="report-9d972a.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-9d972a.html" -->
+</tr>
+<tr class="bt_dead_store_dead_initialization"><td class="DESC">Dead store</td><td class="DESC">Dead initialization</td><td>home/zach/inkscape/src/ui/dialog/dialog-multipaned.cpp</td><td class="DESC">reveal_curve</td><td class="Q">1085</td><td class="Q">1</td><td><a href="report-b97306.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-b97306.html" -->
+</tr>
+<tr class="bt_dead_store_dead_initialization"><td class="DESC">Dead store</td><td class="DESC">Dead initialization</td><td>home/zach/inkscape/src/filter-chemistry.cpp</td><td class="DESC">new_filter_blend_gaussian_blur</td><td class="Q">272</td><td class="Q">1</td><td><a href="report-18c6ee.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-18c6ee.html" -->
+</tr>
+<tr class="bt_dead_store_dead_initialization"><td class="DESC">Dead store</td><td class="DESC">Dead initialization</td><td>home/zach/inkscape/src/filter-chemistry.cpp</td><td class="DESC">new_filter_blend_gaussian_blur</td><td class="Q">294</td><td class="Q">1</td><td><a href="report-f360b3.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-f360b3.html" -->
+</tr>
+<tr class="bt_dead_store_dead_initialization"><td class="DESC">Dead store</td><td class="DESC">Dead initialization</td><td>home/zach/inkscape/src/ui/dialog/dialog-container.cpp</td><td class="DESC">load_container_state</td><td class="Q">669</td><td class="Q">1</td><td><a href="report-4fa338.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-4fa338.html" -->
+</tr>
+<tr class="bt_dead_store_dead_initialization"><td class="DESC">Dead store</td><td class="DESC">Dead initialization</td><td>home/zach/inkscape/src/object/sp-flowtext.cpp</td><td class="DESC">create_flowtext_with_internal_frame</td><td class="Q">662</td><td class="Q">1</td><td><a href="report-2a421c.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-2a421c.html" -->
+</tr>
+<tr class="bt_dead_store_dead_initialization"><td class="DESC">Dead store</td><td class="DESC">Dead initialization</td><td>home/zach/inkscape/src/object/filters/tile.cpp</td><td class="DESC">build_renderer</td><td class="Q">93</td><td class="Q">1</td><td><a href="report-b9317a.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-b9317a.html" -->
+</tr>
+<tr class="bt_dead_store_dead_initialization"><td class="DESC">Dead store</td><td class="DESC">Dead initialization</td><td>home/zach/inkscape/src/object/sp-flowtext.cpp</td><td class="DESC">create_flowtext_with_internal_frame</td><td class="Q">657</td><td class="Q">1</td><td><a href="report-20c50b.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-20c50b.html" -->
+</tr>
+<tr class="bt_dead_store_dead_initialization"><td class="DESC">Dead store</td><td class="DESC">Dead initialization</td><td>home/zach/inkscape/src/ui/dialog/objects.cpp</td><td class="DESC">addChild</td><td class="Q">395</td><td class="Q">1</td><td><a href="report-c8495b.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-c8495b.html" -->
+</tr>
+<tr class="bt_dead_store_dead_initialization"><td class="DESC">Dead store</td><td class="DESC">Dead initialization</td><td>home/zach/inkscape/src/ui/dialog/dialog-multipaned.cpp</td><td class="DESC">collapse_curve</td><td class="Q">1106</td><td class="Q">1</td><td><a href="report-83ac33.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-83ac33.html" -->
+</tr>
+<tr class="bt_dead_store_dead_initialization"><td class="DESC">Dead store</td><td class="DESC">Dead initialization</td><td>home/zach/inkscape/src/object/sp-flowtext.cpp</td><td class="DESC">create_flowtext_with_internal_frame</td><td class="Q">687</td><td class="Q">1</td><td><a href="report-b6af08.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-b6af08.html" -->
+</tr>
+<tr class="bt_dead_store_dead_initialization"><td class="DESC">Dead store</td><td class="DESC">Dead initialization</td><td>home/zach/inkscape/src/svg/svg-affine-parser.cpp</td><td class="DESC">sp_svg_transform_read</td><td class="Q">1017</td><td class="Q">1</td><td><a href="report-e09622.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-e09622.html" -->
+</tr>
+<tr class="bt_dead_store_dead_nested_assignment"><td class="DESC">Dead store</td><td class="DESC">Dead nested assignment</td><td>home/zach/inkscape/src/3rdparty/2geom/src/2geom/sbasis-roots.cpp</td><td class="DESC">level_sets_internal</td><td class="Q">437</td><td class="Q">1</td><td><a href="report-895f57.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-895f57.html" -->
+</tr>
+<tr class="bt_dead_store_dead_nested_assignment"><td class="DESC">Dead store</td><td class="DESC">Dead nested assignment</td><td>home/zach/inkscape/src/live_effects/lpe-powermask.cpp</td><td class="DESC">setMask</td><td class="Q">167</td><td class="Q">1</td><td><a href="report-8db2ab.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-8db2ab.html" -->
+</tr>
+<tr class="bt_dead_store_dead_nested_assignment"><td class="DESC">Dead store</td><td class="DESC">Dead nested assignment</td><td>home/zach/inkscape/src/3rdparty/2geom/src/2geom/sbasis-roots.cpp</td><td class="DESC">level_sets_internal</td><td class="Q">438</td><td class="Q">1</td><td><a href="report-cc83db.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-cc83db.html" -->
+</tr>
+<tr class="bt_dead_store_dead_nested_assignment"><td class="DESC">Dead store</td><td class="DESC">Dead nested assignment</td><td>home/zach/inkscape/src/extension/internal/text_reassemble.c</td><td class="DESC">TR_layout_analyze</td><td class="Q">2441</td><td class="Q">1</td><td><a href="report-10ef3a.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-10ef3a.html" -->
+</tr>
+<tr class="bt_dead_store_dead_nested_assignment"><td class="DESC">Dead store</td><td class="DESC">Dead nested assignment</td><td>home/zach/inkscape/src/live_effects/lpe-powermask.cpp</td><td class="DESC">setMask</td><td class="Q">237</td><td class="Q">1</td><td><a href="report-993f84.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-993f84.html" -->
+</tr>
+<tr class="bt_logic_error_dereference_of_null_pointer"><td class="DESC">Logic error</td><td class="DESC">Dereference of null pointer</td><td>home/zach/inkscape/src/selection-chemistry.cpp</td><td class="DESC">getSiblingState</td><td class="Q">4306</td><td class="Q">7</td><td><a href="report-e0f8ae.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-e0f8ae.html" -->
+</tr>
+<tr class="bt_logic_error_dereference_of_null_pointer"><td class="DESC">Logic error</td><td class="DESC">Dereference of null pointer</td><td>home/zach/inkscape/src/ui/dialog/filter-effects-dialog.cpp</td><td class="DESC">find_result</td><td class="Q">2215</td><td class="Q">16</td><td><a href="report-278377.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-278377.html" -->
+</tr>
+<tr class="bt_logic_error_dereference_of_null_pointer"><td class="DESC">Logic error</td><td class="DESC">Dereference of null pointer</td><td>home/zach/inkscape/src/3rdparty/libcroco/cr-tknzr.c</td><td class="DESC">cr_tknzr_parse_string</td><td class="Q">712</td><td class="Q">51</td><td><a href="report-caec01.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-caec01.html" -->
+</tr>
+<tr class="bt_logic_error_dereference_of_null_pointer"><td class="DESC">Logic error</td><td class="DESC">Dereference of null pointer</td><td>home/zach/inkscape/src/3rdparty/libcroco/cr-statement.c</td><td class="DESC">cr_statement_destroy</td><td class="Q">2786</td><td class="Q">50</td><td><a href="report-dadab3.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-dadab3.html" -->
+</tr>
+<tr class="bt_logic_error_dereference_of_null_pointer"><td class="DESC">Logic error</td><td class="DESC">Dereference of null pointer</td><td>home/zach/inkscape/src/3rdparty/libcroco/cr-tknzr.c</td><td class="DESC">cr_tknzr_parse_string</td><td class="Q">722</td><td class="Q">56</td><td><a href="report-7bbe0d.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-7bbe0d.html" -->
+</tr>
+<tr class="bt_logic_error_dereference_of_null_pointer"><td class="DESC">Logic error</td><td class="DESC">Dereference of null pointer</td><td>home/zach/inkscape/src/3rdparty/libcroco/cr-tknzr.c</td><td class="DESC">cr_tknzr_parse_string</td><td class="Q">753</td><td class="Q">56</td><td><a href="report-9f47cc.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-9f47cc.html" -->
+</tr>
+<tr class="bt_logic_error_dereference_of_null_pointer"><td class="DESC">Logic error</td><td class="DESC">Dereference of null pointer</td><td>home/zach/inkscape/src/3rdparty/adaptagrams/libavoid/obstacle.cpp</td><td class="DESC">Obstacle</td><td class="Q">61</td><td class="Q">6</td><td><a href="report-bae0f7.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-bae0f7.html" -->
+</tr>
+<tr class="bt_logic_error_dereference_of_null_pointer"><td class="DESC">Logic error</td><td class="DESC">Dereference of null pointer</td><td>home/zach/inkscape/src/text-editing.cpp</td><td class="DESC">sp_te_input_is_empty</td><td class="Q">93</td><td class="Q">3</td><td><a href="report-c2d364.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-c2d364.html" -->
+</tr>
+<tr class="bt_logic_error_dereference_of_null_pointer"><td class="DESC">Logic error</td><td class="DESC">Dereference of null pointer</td><td>home/zach/inkscape/src/text-editing.cpp</td><td class="DESC">tidy_operator_inexplicable_spans</td><td class="Q">1686</td><td class="Q">32</td><td><a href="report-af8aeb.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-af8aeb.html" -->
+</tr>
+<tr class="bt_logic_error_dereference_of_null_pointer"><td class="DESC">Logic error</td><td class="DESC">Dereference of null pointer</td><td>home/zach/inkscape/src/ui/dialog/dialog-notebook.cpp</td><td class="DESC">on_page_switch</td><td class="Q">874</td><td class="Q">13</td><td><a href="report-d504fd.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-d504fd.html" -->
+</tr>
+<tr class="bt_logic_error_dereference_of_null_pointer"><td class="DESC">Logic error</td><td class="DESC">Dereference of null pointer</td><td>home/zach/inkscape/src/live_effects/parameter/satellitearray.cpp</td><td class="DESC">param_newWidget</td><td class="Q">347</td><td class="Q">4</td><td><a href="report-8c89c5.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-8c89c5.html" -->
+</tr>
+<tr class="bt_logic_error_dereference_of_null_pointer"><td class="DESC">Logic error</td><td class="DESC">Dereference of null pointer</td><td>home/zach/inkscape/src/3rdparty/adaptagrams/libavoid/connector.cpp</td><td class="DESC">generateStandardPath</td><td class="Q">1296</td><td class="Q">32</td><td><a href="report-15da8d.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-15da8d.html" -->
+</tr>
+<tr class="bt_logic_error_dereference_of_null_pointer"><td class="DESC">Logic error</td><td class="DESC">Dereference of null pointer</td><td>home/zach/inkscape/src/object/sp-item.cpp</td><td class="DESC">sp_item_adjust_rects_recursive</td><td class="Q">1448</td><td class="Q">3</td><td><a href="report-b0eb3d.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-b0eb3d.html" -->
+</tr>
+<tr class="bt_logic_error_dereference_of_null_pointer"><td class="DESC">Logic error</td><td class="DESC">Dereference of null pointer</td><td>home/zach/inkscape/src/3rdparty/libcroco/cr-prop-list.c</td><td class="DESC">cr_prop_list_append</td><td class="Q">91</td><td class="Q">25</td><td><a href="report-027419.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-027419.html" -->
+</tr>
+<tr class="bt_logic_error_dereference_of_null_pointer"><td class="DESC">Logic error</td><td class="DESC">Dereference of null pointer</td><td>home/zach/inkscape/src/extension/internal/text_reassemble.c</td><td class="DESC">TR_layout_analyze</td><td class="Q">2462</td><td class="Q">44</td><td><a href="report-f4ee85.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-f4ee85.html" -->
+</tr>
+<tr class="bt_logic_error_dereference_of_null_pointer"><td class="DESC">Logic error</td><td class="DESC">Dereference of null pointer</td><td>home/zach/inkscape/src/3rdparty/adaptagrams/libavoid/mtst.cpp</td><td class="DESC">buildHyperedgeTreeToRoot</td><td class="Q">185</td><td class="Q">18</td><td><a href="report-7174fd.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-7174fd.html" -->
+</tr>
+<tr class="bt_logic_error_dereference_of_null_pointer"><td class="DESC">Logic error</td><td class="DESC">Dereference of null pointer</td><td>home/zach/inkscape/src/extension/internal/emf-print.cpp</td><td class="DESC">smuggle_adxkyrtl_out</td><td class="Q">101</td><td class="Q">12</td><td><a href="report-8a976f.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-8a976f.html" -->
+</tr>
+<tr class="bt_logic_error_dereference_of_null_pointer"><td class="DESC">Logic error</td><td class="DESC">Dereference of null pointer</td><td>home/zach/inkscape/src/3rdparty/adaptagrams/libavoid/obstacle.cpp</td><td class="DESC">Obstacle</td><td class="Q">71</td><td class="Q">5</td><td><a href="report-c9083a.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-c9083a.html" -->
+</tr>
+<tr class="bt_logic_error_dereference_of_null_pointer"><td class="DESC">Logic error</td><td class="DESC">Dereference of null pointer</td><td>home/zach/inkscape/src/ui/clipboard.cpp</td><td class="DESC">_copyUsedDefs</td><td class="Q">1104</td><td class="Q">17</td><td><a href="report-de24f3.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-de24f3.html" -->
+</tr>
+<tr class="bt_logic_error_dereference_of_null_pointer"><td class="DESC">Logic error</td><td class="DESC">Dereference of null pointer</td><td>home/zach/inkscape/src/livarot/sweep-event.cpp</td><td class="DESC">MakeDelete</td><td class="Q">269</td><td class="Q">7</td><td><a href="report-21ec73.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-21ec73.html" -->
+</tr>
+<tr class="bt_logic_error_dereference_of_null_pointer"><td class="DESC">Logic error</td><td class="DESC">Dereference of null pointer</td><td>home/zach/inkscape/src/ui/widget/export-preview.cpp</td><td class="DESC">hide_other_items_recursively</td><td class="Q">130</td><td class="Q">17</td><td><a href="report-3e59a2.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-3e59a2.html" -->
+</tr>
+<tr class="bt_logic_error_dereference_of_null_pointer"><td class="DESC">Logic error</td><td class="DESC">Dereference of null pointer</td><td>home/zach/inkscape/src/ui/dialog/selectorsdialog.cpp</td><td class="DESC">_removeFromSelector</td><td class="Q">811</td><td class="Q">16</td><td><a href="report-b94736.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-b94736.html" -->
+</tr>
+<tr class="bt_logic_error_dereference_of_null_pointer"><td class="DESC">Logic error</td><td class="DESC">Dereference of null pointer</td><td>home/zach/inkscape/src/extension/internal/metafile-print.cpp</td><td class="DESC">brush_classify</td><td class="Q">279</td><td class="Q">9</td><td><a href="report-542837.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-542837.html" -->
+</tr>
+<tr class="bt_logic_error_dereference_of_null_pointer"><td class="DESC">Logic error</td><td class="DESC">Dereference of null pointer</td><td>home/zach/inkscape/src/ui/knot/knot-holder-entity.cpp</td><td class="DESC">snap_knot_position</td><td class="Q">114</td><td class="Q">7</td><td><a href="report-6d92eb.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-6d92eb.html" -->
+</tr>
+<tr class="bt_logic_error_dereference_of_null_pointer"><td class="DESC">Logic error</td><td class="DESC">Dereference of null pointer</td><td>home/zach/inkscape/src/extension/internal/cairo-renderer.cpp</td><td class="DESC">sp_shape_render</td><td class="Q">191</td><td class="Q">11</td><td><a href="report-593a55.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-593a55.html" -->
+</tr>
+<tr class="bt_logic_error_dereference_of_null_pointer"><td class="DESC">Logic error</td><td class="DESC">Dereference of null pointer</td><td>home/zach/inkscape/src/ui/shape-editor-knotholders.cpp</td><td class="DESC">createKnotHolder</td><td class="Q">155</td><td class="Q">18</td><td><a href="report-165840.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-165840.html" -->
+</tr>
+<tr class="bt_logic_error_dereference_of_null_pointer"><td class="DESC">Logic error</td><td class="DESC">Dereference of null pointer</td><td>home/zach/inkscape/src/3rdparty/libcroco/cr-prop-list.c</td><td class="DESC">cr_prop_list_destroy</td><td class="Q">395</td><td class="Q">19</td><td><a href="report-0f42e0.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-0f42e0.html" -->
+</tr>
+<tr class="bt_logic_error_dereference_of_null_pointer"><td class="DESC">Logic error</td><td class="DESC">Dereference of null pointer</td><td>home/zach/inkscape/src/selection-chemistry.cpp</td><td class="DESC">itemtree_map</td><td class="Q">4359</td><td class="Q">11</td><td><a href="report-fb898b.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-fb898b.html" -->
+</tr>
+<tr class="bt_logic_error_dereference_of_null_pointer"><td class="DESC">Logic error</td><td class="DESC">Dereference of null pointer</td><td>home/zach/inkscape/src/extension/internal/cairo-render-context.cpp</td><td class="DESC">renderImage</td><td class="Q">1761</td><td class="Q">10</td><td><a href="report-85e9f7.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-85e9f7.html" -->
+</tr>
+<tr class="bt_logic_error_dereference_of_null_pointer"><td class="DESC">Logic error</td><td class="DESC">Dereference of null pointer</td><td>home/zach/inkscape/src/live_effects/lpe-embrodery-stitch-ordering.cpp</td><td class="DESC">OrderGroups</td><td class="Q">995</td><td class="Q">16</td><td><a href="report-0be1e7.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-0be1e7.html" -->
+</tr>
+<tr class="bt_logic_error_dereference_of_null_pointer"><td class="DESC">Logic error</td><td class="DESC">Dereference of null pointer</td><td>home/zach/inkscape/src/object/sp-use.cpp</td><td class="DESC">get_root_transform</td><td class="Q">390</td><td class="Q">21</td><td><a href="report-6dccff.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-6dccff.html" -->
+</tr>
+<tr class="bt_logic_error_dereference_of_null_pointer"><td class="DESC">Logic error</td><td class="DESC">Dereference of null pointer</td><td>home/zach/inkscape/src/3rdparty/libcroco/cr-tknzr.c</td><td class="DESC">cr_tknzr_parse_string</td><td class="Q">746</td><td class="Q">53</td><td><a href="report-611d1a.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-611d1a.html" -->
+</tr>
+<tr class="bt_logic_error_dereference_of_null_pointer"><td class="DESC">Logic error</td><td class="DESC">Dereference of null pointer</td><td>home/zach/inkscape/src/object/sp-style-elem.cpp</td><td class="DESC">end_selector_cb</td><td class="Q">286</td><td class="Q">10</td><td><a href="report-f1b11b.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-f1b11b.html" -->
+</tr>
+<tr class="bt_logic_error_dereference_of_null_pointer"><td class="DESC">Logic error</td><td class="DESC">Dereference of null pointer</td><td>home/zach/inkscape/src/ui/tools/connector-tool.cpp</td><td class="DESC">endpt_handler</td><td class="Q">1024</td><td class="Q">19</td><td><a href="report-eb6df8.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-eb6df8.html" -->
+</tr>
+<tr class="bt_logic_error_dereference_of_null_pointer"><td class="DESC">Logic error</td><td class="DESC">Dereference of null pointer</td><td>home/zach/inkscape/src/ui/dialog/symbols.cpp</td><td class="DESC">useInDoc</td><td class="Q">941</td><td class="Q">27</td><td><a href="report-e7cc40.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-e7cc40.html" -->
+</tr>
+<tr class="bt_logic_error_dereference_of_null_pointer"><td class="DESC">Logic error</td><td class="DESC">Dereference of null pointer</td><td>home/zach/inkscape/src/live_effects/lpe-powerclip.cpp</td><td class="DESC">doOnRemove</td><td class="Q">242</td><td class="Q">12</td><td><a href="report-263b64.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-263b64.html" -->
+</tr>
+<tr class="bt_logic_error_dereference_of_null_pointer"><td class="DESC">Logic error</td><td class="DESC">Dereference of null pointer</td><td>home/zach/inkscape/src/3rdparty/adaptagrams/libavoid/hyperedgetree.cpp</td><td class="DESC">updateConnEnds</td><td class="Q">638</td><td class="Q">10</td><td><a href="report-f35a59.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-f35a59.html" -->
+</tr>
+<tr class="bt_logic_error_dereference_of_null_pointer"><td class="DESC">Logic error</td><td class="DESC">Dereference of null pointer</td><td>home/zach/inkscape/src/display/drawing-item.cpp</td><td class="DESC">~DrawingItem</td><td class="Q">131</td><td class="Q">8</td><td><a href="report-3551a4.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-3551a4.html" -->
+</tr>
+<tr class="bt_logic_error_dereference_of_null_pointer"><td class="DESC">Logic error</td><td class="DESC">Dereference of null pointer</td><td>home/zach/inkscape/src/object/sp-tref.cpp</td><td class="DESC">sp_tref_convert_to_tspan</td><td class="Q">491</td><td class="Q">3</td><td><a href="report-7e5009.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-7e5009.html" -->
+</tr>
+<tr class="bt_logic_error_dereference_of_null_pointer"><td class="DESC">Logic error</td><td class="DESC">Dereference of null pointer</td><td>home/zach/inkscape/src/livarot/sweep-event.cpp</td><td class="DESC">MakeNew</td><td class="Q">255</td><td class="Q">4</td><td><a href="report-5ce61c.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-5ce61c.html" -->
+</tr>
+<tr class="bt_logic_error_dereference_of_null_pointer"><td class="DESC">Logic error</td><td class="DESC">Dereference of null pointer</td><td>home/zach/inkscape/src/3rdparty/adaptagrams/libavoid/hyperedgetree.cpp</td><td class="DESC">addConns</td><td class="Q">587</td><td class="Q">10</td><td><a href="report-b3408d.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-b3408d.html" -->
+</tr>
+<tr class="bt_logic_error_dereference_of_null_pointer"><td class="DESC">Logic error</td><td class="DESC">Dereference of null pointer</td><td>home/zach/inkscape/src/object/sp-style-elem.cpp</td><td class="DESC">end_font_face_cb</td><td class="Q">327</td><td class="Q">5</td><td><a href="report-ed55e6.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-ed55e6.html" -->
+</tr>
+<tr class="bt_logic_error_dereference_of_null_pointer"><td class="DESC">Logic error</td><td class="DESC">Dereference of null pointer</td><td>home/zach/inkscape/src/text-editing.cpp</td><td class="DESC">sp_text_get_length_upto</td><td class="Q">268</td><td class="Q">3</td><td><a href="report-d20e3b.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-d20e3b.html" -->
+</tr>
+<tr class="bt_logic_error_dereference_of_null_pointer"><td class="DESC">Logic error</td><td class="DESC">Dereference of null pointer</td><td>home/zach/inkscape/src/display/drawing-item.cpp</td><td class="DESC">~DrawingItem</td><td class="Q">134</td><td class="Q">8</td><td><a href="report-5d42ec.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-5d42ec.html" -->
+</tr>
+<tr class="bt_logic_error_dereference_of_null_pointer"><td class="DESC">Logic error</td><td class="DESC">Dereference of null pointer</td><td>home/zach/inkscape/src/ui/tools/tweak-tool.cpp</td><td class="DESC">sp_tweak_color_recursive</td><td class="Q">883</td><td class="Q">29</td><td><a href="report-22100b.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-22100b.html" -->
+</tr>
+<tr class="bt_logic_error_dereference_of_null_pointer"><td class="DESC">Logic error</td><td class="DESC">Dereference of null pointer</td><td>home/zach/inkscape/src/3rdparty/adaptagrams/libavoid/graph.cpp</td><td class="DESC">rotationLessThan</td><td class="Q">171</td><td class="Q">11</td><td><a href="report-daa786.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-daa786.html" -->
+</tr>
+<tr class="bt_logic_error_dereference_of_null_pointer"><td class="DESC">Logic error</td><td class="DESC">Dereference of null pointer</td><td>home/zach/inkscape/src/3rdparty/libcroco/cr-parser.c</td><td class="DESC">cr_parser_parse_ruleset</td><td class="Q">3504</td><td class="Q">34</td><td><a href="report-762c02.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-762c02.html" -->
+</tr>
+<tr class="bt_logic_error_dereference_of_null_pointer"><td class="DESC">Logic error</td><td class="DESC">Dereference of null pointer</td><td>home/zach/inkscape/src/ui/knot/knot-holder-entity.cpp</td><td class="DESC">snap_knot_position</td><td class="Q">115</td><td class="Q">9</td><td><a href="report-47ab3c.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-47ab3c.html" -->
+</tr>
+<tr class="bt_logic_error_dereference_of_null_pointer"><td class="DESC">Logic error</td><td class="DESC">Dereference of null pointer</td><td>home/zach/inkscape/src/ui/dialog/dialog-notebook.cpp</td><td class="DESC">on_page_switch</td><td class="Q">869</td><td class="Q">8</td><td><a href="report-0fba54.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-0fba54.html" -->
+</tr>
+<tr class="bt_logic_error_dereference_of_null_pointer"><td class="DESC">Logic error</td><td class="DESC">Dereference of null pointer</td><td>home/zach/inkscape/src/trace/quantize.cpp</td><td class="DESC">octreePrune</td><td class="Q">436</td><td class="Q">26</td><td><a href="report-15b8e3.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-15b8e3.html" -->
+</tr>
+<tr class="bt_logic_error_dereference_of_null_pointer"><td class="DESC">Logic error</td><td class="DESC">Dereference of null pointer</td><td>home/zach/inkscape/src/display/drawing-item.cpp</td><td class="DESC">~DrawingItem</td><td class="Q">125</td><td class="Q">8</td><td><a href="report-5fd509.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-5fd509.html" -->
+</tr>
+<tr class="bt_logic_error_dereference_of_null_pointer"><td class="DESC">Logic error</td><td class="DESC">Dereference of null pointer</td><td>home/zach/inkscape/src/ui/tools/connector-tool.cpp</td><td class="DESC">endpt_handler</td><td class="Q">1022</td><td class="Q">19</td><td><a href="report-a4ab76.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-a4ab76.html" -->
+</tr>
+<tr class="bt_logic_error_dereference_of_null_pointer"><td class="DESC">Logic error</td><td class="DESC">Dereference of null pointer</td><td>home/zach/inkscape/src/live_effects/parameter/patharray.cpp</td><td class="DESC">param_newWidget</td><td class="Q">170</td><td class="Q">2</td><td><a href="report-812b0e.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-812b0e.html" -->
+</tr>
+<tr class="bt_logic_error_dereference_of_null_pointer"><td class="DESC">Logic error</td><td class="DESC">Dereference of null pointer</td><td>home/zach/inkscape/src/3rdparty/libcroco/cr-sel-eng.c</td><td class="DESC">put_css_properties_in_props_list</td><td class="Q">1724</td><td class="Q">60</td><td><a href="report-68077e.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-68077e.html" -->
+</tr>
+<tr class="bt_logic_error_dereference_of_null_pointer"><td class="DESC">Logic error</td><td class="DESC">Dereference of null pointer</td><td>home/zach/inkscape/src/extension/internal/text_reassemble.c</td><td class="DESC">TR_layout_analyze</td><td class="Q">2461</td><td class="Q">50</td><td><a href="report-f99cc0.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-f99cc0.html" -->
+</tr>
+<tr class="bt_logic_error_dereference_of_null_pointer"><td class="DESC">Logic error</td><td class="DESC">Dereference of null pointer</td><td>home/zach/inkscape/src/live_effects/lpe-powerclip.cpp</td><td class="DESC">getClipPathvector</td><td class="Q">113</td><td class="Q">20</td><td><a href="report-5a8156.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-5a8156.html" -->
+</tr>
+<tr class="bt_logic_error_dereference_of_null_pointer"><td class="DESC">Logic error</td><td class="DESC">Dereference of null pointer</td><td>home/zach/inkscape/src/display/drawing-item.cpp</td><td class="DESC">~DrawingItem</td><td class="Q">122</td><td class="Q">8</td><td><a href="report-d55b2c.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-d55b2c.html" -->
+</tr>
+<tr class="bt_logic_error_dereference_of_null_pointer"><td class="DESC">Logic error</td><td class="DESC">Dereference of null pointer</td><td>home/zach/inkscape/src/extension/internal/cairo-renderer.cpp</td><td class="DESC">sp_item_invoke_render</td><td class="Q">612</td><td class="Q">13</td><td><a href="report-102c51.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-102c51.html" -->
+</tr>
+<tr class="bt_logic_error_dereference_of_undefined_pointer_value"><td class="DESC">Logic error</td><td class="DESC">Dereference of undefined pointer value</td><td>home/zach/inkscape/src/3rdparty/autotrace/image-proc.c</td><td class="DESC">new_distance_map</td><td class="Q">97</td><td class="Q">14</td><td><a href="report-fb1415.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-fb1415.html" -->
+</tr>
+<tr class="bt_logic_error_division_by_zero"><td class="DESC">Logic error</td><td class="DESC">Division by zero</td><td>home/zach/inkscape/src/3rdparty/autotrace/fit.c</td><td class="DESC">remove_knee_points</td><td class="Q">727</td><td class="Q">22</td><td><a href="report-e75ed0.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-e75ed0.html" -->
+</tr>
+<tr class="bt_logic_error_division_by_zero"><td class="DESC">Logic error</td><td class="DESC">Division by zero</td><td>home/zach/inkscape/src/ui/dialog/filter-effects-dialog.cpp</td><td class="DESC">do_connection_node</td><td class="Q">2179</td><td class="Q">11</td><td><a href="report-d99ea7.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-d99ea7.html" -->
+</tr>
+<tr class="bt_logic_error_division_by_zero"><td class="DESC">Logic error</td><td class="DESC">Division by zero</td><td>home/zach/inkscape/src/3rdparty/autotrace/fit.c</td><td class="DESC">filter</td><td class="Q">798</td><td class="Q">40</td><td><a href="report-8f7bdf.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-8f7bdf.html" -->
+</tr>
+<tr class="bt_logic_error_division_by_zero"><td class="DESC">Logic error</td><td class="DESC">Division by zero</td><td>home/zach/inkscape/src/3rdparty/autotrace/median.c</td><td class="DESC">compute_color_rgb</td><td class="Q">349</td><td class="Q">12</td><td><a href="report-090103.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-090103.html" -->
+</tr>
+<tr class="bt_memory_error_double_delete"><td class="DESC">Memory error</td><td class="DESC">Double delete</td><td>home/zach/inkscape/src/3rdparty/adaptagrams/libavoid/graph.cpp</td><td class="DESC">clear</td><td class="Q">694</td><td class="Q">5</td><td><a href="report-42010d.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-42010d.html" -->
+</tr>
+<tr class="bt_memory_error_memory_leak"><td class="DESC">Memory error</td><td class="DESC">Memory leak</td><td>home/zach/inkscape/src/3rdparty/adaptagrams/libavoid/hyperedgeimprover.cpp</td><td class="DESC">execute</td><td class="Q">886</td><td class="Q">16</td><td><a href="report-8fcf26.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-8fcf26.html" -->
+</tr>
+<tr class="bt_memory_error_memory_leak"><td class="DESC">Memory error</td><td class="DESC">Memory leak</td><td>home/zach/inkscape/src/live_effects/lpe-gears.cpp</td><td class="DESC">doEffect_path</td><td class="Q">243</td><td class="Q">6</td><td><a href="report-f6c95e.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-f6c95e.html" -->
+</tr>
+<tr class="bt_memory_error_memory_leak"><td class="DESC">Memory error</td><td class="DESC">Memory leak</td><td>home/zach/inkscape/src/live_effects/lpe-powerstroke.cpp</td><td class="DESC">path_from_piecewise_fix_cusps</td><td class="Q">536</td><td class="Q">14</td><td><a href="report-61d16c.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-61d16c.html" -->
+</tr>
+<tr class="bt_memory_error_memory_leak"><td class="DESC">Memory error</td><td class="DESC">Memory leak</td><td>home/zach/inkscape/src/ui/toolbar/mesh-toolbar.cpp</td><td class="DESC">create</td><td class="Q">356</td><td class="Q">2</td><td><a href="report-dff391.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-dff391.html" -->
+</tr>
+<tr class="bt_memory_error_memory_leak"><td class="DESC">Memory error</td><td class="DESC">Memory leak</td><td>home/zach/inkscape/src/display/cairo-utils.cpp</td><td class="DESC">create_from_buffer</td><td class="Q">340</td><td class="Q">2</td><td><a href="report-7f328c.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-7f328c.html" -->
+</tr>
+<tr class="bt_memory_error_memory_leak"><td class="DESC">Memory error</td><td class="DESC">Memory leak</td><td>home/zach/inkscape/src/widgets/sp-xmlview-tree.cpp</td><td class="DESC">add_node</td><td class="Q">268</td><td class="Q">27</td><td><a href="report-ea6d17.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-ea6d17.html" -->
+</tr>
+<tr class="bt_memory_error_memory_leak"><td class="DESC">Memory error</td><td class="DESC">Memory leak</td><td>home/zach/inkscape/src/live_effects/lpe-roughen.cpp</td><td class="DESC">doEffect</td><td class="Q">327</td><td class="Q">15</td><td><a href="report-75fc5b.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-75fc5b.html" -->
+</tr>
+<tr class="bt_memory_error_memory_leak"><td class="DESC">Memory error</td><td class="DESC">Memory leak</td><td>home/zach/inkscape/src/3rdparty/autotrace/pxl-outline.c</td><td class="DESC">find_outline_pixels</td><td class="Q">160</td><td class="Q">43</td><td><a href="report-7c9658.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-7c9658.html" -->
+</tr>
+<tr class="bt_memory_error_memory_leak"><td class="DESC">Memory error</td><td class="DESC">Memory leak</td><td>home/zach/inkscape/src/extension/system.cpp</td><td class="DESC">build_from_reprdoc</td><td class="Q">525</td><td class="Q">17</td><td><a href="report-2367bd.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-2367bd.html" -->
+</tr>
+<tr class="bt_memory_error_memory_leak"><td class="DESC">Memory error</td><td class="DESC">Memory leak</td><td>home/zach/inkscape/src/ui/toolbar/lpe-toolbar.cpp</td><td class="DESC">create</td><td class="Q">194</td><td class="Q">2</td><td><a href="report-9a5a04.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-9a5a04.html" -->
+</tr>
+<tr class="bt_memory_error_memory_leak"><td class="DESC">Memory error</td><td class="DESC">Memory leak</td><td>home/zach/inkscape/src/3rdparty/autotrace/pxl-outline.c</td><td class="DESC">find_centerline_pixels</td><td class="Q">228</td><td class="Q">85</td><td><a href="report-4f5fc2.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-4f5fc2.html" -->
+</tr>
+<tr class="bt_memory_error_memory_leak"><td class="DESC">Memory error</td><td class="DESC">Memory leak</td><td>home/zach/inkscape/src/ui/toolbar/page-toolbar.cpp</td><td class="DESC">create</td><td class="Q">334</td><td class="Q">10</td><td><a href="report-21c670.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-21c670.html" -->
+</tr>
+<tr class="bt_memory_error_memory_leak"><td class="DESC">Memory error</td><td class="DESC">Memory leak</td><td>home/zach/inkscape/src/extension/internal/pdfinput/pdf-parser.cpp</td><td class="DESC">doImage</td><td class="Q">2898</td><td class="Q">29</td><td><a href="report-9fbaa1.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-9fbaa1.html" -->
+</tr>
+<tr class="bt_memory_error_memory_leak"><td class="DESC">Memory error</td><td class="DESC">Memory leak</td><td>home/zach/inkscape/src/3rdparty/adaptagrams/libavoid/hyperedgeimprover.cpp</td><td class="DESC">execute</td><td class="Q">886</td><td class="Q">16</td><td><a href="report-c6c670.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-c6c670.html" -->
+</tr>
+<tr class="bt_memory_error_memory_leak"><td class="DESC">Memory error</td><td class="DESC">Memory leak</td><td>usr/include/gtkmm-3.0/gtkmm/builder.h</td><td class="DESC">get_widget_derived</td><td class="Q">773</td><td class="Q">9</td><td><a href="report-c188e4.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-c188e4.html" -->
+</tr>
+<tr class="bt_memory_error_memory_leak"><td class="DESC">Memory error</td><td class="DESC">Memory leak</td><td>home/zach/inkscape/src/ui/toolbar/spray-toolbar.cpp</td><td class="DESC">create</td><td class="Q">357</td><td class="Q">2</td><td><a href="report-4b303d.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-4b303d.html" -->
+</tr>
+<tr class="bt_memory_error_memory_leak"><td class="DESC">Memory error</td><td class="DESC">Memory leak</td><td>home/zach/inkscape/src/ui/toolbar/paintbucket-toolbar.cpp</td><td class="DESC">create</td><td class="Q">159</td><td class="Q">2</td><td><a href="report-d1ab58.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-d1ab58.html" -->
+</tr>
+<tr class="bt_memory_error_memory_leak"><td class="DESC">Memory error</td><td class="DESC">Memory leak</td><td>home/zach/inkscape/src/3rdparty/autotrace/pxl-outline.c</td><td class="DESC">find_centerline_pixels</td><td class="Q">228</td><td class="Q">97</td><td><a href="report-68c61e.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-68c61e.html" -->
+</tr>
+<tr class="bt_memory_error_memory_leak"><td class="DESC">Memory error</td><td class="DESC">Memory leak</td><td>home/zach/inkscape/src/ui/dialog/export-batch.cpp</td><td class="DESC">initialise</td><td class="Q">203</td><td class="Q">8</td><td><a href="report-9f49b4.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-9f49b4.html" -->
+</tr>
+<tr class="bt_memory_error_memory_leak"><td class="DESC">Memory error</td><td class="DESC">Memory leak</td><td>home/zach/inkscape/src/extension/internal/bitmap/imagemagick.cpp</td><td class="DESC">effect</td><td class="Q">230</td><td class="Q">10</td><td><a href="report-96c1a5.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-96c1a5.html" -->
+</tr>
+<tr class="bt_memory_error_memory_leak"><td class="DESC">Memory error</td><td class="DESC">Memory leak</td><td>home/zach/inkscape/src/helper/geom-pathstroke.cpp</td><td class="DESC">extrapolate_join_internal</td><td class="Q">536</td><td class="Q">28</td><td><a href="report-8693dd.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-8693dd.html" -->
+</tr>
+<tr class="bt_memory_error_memory_leak"><td class="DESC">Memory error</td><td class="DESC">Memory leak</td><td>home/zach/inkscape/src/display/curve.cpp</td><td class="DESC">copy</td><td class="Q">121</td><td class="Q">8</td><td><a href="report-cfcc8d.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-cfcc8d.html" -->
+</tr>
+<tr class="bt_memory_error_memory_leak"><td class="DESC">Memory error</td><td class="DESC">Memory leak</td><td>home/zach/inkscape/src/helper/geom-pathstroke.cpp</td><td class="DESC">extrapolate_join_internal</td><td class="Q">536</td><td class="Q">28</td><td><a href="report-0927cc.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-0927cc.html" -->
+</tr>
+<tr class="bt_logic_error_result_of_operation_is_garbage_or_undefined"><td class="DESC">Logic error</td><td class="DESC">Result of operation is garbage or undefined</td><td>home/zach/inkscape/src/display/nr-filter-gaussian.cpp</td><td class="DESC">_make_kernel</td><td class="Q">164</td><td class="Q">5</td><td><a href="report-147dbd.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-147dbd.html" -->
+</tr>
+<tr class="bt_logic_error_result_of_operation_is_garbage_or_undefined"><td class="DESC">Logic error</td><td class="DESC">Result of operation is garbage or undefined</td><td>home/zach/inkscape/src/3rdparty/2geom/include/2geom/bezier.h</td><td class="DESC">bernstein_value_at</td><td class="Q">60</td><td class="Q">23</td><td><a href="report-aa8d40.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-aa8d40.html" -->
+</tr>
+<tr class="bt_logic_error_result_of_operation_is_garbage_or_undefined"><td class="DESC">Logic error</td><td class="DESC">Result of operation is garbage or undefined</td><td>home/zach/inkscape/src/ui/widget/color-scales.cpp</td><td class="DESC">_getRgba32</td><td class="Q">457</td><td class="Q">16</td><td><a href="report-9c060c.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-9c060c.html" -->
+</tr>
+<tr class="bt_logic_error_result_of_operation_is_garbage_or_undefined"><td class="DESC">Logic error</td><td class="DESC">Result of operation is garbage or undefined</td><td>home/zach/inkscape/src/3rdparty/2geom/src/2geom/solve-bezier.cpp</td><td class="DESC">convex_hull_marching</td><td class="Q">61</td><td class="Q">23</td><td><a href="report-704ebf.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-704ebf.html" -->
+</tr>
+<tr class="bt_logic_error_result_of_operation_is_garbage_or_undefined"><td class="DESC">Logic error</td><td class="DESC">Result of operation is garbage or undefined</td><td>home/zach/inkscape/src/3rdparty/adaptagrams/libcola/convex_hull.cpp</td><td class="DESC">convex</td><td class="Q">86</td><td class="Q">15</td><td><a href="report-1a48d4.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-1a48d4.html" -->
+</tr>
+<tr class="bt_logic_error_result_of_operation_is_garbage_or_undefined"><td class="DESC">Logic error</td><td class="DESC">Result of operation is garbage or undefined</td><td>home/zach/inkscape/src/extension/internal/emf-print.cpp</td><td class="DESC">text</td><td class="Q">1983</td><td class="Q">10</td><td><a href="report-8ce3ff.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-8ce3ff.html" -->
+</tr>
+<tr class="bt_logic_error_result_of_operation_is_garbage_or_undefined"><td class="DESC">Logic error</td><td class="DESC">Result of operation is garbage or undefined</td><td>home/zach/inkscape/src/3rdparty/2geom/src/2geom/solve-bezier.cpp</td><td class="DESC">convex_hull_marching</td><td class="Q">94</td><td class="Q">30</td><td><a href="report-81af96.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-81af96.html" -->
+</tr>
+<tr class="bt_logic_error_result_of_operation_is_garbage_or_undefined"><td class="DESC">Logic error</td><td class="DESC">Result of operation is garbage or undefined</td><td>home/zach/inkscape/src/ui/widget/canvas.cpp</td><td class="DESC">operator()</td><td class="Q">2755</td><td class="Q">30</td><td><a href="report-592923.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-592923.html" -->
+</tr>
+<tr class="bt_logic_error_result_of_operation_is_garbage_or_undefined"><td class="DESC">Logic error</td><td class="DESC">Result of operation is garbage or undefined</td><td>home/zach/inkscape/src/3rdparty/2geom/src/2geom/bezier-utils.cpp</td><td class="DESC">bezier_fit_cubic_full</td><td class="Q">276</td><td class="Q">43</td><td><a href="report-6ff194.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-6ff194.html" -->
+</tr>
+<tr class="bt_logic_error_result_of_operation_is_garbage_or_undefined"><td class="DESC">Logic error</td><td class="DESC">Result of operation is garbage or undefined</td><td>home/zach/inkscape/src/3rdparty/adaptagrams/libcola/gradient_projection.cpp</td><td class="DESC">solve</td><td class="Q">323</td><td class="Q">37</td><td><a href="report-dd0413.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-dd0413.html" -->
+</tr>
+<tr class="bt_logic_error_result_of_operation_is_garbage_or_undefined"><td class="DESC">Logic error</td><td class="DESC">Result of operation is garbage or undefined</td><td>home/zach/inkscape/src/3rdparty/adaptagrams/libcola/convex_hull.cpp</td><td class="DESC">convex</td><td class="Q">86</td><td class="Q">17</td><td><a href="report-a7f037.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-a7f037.html" -->
+</tr>
+<tr class="bt_logic_error_result_of_operation_is_garbage_or_undefined"><td class="DESC">Logic error</td><td class="DESC">Result of operation is garbage or undefined</td><td>home/zach/inkscape/src/3rdparty/adaptagrams/libcola/cola.cpp</td><td class="DESC">ConstrainedMajorizationLayout</td><td class="Q">94</td><td class="Q">23</td><td><a href="report-282007.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-282007.html" -->
+</tr>
+<tr class="bt_logic_error_result_of_operation_is_garbage_or_undefined"><td class="DESC">Logic error</td><td class="DESC">Result of operation is garbage or undefined</td><td>home/zach/inkscape/src/extension/internal/emf-print.cpp</td><td class="DESC">text</td><td class="Q">2116</td><td class="Q">32</td><td><a href="report-06f91a.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-06f91a.html" -->
+</tr>
+<tr class="bt_logic_error_result_of_operation_is_garbage_or_undefined"><td class="DESC">Logic error</td><td class="DESC">Result of operation is garbage or undefined</td><td>home/zach/inkscape/src/ui/dialog/grid-arrange-tab.cpp</td><td class="DESC">arrange</td><td class="Q">246</td><td class="Q">25</td><td><a href="report-069087.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-069087.html" -->
+</tr>
+<tr class="bt_logic_error_result_of_operation_is_garbage_or_undefined"><td class="DESC">Logic error</td><td class="DESC">Result of operation is garbage or undefined</td><td>home/zach/inkscape/src/extension/internal/wmf-print.cpp</td><td class="DESC">text</td><td class="Q">1520</td><td class="Q">34</td><td><a href="report-715867.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-715867.html" -->
+</tr>
+<tr class="bt_logic_error_result_of_operation_is_garbage_or_undefined"><td class="DESC">Logic error</td><td class="DESC">Result of operation is garbage or undefined</td><td>home/zach/inkscape/src/3rdparty/autotrace/image-proc.c</td><td class="DESC">new_distance_map</td><td class="Q">91</td><td class="Q">19</td><td><a href="report-94cf44.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-94cf44.html" -->
+</tr>
+<tr class="bt_logic_error_result_of_operation_is_garbage_or_undefined"><td class="DESC">Logic error</td><td class="DESC">Result of operation is garbage or undefined</td><td>home/zach/inkscape/src/3rdparty/2geom/src/2geom/solve-bezier.cpp</td><td class="DESC">find_bezier_roots</td><td class="Q">128</td><td class="Q">32</td><td><a href="report-5b7079.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-5b7079.html" -->
+</tr>
+<tr class="bt_logic_error_uninitialized_argument_value"><td class="DESC">Logic error</td><td class="DESC">Uninitialized argument value</td><td>home/zach/inkscape/src/ui/tools/connector-tool.cpp</td><td class="DESC">_reroutingFinish</td><td class="Q">755</td><td class="Q">26</td><td><a href="report-a65d7e.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-a65d7e.html" -->
+</tr>
+<tr class="bt_logic_error_uninitialized_argument_value"><td class="DESC">Logic error</td><td class="DESC">Uninitialized argument value</td><td>home/zach/inkscape/src/3rdparty/2geom/include/2geom/bezier.h</td><td class="DESC">isConstant</td><td class="Q">244</td><td class="Q">17</td><td><a href="report-dfb0f5.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-dfb0f5.html" -->
+</tr>
+<tr class="bt_logic_error_uninitialized_argument_value"><td class="DESC">Logic error</td><td class="DESC">Uninitialized argument value</td><td>home/zach/inkscape/src/ui/tools/connector-tool.cpp</td><td class="DESC">_reroutingFinish</td><td class="Q">758</td><td class="Q">26</td><td><a href="report-9ae0fe.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-9ae0fe.html" -->
+</tr>
+<tr class="bt_logic_error_uninitialized_argument_value"><td class="DESC">Logic error</td><td class="DESC">Uninitialized argument value</td><td>home/zach/inkscape/src/extension/internal/wmf-inout.cpp</td><td class="DESC">myMetaFileProc</td><td class="Q">2768</td><td class="Q">35</td><td><a href="report-765f20.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-765f20.html" -->
+</tr>
+<tr class="bt_logic_error_uninitialized_argument_value"><td class="DESC">Logic error</td><td class="DESC">Uninitialized argument value</td><td>home/zach/inkscape/src/3rdparty/2geom/include/2geom/generic-interval.h</td><td class="DESC">from_range</td><td class="Q">82</td><td class="Q">31</td><td><a href="report-d941ef.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-d941ef.html" -->
+</tr>
+<tr class="bt_logic_error_uninitialized_argument_value"><td class="DESC">Logic error</td><td class="DESC">Uninitialized argument value</td><td>home/zach/inkscape/src/livarot/PathOutline.cpp</td><td class="DESC">RecStdArcTo</td><td class="Q">1445</td><td class="Q">9</td><td><a href="report-787b60.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-787b60.html" -->
+</tr>
+<tr class="bt_logic_error_uninitialized_argument_value"><td class="DESC">Logic error</td><td class="DESC">Uninitialized argument value</td><td>home/zach/inkscape/src/svg/svg-length.cpp</td><td class="DESC">sp_svg_length_list_read</td><td class="Q">260</td><td class="Q">28</td><td><a href="report-e1c76c.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-e1c76c.html" -->
+</tr>
+<tr class="bt_logic_error_uninitialized_argument_value"><td class="DESC">Logic error</td><td class="DESC">Uninitialized argument value</td><td>home/zach/inkscape/src/3rdparty/libuemf/upmf_print.c</td><td class="DESC">U_PMF_TRANSFORMMATRIX2_print</td><td class="Q">1858</td><td class="Q">10</td><td><a href="report-747fe5.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-747fe5.html" -->
+</tr>
+<tr class="bt_logic_error_uninitialized_argument_value"><td class="DESC">Logic error</td><td class="DESC">Uninitialized argument value</td><td>home/zach/inkscape/src/livarot/PathOutline.cpp</td><td class="DESC">RecStdArcTo</td><td class="Q">1443</td><td class="Q">7</td><td><a href="report-012a62.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-012a62.html" -->
+</tr>
+<tr class="bt_logic_error_uninitialized_argument_value"><td class="DESC">Logic error</td><td class="DESC">Uninitialized argument value</td><td>home/zach/inkscape/src/livarot/PathOutline.cpp</td><td class="DESC">RecStdArcTo</td><td class="Q">1447</td><td class="Q">11</td><td><a href="report-676e33.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-676e33.html" -->
+</tr>
+<tr class="bt_memory_error_use_of_zero_allocated"><td class="DESC">Memory error</td><td class="DESC">Use of zero allocated</td><td>home/zach/inkscape/src/3rdparty/2geom/include/2geom/generic-interval.h</td><td class="DESC">from_range</td><td class="Q">82</td><td class="Q">25</td><td><a href="report-f10022.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-f10022.html" -->
+</tr>
+<tr class="bt_memory_error_use-after-free"><td class="DESC">Memory error</td><td class="DESC">Use-after-free</td><td>home/zach/inkscape/src/object/sp-clippath.cpp</td><td class="DESC">sp_clippath_view_list_remove</td><td class="Q">270</td><td class="Q">13</td><td><a href="report-77a35b.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-77a35b.html" -->
+</tr>
+<tr class="bt_memory_error_use-after-free"><td class="DESC">Memory error</td><td class="DESC">Use-after-free</td><td>home/zach/inkscape/src/extension/internal/text_reassemble.c</td><td class="DESC">fsp_alts_make_insertable</td><td class="Q">863</td><td class="Q">94</td><td><a href="report-d9bb38.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-d9bb38.html" -->
+</tr>
+<tr class="bt_memory_error_use-after-free"><td class="DESC">Memory error</td><td class="DESC">Use-after-free</td><td>home/zach/inkscape/src/3rdparty/libcroco/cr-fonts.c</td><td class="DESC">cr_font_family_destroy</td><td class="Q">306</td><td class="Q">15</td><td><a href="report-bc03ac.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-bc03ac.html" -->
+</tr>
+<tr class="bt_memory_error_use-after-free"><td class="DESC">Memory error</td><td class="DESC">Use-after-free</td><td>home/zach/inkscape/src/object/sp-mask.cpp</td><td class="DESC">sp_mask_view_list_remove</td><td class="Q">325</td><td class="Q">16</td><td><a href="report-3abe2c.html#EndPath">View Report</a></td>
+<!-- REPORTBUG id="report-3abe2c.html" -->
+</tr>
+</tbody>
+</table>
+
+</body></html>

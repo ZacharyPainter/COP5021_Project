@@ -1,0 +1,4 @@
+conftest.c:32:26: error: "_REENTRANT must be defined"
+#                        error "_REENTRANT must be defined"
+                         ^
+1 error generated.
